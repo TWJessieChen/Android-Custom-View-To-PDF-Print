@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/example_2/CustomViewToPDFPrint/app/src/main/res/layout-land/ecg_report.xml" value="0.75" />
+        <entry key="..\:/example_2/CustomViewToPDFPrint/app/src/main/res/layout/activity_main.xml" value="0.31927083333333334" />
+        <entry key="..\:/example_2/CustomViewToPDFPrint/app/src/main/res/layout/ecg_report.xml" value="0.25" />
+        <entry key="..\:/example_2/CustomViewToPDFPrint/app/src/main/res/layout/ecg_report_sdk.xml" value="0.33645833333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
