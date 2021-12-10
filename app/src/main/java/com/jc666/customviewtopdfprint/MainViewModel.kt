@@ -33,6 +33,8 @@ class MainViewModel()  : ViewModel() {
 
     val generatePdfResult = MutableLiveData<String>()
 
+    val writePdfResult = MutableLiveData<String>()
+
     val errorMessage = MutableLiveData<String>()
 
     val loading = MutableLiveData<Boolean>()
@@ -51,11 +53,51 @@ class MainViewModel()  : ViewModel() {
         }
     }
 
+    fun generatePdfCanvas() {
+        ioScope.launch {
+//            val bitmap = v.getDrawingCache()
+
+//            val bitmap = Bitmap.createBitmap(595, 842, Bitmap.Config.ARGB_8888)
+//            val canvas_bmp = Canvas(bitmap)
+//            v.draw(canvas_bmp)
+
+            val softCanvas = Canvas()
+            val barChart = BarChart()
+            val bitmap = barChart.onDraw(softCanvas)
+
+//            val bitmap = loadBitmapFromView(v)
+            val currentTimeMillis = System.currentTimeMillis()
+            saveBitmap(bitmap, MainApplication.internalFilePath + File.separator + currentTimeMillis + ".png")
+
+//            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 595, 842, true)
+
+            // Create a PdfDocument with a page of the same size as the image
+            val document = PdfDocument()
+            val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
+            val page = document.startPage(pageInfo)
+
+            // Draw the bitmap onto the page
+            val canvas: Canvas = page.canvas
+            canvas.drawBitmap(bitmap, 0f, 0f, null)
+            document.finishPage(page)
+
+            // Write the PDF file to a file
+            document.writeTo(FileOutputStream(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
+            document.close()
+
+            viewModelScope.launch {
+                generatePdfResult.value =
+                    MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"
+            }
+//            loadBitmapFromView(v)
+        }
+    }
+
     fun generatePdf(v: View) {
         ioScope.launch {
 //            val bitmap = v.getDrawingCache()
 
-            val bitmap = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+            val bitmap = Bitmap.createBitmap(595, 842, Bitmap.Config.ARGB_8888)
             val canvas_bmp = Canvas(bitmap)
             v.draw(canvas_bmp)
 
@@ -63,16 +105,16 @@ class MainViewModel()  : ViewModel() {
             val currentTimeMillis = System.currentTimeMillis()
             saveBitmap(bitmap, MainApplication.internalFilePath + File.separator + currentTimeMillis + ".png")
 
-            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 595, 842, true)
+//            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 595, 842, true)
 
             // Create a PdfDocument with a page of the same size as the image
             val document = PdfDocument()
-            val pageInfo = PdfDocument.PageInfo.Builder(scaledBitmap.width, scaledBitmap.height, 1).create()
+            val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
             val page = document.startPage(pageInfo)
 
             // Draw the bitmap onto the page
             val canvas: Canvas = page.canvas
-            canvas.drawBitmap(scaledBitmap, 0f, 0f, null)
+            canvas.drawBitmap(bitmap, 0f, 0f, null)
             document.finishPage(page)
 
             // Write the PDF file to a file
@@ -119,6 +161,8 @@ class MainViewModel()  : ViewModel() {
                         super.onSuccess(response)
                         viewModelScope.launch {
                             generatePdfResult.value =
+                                response!!.path
+                            writePdfResult.value =
                                 response!!.path
                         }
                     }

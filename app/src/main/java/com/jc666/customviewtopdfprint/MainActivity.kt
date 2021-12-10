@@ -1,6 +1,9 @@
 package com.jc666.customviewtopdfprint
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.pdf.PdfDocument
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,19 +11,29 @@ import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintJob
 import android.print.PrintManager
+import android.text.InputType
+import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.view.ViewGroup
+import android.widget.*
 import androidx.constraintlayout.solver.widgets.ConstraintWidgetContainer.measure
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.get
 import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
+import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import java.lang.reflect.Constructor
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,40 +59,42 @@ class MainActivity : AppCompatActivity() {
 
 
         btn_generate_pdf!!.setOnClickListener {
-            val inflater = LayoutInflater.from(this@MainActivity)
-            val inflatedFrame: View = inflater.inflate(R.layout.ecg_report, null)
-
-            val frameLayout = inflatedFrame.findViewById(R.id.screen) as ConstraintLayout
-            val tv_first_name = inflatedFrame.findViewById(R.id.tv_first_name) as TextView
-            val tv_last_name = inflatedFrame.findViewById(R.id.tv_last_name) as TextView
-            val tv_patient_age = inflatedFrame.findViewById(R.id.tv_patient_age) as TextView
-            val tv_patient_number = inflatedFrame.findViewById(R.id.tv_patient_number) as TextView
-            val tv_patient_brithday = inflatedFrame.findViewById(R.id.tv_patient_brithday) as TextView
-            tv_first_name.setText("JC")
-            tv_last_name.setText("666")
-            tv_patient_number.setText("病歷號碼    GHGFVJ654D563FG7")
-            tv_patient_age.setText("年齡: 17")
-            tv_patient_brithday.setText("生日 2004.03.11")
-
-            val displayMetrics = DisplayMetrics()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                this@MainActivity.display?.getRealMetrics(displayMetrics)
-                displayMetrics.densityDpi
-            }
-            else{
-                this@MainActivity.windowManager.defaultDisplay.getMetrics(displayMetrics)
-            }
-
-            inflatedFrame.measure(
-                View.MeasureSpec.makeMeasureSpec(
-                    displayMetrics.widthPixels, View.MeasureSpec.EXACTLY
-                ),
-                View.MeasureSpec.makeMeasureSpec(
-                    displayMetrics.heightPixels, View.MeasureSpec.EXACTLY
-                )
-            )
-
-            inflatedFrame.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
+//            val inflater = LayoutInflater.from(this@MainActivity)
+//            val inflatedFrame: View = inflater.inflate(R.layout.ecg_report, null)
+//
+//            val frameLayout = inflatedFrame.findViewById(R.id.screen) as ConstraintLayout
+//            val tv_first_name = inflatedFrame.findViewById(R.id.tv_first_name) as TextView
+//            val tv_last_name = inflatedFrame.findViewById(R.id.tv_last_name) as TextView
+//            val tv_patient_age = inflatedFrame.findViewById(R.id.tv_patient_age) as TextView
+//            val tv_patient_number = inflatedFrame.findViewById(R.id.tv_patient_number) as TextView
+//            val tv_patient_brithday = inflatedFrame.findViewById(R.id.tv_patient_brithday) as TextView
+//            tv_first_name.setText("JC")
+//            tv_last_name.setText("666")
+//            tv_patient_number.setText("病歷號碼    GHGFVJ654D563FG7")
+//            tv_patient_age.setText("年齡: 17")
+//            tv_patient_brithday.setText("生日 2004.03.11")
+//
+////            resizeView(inflatedFrame, 595, 842)
+//
+//            val displayMetrics = DisplayMetrics()
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//                this@MainActivity.display?.getRealMetrics(displayMetrics)
+//                displayMetrics.densityDpi
+//            }
+//            else{
+//                this@MainActivity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+//            }
+//
+//            inflatedFrame.measure(
+//                View.MeasureSpec.makeMeasureSpec(
+//                    displayMetrics.widthPixels, View.MeasureSpec.EXACTLY
+//                ),
+//                View.MeasureSpec.makeMeasureSpec(
+//                    displayMetrics.heightPixels, View.MeasureSpec.EXACTLY
+//                )
+//            )
+//
+//            inflatedFrame.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
 
 //            inflatedFrame.measure(
 //                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
@@ -87,27 +102,83 @@ class MainActivity : AppCompatActivity() {
 //            )
 //            inflatedFrame.layout(0, 0, frameLayout.measuredWidth, frameLayout.measuredHeight)
 
-            inflatedFrame.isDrawingCacheEnabled = true
-            inflatedFrame.buildDrawingCache(true)
+//            inflatedFrame.isDrawingCacheEnabled = true
+//            inflatedFrame.buildDrawingCache(true)
 
-            viewModel.generatePdf(inflatedFrame)
+
+            // Creating a LinearLayout.LayoutParams object for text view
+            var params : LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                LinearLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+            )
+
+            val root = LinearLayout(this@MainActivity)
+            root.layoutParams = params
+            root.layout(0, 0, 595, 842)
+
+            val text_view: TextView = TextView(this@MainActivity)
+
+
+            // Add margin to the text view
+            params.setMargins(10,10,10,10)
+
+            // Now, specify the text view width and height (dimension)
+            text_view.layoutParams = params
+
+            // Display some text on the newly created text view
+            text_view.text = "Hi, i am a TextView. Number"
+
+            // Set the text view font/text size
+            text_view.setTextSize(TypedValue.COMPLEX_UNIT_SP,30F)
+
+            // Set the text view text color
+            text_view.setTextColor(Color.RED)
+
+            // Make the text viw text bold italic
+            text_view.setTypeface(text_view.typeface, Typeface.BOLD_ITALIC)
+
+            // Change the text view font
+            text_view.setTypeface(Typeface.MONOSPACE)
+
+            // Change the text view background color
+            text_view.setBackgroundColor(Color.YELLOW)
+
+            // Put some padding on text view text
+            text_view.setPadding(50,10,10,10)
+
+//            // Set a click listener for newly generated text view
+//            text_view.setOnClickListener{
+//                Toast.makeText(this,text_view.text,Toast.LENGTH_SHORT).show()
+//            }
+
+            // Finally, add the text view to the view group
+            root.addView(text_view)
+
+            root.isDrawingCacheEnabled = true
+            root.buildDrawingCache(true)
+
+//            CreateView().setContentView(this@MainActivity)
+//            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
+
+//            viewModel.generatePdf(BarChart(this@MainActivity))
+            viewModel.generatePdfCanvas()
         }
 
         btn_print_pdf!!.setOnClickListener {
 
-            val inflatedFrame: View = getLayoutInflater().inflate(R.layout.ecg_report_sdk, null)
-
-            val frameLayout = inflatedFrame.findViewById(R.id.screen) as ConstraintLayout
-            val tv_first_name = inflatedFrame.findViewById(R.id.tv_first_name) as TextView
-            val tv_last_name = inflatedFrame.findViewById(R.id.tv_last_name) as TextView
-            val tv_patient_age = inflatedFrame.findViewById(R.id.tv_patient_age) as TextView
-            val tv_patient_number = inflatedFrame.findViewById(R.id.tv_patient_number) as TextView
-            val tv_patient_brithday = inflatedFrame.findViewById(R.id.tv_patient_brithday) as TextView
-            tv_first_name.setText("JC")
-            tv_last_name.setText("666")
-            tv_patient_number.setText("病歷號碼    GHGFVJ654D563FG7")
-            tv_patient_age.setText("年齡: 17")
-            tv_patient_brithday.setText("生日 2004.03.11")
+//            val inflatedFrame: View = getLayoutInflater().inflate(R.layout.ecg_report_sdk, null)
+//
+//            val frameLayout = inflatedFrame.findViewById(R.id.screen) as ConstraintLayout
+//            val tv_first_name = inflatedFrame.findViewById(R.id.tv_first_name) as TextView
+//            val tv_last_name = inflatedFrame.findViewById(R.id.tv_last_name) as TextView
+//            val tv_patient_age = inflatedFrame.findViewById(R.id.tv_patient_age) as TextView
+//            val tv_patient_number = inflatedFrame.findViewById(R.id.tv_patient_number) as TextView
+//            val tv_patient_brithday = inflatedFrame.findViewById(R.id.tv_patient_brithday) as TextView
+//            tv_first_name.setText("JC")
+//            tv_last_name.setText("666")
+//            tv_patient_number.setText("病歷號碼    GHGFVJ654D563FG7")
+//            tv_patient_age.setText("年齡: 17")
+//            tv_patient_brithday.setText("生日 2004.03.11")
 
 //            val displayMetrics = DisplayMetrics()
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -129,16 +200,16 @@ class MainActivity : AppCompatActivity() {
 //
 //            inflatedFrame.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
 
-            inflatedFrame.measure(
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-            )
-            inflatedFrame.layout(0, 0, frameLayout.measuredWidth, frameLayout.measuredHeight)
+//            inflatedFrame.measure(
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+//            )
+//            inflatedFrame.layout(0, 0, frameLayout.measuredWidth, frameLayout.measuredHeight)
+//
+//            inflatedFrame.isDrawingCacheEnabled = true
+//            inflatedFrame.buildDrawingCache(true)
 
-            inflatedFrame.isDrawingCacheEnabled = true
-            inflatedFrame.buildDrawingCache(true)
-
-            viewModel.generatePdfFromGkemon(inflatedFrame, this@MainActivity)
+            viewModel.generatePdfFromGkemon(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>), this@MainActivity)
         }
 
         viewModel.generatePdfResult.observe(this) { it ->
@@ -157,8 +228,112 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+//        viewModel.writePdfResult.observe(this) { it ->
+//            if(it != null) {
+//                val document = PdfDocument()
+//                document.writeTo(FileOutputStream(it))
+//                document.close()
+//            }
+//        }
+
     }
 
+    class CreateView() : AnkoComponent<MainActivity> {
+
+        val customStyle = { v: Any ->
+            when (v) {
+                is Button -> v.textSize = 26f
+                is EditText -> v.textSize = 24f
+            }
+        }
+
+        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+            var height = px2dip(842)
+            var width = px2dip(595)
+
+            verticalLayout {
+                lparams(width = width.toInt(), height = height.toInt())
+
+                frameLayout {
+                    lparams(width = matchParent, height = wrapContent)
+
+                    imageView(R.mipmap.ecg_background).lparams {
+                        margin = dip(16)
+                        gravity = Gravity.CENTER
+                    }
+
+                    val name = textView {
+                        text =  "JC"
+                    }
+                    val password = textView {
+                        text =  "666"
+                    }
+                }
+
+//                relativeLayout {
+//                    lparams(width = matchParent, height = wrapContent) {
+//                        leftPadding = dip(10)
+//                        rightPadding = dip(10)
+//                    }
+//
+//                    imageView(R.mipmap.ecg_background).lparams {
+//                        margin = dip(16)
+//                        gravity = Gravity.CENTER
+//                    }
+//
+//                    val name = textView {
+//                        text =  "JC"
+//                    }
+//                    val password = textView {
+//                        text =  "666"
+//                    }
+//                }
+            }.applyRecursively(customStyle)
+        }
+
+
+    }
+
+    class MainActivityUi : AnkoComponent<MainActivity> {
+        private val customStyle = { v: Any ->
+            when (v) {
+                is Button -> v.textSize = 26f
+                is EditText -> v.textSize = 24f
+            }
+        }
+
+        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+            verticalLayout {
+                padding = dip(32)
+
+                imageView(R.mipmap.ecg_background).lparams {
+                    margin = dip(16)
+                    gravity = Gravity.CENTER
+                }
+
+                val name = textView {
+                    text =  "JC"
+                }
+                val password = textView {
+                    text =  "666"
+                }
+
+            }.applyRecursively(customStyle)
+        }
+    }
+
+    private fun resizeView(view: View, newWidth: Int, newHeight: Int) {
+        try {
+            val ctor: Constructor<out ViewGroup.LayoutParams?> =
+                view.layoutParams.javaClass.getDeclaredConstructor(
+                    Int::class.javaPrimitiveType,
+                    Int::class.javaPrimitiveType
+                )
+            view.layoutParams = ctor.newInstance(newWidth, newHeight)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
     private fun print(
         name: String, adapter: PrintDocumentAdapter,
