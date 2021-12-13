@@ -97,8 +97,9 @@ class MainViewModel()  : ViewModel() {
         ioScope.launch {
 //            val bitmap = v.getDrawingCache()
 
-            val bitmap = Bitmap.createBitmap(595, 842, Bitmap.Config.ARGB_8888)
+            val bitmap = Bitmap.createBitmap(842, 595, Bitmap.Config.ARGB_8888)
             val canvas_bmp = Canvas(bitmap)
+            v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
             v.draw(canvas_bmp)
 
 //            val bitmap = loadBitmapFromView(v)
@@ -128,6 +129,50 @@ class MainViewModel()  : ViewModel() {
 //            loadBitmapFromView(v)
         }
     }
+
+    fun generatePdf_V2(v: View) {
+        ioScope.launch {
+            val currentTimeMillis = System.currentTimeMillis()
+
+            var pageWidthInPixel = 3508
+            var pageHeightInPixel = 2480
+
+
+//            if (pageWidthInPixel == PdfGenerator.WRAP_CONTENT_WIDTH && pageHeightInPixel == PdfGenerator.WRAP_CONTENT_HEIGHT) {
+//                content.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+//                pageHeightInPixel = v.getMeasuredHeight()
+//                pageWidthInPixel = v.getMeasuredWidth()
+//                PdfGenerator.postScriptThreshold = 1.0
+//                PdfGenerator.a4HeightInPostScript = pageHeightInPixel
+//            }
+
+
+            pageHeightInPixel= (pageHeightInPixel * 0.75) as Int
+            pageWidthInPixel = (pageWidthInPixel * 0.75) as Int
+
+            v.measure(View.MeasureSpec.makeMeasureSpec(pageWidthInPixel, View.MeasureSpec.EXACTLY), View.MeasureSpec.UNSPECIFIED)
+            pageHeightInPixel = Math.max(v.getMeasuredHeight(), PdfGenerator.a4HeightInPostScript)
+
+
+            val document = PdfDocument()
+            val pageInfo = PdfDocument.PageInfo.Builder(pageWidthInPixel, pageHeightInPixel, 1).create()
+            val page = document.startPage(pageInfo)
+            v.layout(0, 0, pageWidthInPixel, pageHeightInPixel)
+            v.draw(page.canvas)
+            document.finishPage(page)
+
+            // Write the PDF file to a file
+            document.writeTo(FileOutputStream(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
+            document.close()
+
+            viewModelScope.launch {
+                generatePdfResult.value =
+                    MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"
+            }
+//            loadBitmapFromView(v)
+        }
+    }
+
 
     fun generatePdfFromGkemon(v: View, context: Context) {
         ioScope.launch {

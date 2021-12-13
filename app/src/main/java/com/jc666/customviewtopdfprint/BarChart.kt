@@ -1,11 +1,14 @@
 package com.jc666.customviewtopdfprint
 
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
-import android.util.AttributeSet
-import android.view.View
 import kotlin.math.roundToInt
+import android.graphics.BitmapFactory
+
+import android.graphics.Bitmap
+
+
+
 
 
 //class BarChart : View {
@@ -67,9 +70,23 @@ class BarChart {
 //        canvas.drawLine(lineLeft, y, lineRight, y, linePaint)
 //    }
 
+//    constructor(context: Context?) : super(context)
+//    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+
+
     init {
-        Bitmap.createBitmap(595, 842, Bitmap.Config.ARGB_8888).also { softwareBitmap = it }
+        Bitmap.createBitmap(842, 595, Bitmap.Config.ARGB_8888).also { softwareBitmap = it }
     }
+
+    var barDatas: List<BarData> = listOf(
+        BarData("2000", 23f),
+        BarData("2001", 34f),
+        BarData("2002", 10f),
+        BarData("2003", 93f),
+        BarData("2004", 77f)
+    )
 
     private var softwareBitmap: Bitmap? = null
 
@@ -82,31 +99,95 @@ class BarChart {
         color = Color.GRAY
     }
 
-//    constructor(context: Context?) : super(context)
-//    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = 14.toPx().toFloat()
+        color = Color.GRAY
+        textAlign = Paint.Align.LEFT
+    }
 
+    private val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        isFilterBitmap = true
+        isDither = true
+    }
+
+    private val valueTextPaint = Paint().apply {
+        color = Color.BLACK
+        textSize = 8.toPx().toFloat()
+        textAlign = Paint.Align.RIGHT
+    }
+
+    private val startDistanceWidth = 10.toPx()
+    private val startDistanceHeight = 15.toPx()
     private val barWidth = 30.toPx()
     private val barDistance = 30.toPx()
     private val maxValue = 200
 
-    var barDatas: List<BarData> = listOf(
-        BarData("2000", 23f),
-        BarData("2001", 34f),
-        BarData("2002", 10f),
-        BarData("2003", 93f),
-        BarData("2004", 77f)
-    )
+    private var firstNameValue = "JC"
+    private var lastNameValue = "666"
+    private var patientNumberTitleValue = "病歷號碼"
+    private var patientNumberValue = "GHGFVJ654D563FG7"
+    private var patientAgeTitleValue = "年齡:"
+    private var patientAgeValue = "35"
+    private var patientBirthdayTitleValue = "生日"
+    private var patientBirthdayValue = "1986.04.22"
 
     fun onDraw(canvas: Canvas) : Bitmap{
         canvas.setBitmap(softwareBitmap!!)
 
-        drawBar(canvas)
-        drawAxis(canvas)
-        drawValue(canvas)
-        drawLabels(canvas)
+        drawPatientFirstAndLastNameValue(canvas)
+        drawPatientIDNumberValue(canvas)
+        drawPatientGenderAndAgeValue(canvas)
+//        drawBar(canvas)
+//        drawAxis(canvas)
+//        drawValue(canvas)
+//        drawLabels(canvas)
         return softwareBitmap!!
+    }
+
+    private fun drawPatientFirstAndLastNameValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + startDistanceHeight
+        // 只畫 firstNameValue
+        canvas.drawText(firstNameValue, x, y, textPaint)
+        // 只畫 lastNameValue
+        canvas.drawText(lastNameValue, x + (barDistance*2), y, textPaint)
+    }
+
+    private fun drawPatientIDNumberValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + (startDistanceHeight*2)
+        // 只畫 patientNumberTitleValue
+        canvas.drawText(patientNumberTitleValue, x, y, textPaint)
+        // 只畫 patientNumberValue
+        canvas.drawText(patientNumberValue, x + (barDistance*2), y, textPaint)
+    }
+
+    private fun drawPatientGenderAndAgeValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + (startDistanceHeight*3)
+        // 只畫 patientGenderValue
+        val bitmap = BitmapFactory.decodeResource(MainApplication.appContext!!.resources, R.mipmap.female)
+        canvas.drawBitmap(bitmap, x, y, iconPaint)
+        // 只畫 patientAgeTitleValue
+        canvas.drawText(patientAgeTitleValue, x + 10.toPx(), y + 6.toPx(), textPaint)
+        // 只畫 patientAgeValue
+        canvas.drawText(patientAgeValue, x + 30.toPx(), y + 6.toPx(), textPaint)
+        // 只畫 patientBirthdayTitleValue
+        canvas.drawText(patientBirthdayTitleValue, x + (barDistance*2), y + 6.toPx(), textPaint)
+        // 只畫 patientBirthdayValue
+        canvas.drawText(patientBirthdayValue, x + (barDistance*2) + 20.toPx(), y + 6.toPx(), textPaint)
+    }
+
+    private fun getTextValueWidth(): Float {
+        val rect = Rect()
+        valueTextPaint.getTextBounds(maxValue.toString(), 0, maxValue.toString().length, rect)
+        return rect.width().toFloat()
     }
 
     private fun drawAxis(canvas: Canvas) {
@@ -138,12 +219,6 @@ class BarChart {
         }
     }
 
-    private val valueTextPaint = Paint().apply {
-        color = Color.BLACK
-        textSize = 16.toPx().toFloat()
-        textAlign = Paint.Align.RIGHT
-    }
-
     private fun drawValue(canvas: Canvas) {
         val x = getValueWidth()
         val fontMetrics = valueTextPaint.fontMetrics
@@ -151,7 +226,6 @@ class BarChart {
         val y = - fontMetrics.top
         // 只畫 maxValue
         canvas.drawText(maxValue.toString(), x, y, valueTextPaint)
-
     }
 
     private val labelTextPaint = Paint().apply {

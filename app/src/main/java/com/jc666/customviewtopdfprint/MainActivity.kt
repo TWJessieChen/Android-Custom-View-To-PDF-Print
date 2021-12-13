@@ -31,9 +31,12 @@ import com.gkemon.XMLtoPDF.model.SuccessResponse
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.IOException
 import java.lang.Exception
 import java.lang.reflect.Constructor
+import java.nio.channels.FileChannel
 
 
 class MainActivity : AppCompatActivity() {
@@ -209,7 +212,11 @@ class MainActivity : AppCompatActivity() {
 //            inflatedFrame.isDrawingCacheEnabled = true
 //            inflatedFrame.buildDrawingCache(true)
 
-            viewModel.generatePdfFromGkemon(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>), this@MainActivity)
+//            viewModel.generatePdfFromGkemon(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>), this@MainActivity)
+//            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
+
+//            viewModel.generatePdf_V2(GenerateECGReportView(this).createECGLayout())
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(), this@MainActivity)
         }
 
         viewModel.generatePdfResult.observe(this) { it ->
@@ -228,53 +235,52 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        viewModel.writePdfResult.observe(this) { it ->
-//            if(it != null) {
+        viewModel.writePdfResult.observe(this) { it ->
+            if(it != null) {
+                val currentTimeMillis = System.currentTimeMillis()
+                copyFile(File(it), File(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
 //                val document = PdfDocument()
 //                document.writeTo(FileOutputStream(it))
 //                document.close()
-//            }
-//        }
-
-    }
-
-    class CreateView() : AnkoComponent<MainActivity> {
-
-        val customStyle = { v: Any ->
-            when (v) {
-                is Button -> v.textSize = 26f
-                is EditText -> v.textSize = 24f
             }
         }
 
-        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            var height = px2dip(842)
-            var width = px2dip(595)
+    }
 
-            verticalLayout {
-                lparams(width = width.toInt(), height = height.toInt())
+    @Throws(IOException::class)
+    fun copyFile(src: File?, dst: File?) {
+        val inFile = FileInputStream(src)
+        val out = FileOutputStream(dst)
+        var fromChannel: FileChannel? = null
+        var toChannel: FileChannel? = null
+        try {
+            fromChannel = inFile.channel
+            toChannel = out.channel
+            fromChannel.transferTo(0, fromChannel.size(), toChannel)
+        } finally {
+            fromChannel?.close()
+            toChannel?.close()
+        }
+    }
 
-                frameLayout {
-                    lparams(width = matchParent, height = wrapContent)
-
-                    imageView(R.mipmap.ecg_background).lparams {
-                        margin = dip(16)
-                        gravity = Gravity.CENTER
-                    }
-
-                    val name = textView {
-                        text =  "JC"
-                    }
-                    val password = textView {
-                        text =  "666"
-                    }
-                }
-
-//                relativeLayout {
-//                    lparams(width = matchParent, height = wrapContent) {
-//                        leftPadding = dip(10)
-//                        rightPadding = dip(10)
-//                    }
+//    class CreateView() : AnkoComponent<MainActivity> {
+//
+//        val customStyle = { v: Any ->
+//            when (v) {
+//                is Button -> v.textSize = 26f
+//                is EditText -> v.textSize = 24f
+//            }
+//        }
+//
+//        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+//            var height = px2dip(595)
+//            var width = px2dip(842)
+//
+//            verticalLayout {
+//                lparams(width = width.toInt(), height = height.toInt())
+//
+//                frameLayout {
+//                    lparams(width = matchParent, height = wrapContent)
 //
 //                    imageView(R.mipmap.ecg_background).lparams {
 //                        margin = dip(16)
@@ -288,39 +294,58 @@ class MainActivity : AppCompatActivity() {
 //                        text =  "666"
 //                    }
 //                }
-            }.applyRecursively(customStyle)
-        }
-
-
-    }
-
-    class MainActivityUi : AnkoComponent<MainActivity> {
-        private val customStyle = { v: Any ->
-            when (v) {
-                is Button -> v.textSize = 26f
-                is EditText -> v.textSize = 24f
-            }
-        }
-
-        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            verticalLayout {
-                padding = dip(32)
-
-                imageView(R.mipmap.ecg_background).lparams {
-                    margin = dip(16)
-                    gravity = Gravity.CENTER
-                }
-
-                val name = textView {
-                    text =  "JC"
-                }
-                val password = textView {
-                    text =  "666"
-                }
-
-            }.applyRecursively(customStyle)
-        }
-    }
+//
+////                relativeLayout {
+////                    lparams(width = matchParent, height = wrapContent) {
+////                        leftPadding = dip(10)
+////                        rightPadding = dip(10)
+////                    }
+////
+////                    imageView(R.mipmap.ecg_background).lparams {
+////                        margin = dip(16)
+////                        gravity = Gravity.CENTER
+////                    }
+////
+////                    val name = textView {
+////                        text =  "JC"
+////                    }
+////                    val password = textView {
+////                        text =  "666"
+////                    }
+////                }
+//            }.applyRecursively(customStyle)
+//        }
+//
+//
+//    }
+//
+//    class MainActivityUi : AnkoComponent<MainActivity> {
+//        private val customStyle = { v: Any ->
+//            when (v) {
+//                is Button -> v.textSize = 26f
+//                is EditText -> v.textSize = 24f
+//            }
+//        }
+//
+//        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
+//            verticalLayout {
+//                padding = dip(32)
+//
+//                imageView(R.mipmap.ecg_background).lparams {
+//                    margin = dip(16)
+//                    gravity = Gravity.CENTER
+//                }
+//
+//                val name = textView {
+//                    text =  "JC"
+//                }
+//                val password = textView {
+//                    text =  "666"
+//                }
+//
+//            }.applyRecursively(customStyle)
+//        }
+//    }
 
     private fun resizeView(view: View, newWidth: Int, newHeight: Int) {
         try {
