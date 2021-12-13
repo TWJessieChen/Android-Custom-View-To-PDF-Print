@@ -397,7 +397,66 @@ class GenerateECGReportView(context: Context) {
         patientRv5Sv1Content.addView(tv_patient_rv_sv_unit)
         patientRv5Sv1Content.setBackgroundResource(R.drawable.underline)
 
+        //增益
+        val reportMagnificationLayout = RelativeLayout(context)
+        reportMagnificationLayout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT)
+        val reportMagnificationContent = LinearLayout(context)
+        reportMagnificationContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        reportMagnificationContent.orientation = LinearLayout.HORIZONTAL
+        reportMagnificationContent.gravity = Gravity.CENTER_VERTICAL
+        val tv_report_magnification = TextView(context)
+        tv_report_magnification.setLayoutParams(tv_patient_info_params)
+        tv_report_magnification.setText("增益: x1.0")
+        tv_report_magnification.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
+        reportMagnificationContent.setBackgroundResource(R.drawable.aroundshap)
+        reportMagnificationContent.addView(tv_report_magnification)
+        reportMagnificationLayout.addView(reportMagnificationContent)
 
+        //低通 高通 交流電
+        val channelACLayout = RelativeLayout(context)
+        channelACLayout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT)
+        val channelACContent = LinearLayout(context)
+        channelACContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        channelACContent.orientation = LinearLayout.VERTICAL
+        channelACContent.gravity = Gravity.CENTER_VERTICAL
+        val tv_low_channel = TextView(context)
+        val tv_high_channel = TextView(context)
+        val tv_ac = TextView(context)
+        tv_low_channel.setLayoutParams(tv_patient_info_params)
+        tv_low_channel.setText("低通:150Hz")
+        tv_low_channel.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
+        tv_high_channel.setLayoutParams(tv_patient_info_params)
+        tv_high_channel.setText("高通:0.05Hz")
+        tv_high_channel.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
+        tv_ac.setLayoutParams(tv_patient_info_params)
+        tv_ac.setText("交流電:60Hz")
+        tv_ac.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
+        channelACContent.setBackgroundResource(R.drawable.aroundshap)
+        channelACContent.addView(tv_low_channel)
+        channelACContent.addView(tv_high_channel)
+        channelACContent.addView(tv_ac)
+        channelACLayout.addView(channelACContent)
+
+        //心律調整器偵測
+        val hrDetectLayout = RelativeLayout(context)
+        hrDetectLayout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT)
+        val hrDetectContent = LinearLayout(context)
+        hrDetectContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        hrDetectContent.orientation = LinearLayout.HORIZONTAL
+        hrDetectContent.gravity = Gravity.CENTER_VERTICAL
+        val tv_hr_detect = TextView(context)
+        tv_hr_detect.setLayoutParams(tv_patient_info_params)
+        tv_hr_detect.setText("心律調節器偵測:ON")
+        tv_hr_detect.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
+        hrDetectContent.setBackgroundResource(R.drawable.aroundshap)
+        hrDetectContent.addView(tv_hr_detect)
+        hrDetectLayout.addView(hrDetectContent)
 
         patientECGInfoContent.removeAllViews()
         patientECGInfoContent.addView(patientHRContent)
@@ -419,7 +478,12 @@ class GenerateECGReportView(context: Context) {
         patientECGInfoContent.addView(patientTAxisContent)
         patientRv5Sv1Content.setPadding(5, 3, 0, 0)
         patientECGInfoContent.addView(patientRv5Sv1Content)
-
+        reportMagnificationLayout.setPadding(5, 25, 0, 0)
+        patientECGInfoContent.addView(reportMagnificationLayout)
+        channelACLayout.setPadding(5, 5, 0, 0)
+        patientECGInfoContent.addView(channelACLayout)
+        hrDetectLayout.setPadding(5, 5, 0, 0)
+        patientECGInfoContent.addView(hrDetectLayout)
 
         patientECGDataInfoContent.removeAllViews()
         patientECGDataInfoContent.addView(iv_ECG_data)
