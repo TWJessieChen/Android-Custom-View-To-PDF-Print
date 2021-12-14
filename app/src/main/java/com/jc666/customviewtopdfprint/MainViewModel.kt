@@ -13,6 +13,7 @@ import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
+import com.seeker.luckychart.soft.LuckySoftRenderer
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -53,7 +54,7 @@ class MainViewModel()  : ViewModel() {
         }
     }
 
-    fun generatePdfCanvas() {
+    fun generatePdfCanvas(context: Context) {
         ioScope.launch {
 //            val bitmap = v.getDrawingCache()
 
@@ -61,10 +62,13 @@ class MainViewModel()  : ViewModel() {
 //            val canvas_bmp = Canvas(bitmap)
 //            v.draw(canvas_bmp)
 
-            val softCanvas = Canvas()
-            val barChart = BarChart()
-            val bitmap = barChart.onDraw(softCanvas)
+//            val softCanvas = Canvas()
+//            val ecgGraphicUtil = ECGGraphicUtil()
+//            val bitmap = ecgGraphicUtil.onDraw(softCanvas)
 
+            val dataParse = ECGDataParse(context)
+            val bitmap = LuckySoftRenderer.instantiate(context, dataParse.values) //.setMaxDataValue(2f)
+                .startRender()
 //            val bitmap = loadBitmapFromView(v)
             val currentTimeMillis = System.currentTimeMillis()
             saveBitmap(bitmap, MainApplication.internalFilePath + File.separator + currentTimeMillis + ".png")
@@ -72,23 +76,23 @@ class MainViewModel()  : ViewModel() {
 //            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 595, 842, true)
 
             // Create a PdfDocument with a page of the same size as the image
-            val document = PdfDocument()
-            val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
-            val page = document.startPage(pageInfo)
+//            val document = PdfDocument()
+//            val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
+//            val page = document.startPage(pageInfo)
 
             // Draw the bitmap onto the page
-            val canvas: Canvas = page.canvas
-            canvas.drawBitmap(bitmap, 0f, 0f, null)
-            document.finishPage(page)
+//            val canvas: Canvas = page.canvas
+//            canvas.drawBitmap(bitmap, 0f, 0f, null)
+//            document.finishPage(page)
+//
+//            // Write the PDF file to a file
+//            document.writeTo(FileOutputStream(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
+//            document.close()
 
-            // Write the PDF file to a file
-            document.writeTo(FileOutputStream(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
-            document.close()
-
-            viewModelScope.launch {
-                generatePdfResult.value =
-                    MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"
-            }
+//            viewModelScope.launch {
+//                generatePdfResult.value =
+//                    MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"
+//            }
 //            loadBitmapFromView(v)
         }
     }

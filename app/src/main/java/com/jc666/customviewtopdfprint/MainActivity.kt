@@ -28,6 +28,7 @@ import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
+import com.seeker.luckychart.soft.LuckySoftRenderer
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.io.File
@@ -164,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
 
 //            viewModel.generatePdf(BarChart(this@MainActivity))
-            viewModel.generatePdfCanvas()
+            viewModel.generatePdfCanvas(this@MainActivity)
         }
 
         btn_print_pdf!!.setOnClickListener {
@@ -216,7 +217,11 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
 
 //            viewModel.generatePdf_V2(GenerateECGReportView(this).createECGLayout())
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(), this@MainActivity)
+            viewModel.generatePdfCanvas(this@MainActivity)
+            val dataParse = ECGDataParse(this@MainActivity)
+            val bitmap = LuckySoftRenderer.instantiate(this@MainActivity, dataParse.values) //.setMaxDataValue(2f)
+                .startRender()
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap), this@MainActivity)
         }
 
         viewModel.generatePdfResult.observe(this) { it ->
