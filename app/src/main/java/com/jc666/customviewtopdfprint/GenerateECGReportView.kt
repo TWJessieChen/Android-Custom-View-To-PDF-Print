@@ -178,11 +178,16 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientPDurContent.orientation = LinearLayout.HORIZONTAL
         patientPDurContent.gravity = Gravity.LEFT
+        val patientPDurValueContent = LinearLayout(context)
+        patientPDurValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientPDurValueContent.orientation = LinearLayout.HORIZONTAL
+        patientPDurValueContent.gravity = Gravity.RIGHT
         val tv_patient_p_dur_title = TextView(context)
         val tv_patient_p_dur_value = TextView(context)
         val tv_patient_p_dur_unit = TextView(context)
         tv_patient_p_dur_title.setLayoutParams(tv_patient_info_params)
-        tv_patient_p_dur_title.setText("P dur  ")
+        tv_patient_p_dur_title.setText("P dur ")
         tv_patient_p_dur_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_p_dur_value.setLayoutParams(tv_patient_info_params)
         tv_patient_p_dur_value.setText("102")
@@ -191,10 +196,11 @@ class GenerateECGReportView(context: Context) {
         tv_patient_p_dur_unit.setLayoutParams(tv_patient_info_params)
         tv_patient_p_dur_unit.setText("ms")
         tv_patient_p_dur_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
-        tv_patient_p_dur_value.setPadding(5, 0, 0, 0)
+        tv_patient_p_dur_unit.setPadding(5, 0, 0, 0)
         patientPDurContent.addView(tv_patient_p_dur_title)
-        patientPDurContent.addView(tv_patient_p_dur_value)
-        patientPDurContent.addView(tv_patient_p_dur_unit)
+        patientPDurValueContent.addView(tv_patient_p_dur_value)
+        patientPDurValueContent.addView(tv_patient_p_dur_unit)
+        patientPDurContent.addView(patientPDurValueContent)
         patientPDurContent.setBackgroundResource(R.drawable.underline)
 
         //patient PR int XXX ms
@@ -203,6 +209,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientPRIntContent.orientation = LinearLayout.HORIZONTAL
         patientPRIntContent.gravity = Gravity.LEFT
+        val patientPRIntValueContent = LinearLayout(context)
+        patientPRIntValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientPRIntValueContent.orientation = LinearLayout.HORIZONTAL
+        patientPRIntValueContent.gravity = Gravity.RIGHT
         val tv_patient_pr_int_title = TextView(context)
         val tv_patient_pr_int_value = TextView(context)
         val tv_patient_pr_int_unit = TextView(context)
@@ -218,8 +229,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_pr_int_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_pr_int_unit.setPadding(5, 0, 0, 0)
         patientPRIntContent.addView(tv_patient_pr_int_title)
-        patientPRIntContent.addView(tv_patient_pr_int_value)
-        patientPRIntContent.addView(tv_patient_pr_int_unit)
+        patientPRIntValueContent.addView(tv_patient_pr_int_value)
+        patientPRIntValueContent.addView(tv_patient_pr_int_unit)
+        patientPRIntContent.addView(patientPRIntValueContent)
         patientPRIntContent.setBackgroundResource(R.drawable.underline)
 
         //patient QRS dur XXX ms
@@ -228,6 +240,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientQRSDurContent.orientation = LinearLayout.HORIZONTAL
         patientQRSDurContent.gravity = Gravity.LEFT
+        val patientQRSDurValueContent = LinearLayout(context)
+        patientQRSDurValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientQRSDurValueContent.orientation = LinearLayout.HORIZONTAL
+        patientQRSDurValueContent.gravity = Gravity.RIGHT
         val tv_patient_qrs_dur_title = TextView(context)
         val tv_patient_qrs_dur_value = TextView(context)
         val tv_patient_qrs_dur_unit = TextView(context)
@@ -243,8 +260,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qrs_dur_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_qrs_dur_unit.setPadding(5, 0, 0, 0)
         patientQRSDurContent.addView(tv_patient_qrs_dur_title)
-        patientQRSDurContent.addView(tv_patient_qrs_dur_value)
-        patientQRSDurContent.addView(tv_patient_qrs_dur_unit)
+        patientQRSDurValueContent.addView(tv_patient_qrs_dur_value)
+        patientQRSDurValueContent.addView(tv_patient_qrs_dur_unit)
+        patientQRSDurContent.addView(patientQRSDurValueContent)
         patientQRSDurContent.setBackgroundResource(R.drawable.underline)
 
         //patient QT int XXX ms
@@ -253,6 +271,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientQTIntContent.orientation = LinearLayout.HORIZONTAL
         patientQTIntContent.gravity = Gravity.LEFT
+        val patientQTIntValueContent = LinearLayout(context)
+        patientQTIntValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientQTIntValueContent.orientation = LinearLayout.HORIZONTAL
+        patientQTIntValueContent.gravity = Gravity.RIGHT
         val tv_patient_qt_int_title = TextView(context)
         val tv_patient_qt_int_value = TextView(context)
         val tv_patient_qt_int_unit = TextView(context)
@@ -268,8 +291,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qt_int_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_qt_int_unit.setPadding(5, 0, 0, 0)
         patientQTIntContent.addView(tv_patient_qt_int_title)
-        patientQTIntContent.addView(tv_patient_qt_int_value)
-        patientQTIntContent.addView(tv_patient_qt_int_unit)
+        patientQTIntValueContent.addView(tv_patient_qt_int_value)
+        patientQTIntValueContent.addView(tv_patient_qt_int_unit)
+        patientQTIntContent.addView(patientQTIntValueContent)
         patientQTIntContent.setBackgroundResource(R.drawable.underline)
 
         //patient QTc int XXX ms
@@ -278,6 +302,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientQTcIntContent.orientation = LinearLayout.HORIZONTAL
         patientQTcIntContent.gravity = Gravity.LEFT
+        val patientQTcIntValueContent = LinearLayout(context)
+        patientQTcIntValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientQTcIntValueContent.orientation = LinearLayout.HORIZONTAL
+        patientQTcIntValueContent.gravity = Gravity.RIGHT
         val tv_patient_qtc_int_title = TextView(context)
         val tv_patient_qtc_int_value = TextView(context)
         val tv_patient_qtc_int_unit = TextView(context)
@@ -293,8 +322,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qtc_int_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_qtc_int_unit.setPadding(5, 0, 0, 0)
         patientQTcIntContent.addView(tv_patient_qtc_int_title)
-        patientQTcIntContent.addView(tv_patient_qtc_int_value)
-        patientQTcIntContent.addView(tv_patient_qtc_int_unit)
+        patientQTcIntValueContent.addView(tv_patient_qtc_int_value)
+        patientQTcIntValueContent.addView(tv_patient_qtc_int_unit)
+        patientQTcIntContent.addView(patientQTcIntValueContent)
         patientQTcIntContent.setBackgroundResource(R.drawable.underline)
 
         //patient P axis XXX deg
@@ -303,6 +333,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientPAxisContent.orientation = LinearLayout.HORIZONTAL
         patientPAxisContent.gravity = Gravity.LEFT
+        val patientPAxisValueContent = LinearLayout(context)
+        patientPAxisValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientPAxisValueContent.orientation = LinearLayout.HORIZONTAL
+        patientPAxisValueContent.gravity = Gravity.RIGHT
         val tv_patient_p_axis_title = TextView(context)
         val tv_patient_p_axis_value = TextView(context)
         val tv_patient_p_axis_unit = TextView(context)
@@ -318,8 +353,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_p_axis_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_p_axis_unit.setPadding(5, 0, 0, 0)
         patientPAxisContent.addView(tv_patient_p_axis_title)
-        patientPAxisContent.addView(tv_patient_p_axis_value)
-        patientPAxisContent.addView(tv_patient_p_axis_unit)
+        patientPAxisValueContent.addView(tv_patient_p_axis_value)
+        patientPAxisValueContent.addView(tv_patient_p_axis_unit)
+        patientPAxisContent.addView(patientPAxisValueContent)
         patientPAxisContent.setBackgroundResource(R.drawable.underline)
 
         //patient QRS axis XXX deg
@@ -328,6 +364,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientQRSAxisContent.orientation = LinearLayout.HORIZONTAL
         patientQRSAxisContent.gravity = Gravity.LEFT
+        val patientQRSAxisValueContent = LinearLayout(context)
+        patientQRSAxisValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientQRSAxisValueContent.orientation = LinearLayout.HORIZONTAL
+        patientQRSAxisValueContent.gravity = Gravity.RIGHT
         val tv_patient_qrs_axis_title = TextView(context)
         val tv_patient_qrs_axis_value = TextView(context)
         val tv_patient_qrs_axis_unit = TextView(context)
@@ -343,8 +384,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qrs_axis_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_qrs_axis_unit.setPadding(5, 0, 0, 0)
         patientQRSAxisContent.addView(tv_patient_qrs_axis_title)
-        patientQRSAxisContent.addView(tv_patient_qrs_axis_value)
-        patientQRSAxisContent.addView(tv_patient_qrs_axis_unit)
+        patientQRSAxisValueContent.addView(tv_patient_qrs_axis_value)
+        patientQRSAxisValueContent.addView(tv_patient_qrs_axis_unit)
+        patientQRSAxisContent.addView(patientQRSAxisValueContent)
         patientQRSAxisContent.setBackgroundResource(R.drawable.underline)
 
         //patient T axis XXX deg
@@ -353,6 +395,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientTAxisContent.orientation = LinearLayout.HORIZONTAL
         patientTAxisContent.gravity = Gravity.LEFT
+        val patientTAxisValueContent = LinearLayout(context)
+        patientTAxisValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientTAxisValueContent.orientation = LinearLayout.HORIZONTAL
+        patientTAxisValueContent.gravity = Gravity.RIGHT
         val tv_patient_t_axis_title = TextView(context)
         val tv_patient_t_axis_value = TextView(context)
         val tv_patient_t_axis_unit = TextView(context)
@@ -368,8 +415,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_t_axis_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_t_axis_unit.setPadding(5, 0, 0, 0)
         patientTAxisContent.addView(tv_patient_t_axis_title)
-        patientTAxisContent.addView(tv_patient_t_axis_value)
-        patientTAxisContent.addView(tv_patient_t_axis_unit)
+        patientTAxisValueContent.addView(tv_patient_t_axis_value)
+        patientTAxisValueContent.addView(tv_patient_t_axis_unit)
+        patientTAxisContent.addView(patientTAxisValueContent)
         patientTAxisContent.setBackgroundResource(R.drawable.underline)
 
         //patient RV5+SV1 XXX mv
@@ -378,6 +426,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         patientRv5Sv1Content.orientation = LinearLayout.HORIZONTAL
         patientRv5Sv1Content.gravity = Gravity.LEFT
+        val patientRv5Sv1ValueContent = LinearLayout(context)
+        patientRv5Sv1ValueContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+        patientRv5Sv1ValueContent.orientation = LinearLayout.HORIZONTAL
+        patientRv5Sv1ValueContent.gravity = Gravity.RIGHT
         val tv_patient_rv_sv_title = TextView(context)
         val tv_patient_rv_sv_value = TextView(context)
         val tv_patient_rv_sv_unit = TextView(context)
@@ -393,8 +446,9 @@ class GenerateECGReportView(context: Context) {
         tv_patient_rv_sv_unit.setTextSize(TypedValue.COMPLEX_UNIT_SP,8F)
         tv_patient_rv_sv_unit.setPadding(5, 0, 0, 0)
         patientRv5Sv1Content.addView(tv_patient_rv_sv_title)
-        patientRv5Sv1Content.addView(tv_patient_rv_sv_value)
-        patientRv5Sv1Content.addView(tv_patient_rv_sv_unit)
+        patientRv5Sv1ValueContent.addView(tv_patient_rv_sv_value)
+        patientRv5Sv1ValueContent.addView(tv_patient_rv_sv_unit)
+        patientRv5Sv1Content.addView(patientRv5Sv1ValueContent)
         patientRv5Sv1Content.setBackgroundResource(R.drawable.underline)
 
         //增益
