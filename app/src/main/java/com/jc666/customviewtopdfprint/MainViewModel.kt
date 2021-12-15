@@ -68,7 +68,7 @@ class MainViewModel()  : ViewModel() {
 //            val bitmap = ecgGraphicUtil.onDraw(softCanvas)
 
             val dataParse = ECGDataParse(context)
-            val bitmap = EcgSoftRenderer.instantiate(context, dataParse.values) //.setMaxDataValue(2f)
+            val bitmap = EcgSoftRenderer.instantiate(context, dataParse.values, 0) //.setMaxDataValue(2f)
                 .startRender()
 //            val bitmap = loadBitmapFromView(v)
             val currentTimeMillis = System.currentTimeMillis()

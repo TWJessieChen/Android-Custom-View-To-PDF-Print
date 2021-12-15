@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,13 +18,17 @@ import androidx.annotation.NonNull;
 class SoftAxesRenderer extends RealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
-    private static final int ROW_COLOR = Color.parseColor("#57C2FB");  //藍色
+    private static final int RED_ROW_COLOR = Color.parseColor("#C30D23");  //紅色
 
-    private static final int CELL_COLOR = Color.parseColor("#ffe70000");  //紅色
+    private static final int RED_CELL_COLOR = Color.parseColor("#C30D23");  //紅色
 
-    private static final int LABEL_TEXT_COLOR = Color.parseColor("#021F52"); //深藍色
+    private static final int GREED_ROW_COLOR = Color.parseColor("#00C100");  //綠色
 
-    private static final int LABEL_LEAD_COLOR = Color.parseColor("#ff202123"); //黑色
+    private static final int GREED_CELL_COLOR = Color.parseColor("#00C100");  //綠色
+
+    private static final int LABEL_TEXT_COLOR = Color.parseColor("#FF000000"); //深藍色
+
+    private static final int LABEL_LEAD_COLOR = Color.parseColor("#FF000000"); //黑色
 
     private Paint rowPaint;//行與行之間的畫筆
 
@@ -33,9 +38,9 @@ class SoftAxesRenderer extends RealRenderer{
 
     private Paint labelLeadPaint;//專門畫每個Lead起始位置的柱狀條畫筆
 
-    SoftAxesRenderer(@NonNull Context context, @NonNull ECGPointValue[] values) {
+    SoftAxesRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type) {
         super(context, values);
-        initPaint();
+        initPaint(type);
     }
 
     @Override
@@ -115,7 +120,10 @@ class SoftAxesRenderer extends RealRenderer{
                 drawRowLabel(canvas, startX+(120*cellPixel), startY+((i + 1)*cellPixel), "V3");
                 drawRowLabel(canvas, startX+(182*cellPixel), startY+((i + 1)*cellPixel), "V6");
             } else if(i == 93) {
+                //未來要開出來，可以選擇要顯示哪個lead label
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
+            } else if(i == 118) {
+                drawRowLabel(canvas, startX+(214*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
             }
 
         }
@@ -160,15 +168,24 @@ class SoftAxesRenderer extends RealRenderer{
         }
     }
 
-    private void initPaint(){
+    private void initPaint(int type){
+//        Log.d(TAG, "initPaint type: " + type);
         rowPaint = new Paint();
         rowPaint.setAntiAlias(true);
-        rowPaint.setColor(ROW_COLOR);
-        rowPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,3f));
+        if(type == 0) {
+            rowPaint.setColor(RED_ROW_COLOR);
+        } else {
+            rowPaint.setColor(GREED_ROW_COLOR);
+        }
+        rowPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,1f));
 
         cellPaint = new Paint();
         cellPaint.setAntiAlias(true);
-        cellPaint.setColor(CELL_COLOR);
+        if(type == 0) {
+            cellPaint.setColor(RED_CELL_COLOR);
+        } else {
+            cellPaint.setColor(GREED_CELL_COLOR);
+        }
         cellPaint.setAlpha(200);
         cellPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
 
@@ -183,6 +200,7 @@ class SoftAxesRenderer extends RealRenderer{
         labelTextPaint.setStrokeCap(Paint.Cap.ROUND);
         labelTextPaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
         labelTextPaint.setColor(LABEL_TEXT_COLOR);
+        labelTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
     }
 
 }

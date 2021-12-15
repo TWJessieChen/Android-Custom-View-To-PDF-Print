@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 class SoftDataRenderer extends RealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
+    private static final int LEAD_LINE_COLOR = Color.parseColor("#FF000000"); //黑色
+
     private Transformer transformer;
 
     private int dataLeft;
@@ -52,8 +54,8 @@ class SoftDataRenderer extends RealRenderer{
         for (int i = 0,rows = mSoftStrategy.totalRows();i < rows;i++){
             transformer.setDataContentRect(dataLeft,i*rowHeight,dataRight,(i+1)*rowHeight);
 
-            //標記時間的
-            drawRowTime(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
+            //標記時間的 debug 使用
+            drawRowTimeDebug(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
 
             int start = i*mSoftStrategy.pointsPerRow();
             int end = Math.min((i+1)*mSoftStrategy.pointsPerRow(),mEcgData.length);
@@ -80,7 +82,7 @@ class SoftDataRenderer extends RealRenderer{
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeCap(Paint.Cap.ROUND);
         linePaint.setStrokeWidth(ChartUtils.dp2px(mDensity, 2));
-        linePaint.setColor(Color.parseColor("#021F52"));
+        linePaint.setColor(LEAD_LINE_COLOR);
 
         timePaint = new Paint();
         timePaint.setAntiAlias(true);
@@ -90,7 +92,7 @@ class SoftDataRenderer extends RealRenderer{
         timePaint.setColor(Color.parseColor("#021F52"));
     }
 
-    private void drawRowTime(Canvas canvas,float left,float bottom,String text){
+    private void drawRowTimeDebug(Canvas canvas, float left, float bottom, String text){
         int padding = ChartUtils.dp2px(mDensity,5);
         Paint.FontMetricsInt fontMetrics = timePaint.getFontMetricsInt();
         float startX = left +padding;

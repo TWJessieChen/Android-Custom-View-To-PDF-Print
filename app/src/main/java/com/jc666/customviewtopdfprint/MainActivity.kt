@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf_V2(GenerateECGReportView(this).createECGLayout())
             viewModel.generatePdfCanvas(this@MainActivity)
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.values) //.setMaxDataValue(2f)
+            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.values, 0) //.setMaxDataValue(2f)
                 .startRender()
             viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap!!), this@MainActivity)
         }

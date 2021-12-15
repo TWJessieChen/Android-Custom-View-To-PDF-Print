@@ -11,7 +11,7 @@ import android.graphics.PorterDuff
  * @date 2021/12/15
  * @describe TODO
  */
-class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPointValue>, softStrategy: SoftStrategy?, dataRenderer: RealRenderer?, axesArenderer: RealRenderer?)  {
+class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPointValue>, type: Int, softStrategy: SoftStrategy?, dataRenderer: RealRenderer?, axesArenderer: RealRenderer?)  {
     private val TAG = EcgSoftRenderer::class.java.simpleName
 
     private val mSoftStrategy: SoftStrategy
@@ -29,18 +29,19 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
         fun instantiate(
             context: Context,
             values: Array<ECGPointValue>,
+            type:Int,
             softStrategy: SoftStrategy? = null,
             dataRenderer: RealRenderer? = null,
             axesArenderer: RealRenderer? = null
         ): EcgSoftRenderer {
-            return EcgSoftRenderer(context, values, softStrategy, dataRenderer, axesArenderer)
+            return EcgSoftRenderer(context, values, type, softStrategy, dataRenderer, axesArenderer)
         }
     }
 
     init {
         mSoftStrategy = softStrategy ?: LuckySoftStrategy(values.size)
         mDataRenerer = dataRenderer ?: SoftDataRenderer(context, values)
-        mAxesRenderer = axesArenderer ?: SoftAxesRenderer(context, values)
+        mAxesRenderer = axesArenderer ?: SoftAxesRenderer(context, values, type)
         mDataRenerer.setSoftStrategy(mSoftStrategy)
         mAxesRenderer.setSoftStrategy(mSoftStrategy)
     }
