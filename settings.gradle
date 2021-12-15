@@ -1,2 +1,3 @@
 rootProject.name = "CustomViewToPDFPrint"
 include ':app', ':LuckyEcgChart'
+include ':EcgLibrary'

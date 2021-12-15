@@ -13,6 +13,7 @@ import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
+import com.jc666.ecglibrary.EcgSoftRenderer
 import com.seeker.luckychart.soft.LuckySoftRenderer
 import java.io.File
 import java.io.FileOutputStream
@@ -67,7 +68,7 @@ class MainViewModel()  : ViewModel() {
 //            val bitmap = ecgGraphicUtil.onDraw(softCanvas)
 
             val dataParse = ECGDataParse(context)
-            val bitmap = LuckySoftRenderer.instantiate(context, dataParse.values) //.setMaxDataValue(2f)
+            val bitmap = EcgSoftRenderer.instantiate(context, dataParse.values) //.setMaxDataValue(2f)
                 .startRender()
 //            val bitmap = loadBitmapFromView(v)
             val currentTimeMillis = System.currentTimeMillis()

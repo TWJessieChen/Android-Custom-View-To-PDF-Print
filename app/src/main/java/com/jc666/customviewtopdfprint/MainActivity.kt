@@ -3,32 +3,18 @@ package com.jc666.customviewtopdfprint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.pdf.PdfDocument
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintJob
 import android.print.PrintManager
-import android.text.InputType
-import android.util.AttributeSet
-import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.solver.widgets.ConstraintWidgetContainer.measure
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
-import com.gkemon.XMLtoPDF.PdfGenerator
-import com.gkemon.XMLtoPDF.PdfGeneratorListener
-import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
-import com.seeker.luckychart.soft.LuckySoftRenderer
+import com.jc666.ecglibrary.EcgSoftRenderer
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.io.File
@@ -219,9 +205,9 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf_V2(GenerateECGReportView(this).createECGLayout())
             viewModel.generatePdfCanvas(this@MainActivity)
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = LuckySoftRenderer.instantiate(this@MainActivity, dataParse.values) //.setMaxDataValue(2f)
+            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.values) //.setMaxDataValue(2f)
                 .startRender()
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap), this@MainActivity)
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap!!), this@MainActivity)
         }
 
         viewModel.generatePdfResult.observe(this) { it ->

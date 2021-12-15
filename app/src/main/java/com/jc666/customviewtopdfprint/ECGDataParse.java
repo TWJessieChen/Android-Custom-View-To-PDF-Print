@@ -5,7 +5,7 @@ import android.content.res.AssetManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.seeker.luckychart.model.ECGPointValue;
+import com.jc666.ecglibrary.ECGPointValue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
