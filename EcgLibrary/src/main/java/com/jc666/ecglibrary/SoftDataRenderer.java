@@ -66,8 +66,6 @@ class SoftDataRenderer extends RealRenderer{
                 float nextX = transformer.computeRawX((j+1-start));
                 float nextY = transformer.computeRawY(mEcgData[j+1].getCoorY());
 
-
-
                 if (!transformer.needDraw(currentY,nextY)){
                     continue;
                 }

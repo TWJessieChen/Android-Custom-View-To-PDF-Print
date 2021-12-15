@@ -63,7 +63,7 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
         initSoft()
         softwareCanvas!!.drawColor(Color.WHITE)
         mAxesRenderer.draw(softwareCanvas)
-        //        mDataRenerer.draw(softwareCanvas);
+        mDataRenerer.draw(softwareCanvas);
         return softwareBitmap
     }
 

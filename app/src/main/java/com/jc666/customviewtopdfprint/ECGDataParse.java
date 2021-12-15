@@ -19,7 +19,7 @@ public class ECGDataParse {
 
     private ECGPointValue[] values;
 
-    private ECGPointValue[] valuesTest = new ECGPointValue[10000];;
+    private ECGPointValue[] valuesTest = new ECGPointValue[20000];
 
     public ECGDataParse(Context context){
         String json = parseJson(context,"ecgData.json");
@@ -48,6 +48,7 @@ public class ECGDataParse {
 
         for(int index=0; index < 10000; index++) {
             valuesTest[index] = values[index];
+            valuesTest[index + 10000] = values[index];
         }
 
         return valuesTest;

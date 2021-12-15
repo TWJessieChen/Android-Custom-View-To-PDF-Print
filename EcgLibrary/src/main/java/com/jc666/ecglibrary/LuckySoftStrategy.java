@@ -6,6 +6,7 @@ package com.jc666.ecglibrary;
  * @describe TODO
  */
 public class LuckySoftStrategy implements SoftStrategy {
+    private String TAG = this.getClass().getSimpleName();
 
     private int pointCount;
 
@@ -54,12 +55,13 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     @Override
     public int pointsPerSecond() {
-        return 250;
+        return 500;
+//        return 250;
     }
 
     @Override
     public int pixelPerCell() {
-        return 10;//一个小格占5像素
+        return 20;//一个小格占5像素
     }
 
     @Override

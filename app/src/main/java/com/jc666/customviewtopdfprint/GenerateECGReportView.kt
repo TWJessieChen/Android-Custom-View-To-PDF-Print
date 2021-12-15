@@ -139,10 +139,11 @@ class GenerateECGReportView(context: Context) {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         iv_ECG_data.setLayoutParams(iv_ECG_data_params)
         iv_ECG_data.setImageBitmap(bmp)
-        //調整大小，可以決定格子大小
+        //調整大小，可以決定格子大小，這尺寸專門for ecg 圖表使用
         //Log.d(TAG,"width: " + iv_ECG_data.width + " height: " + iv_ECG_data.height)
-//        iv_ECG_data.getLayoutParams().height = 500
-//        iv_ECG_data.getLayoutParams().width = 300
+        iv_ECG_data.getLayoutParams().height = (14.160319845242177 * 25*3.37).toInt()
+        iv_ECG_data.getLayoutParams().width = (14.160319845242177 * 50*3.409).toInt()
+//        Log.d(TAG,"width: " + (14.160319845242177 * 25).toInt() + " height: " + (14.160319845242177 * 50).toInt())
 
         //patient ecg info
         val patientECGInfoContent = LinearLayout(context)
