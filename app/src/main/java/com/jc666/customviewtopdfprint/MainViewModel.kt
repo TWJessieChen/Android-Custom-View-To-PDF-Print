@@ -13,8 +13,8 @@ import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
+import com.jc666.ecglibrary.ECGPointValue
 import com.jc666.ecglibrary.EcgSoftRenderer
-import com.seeker.luckychart.soft.LuckySoftRenderer
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -55,7 +55,7 @@ class MainViewModel()  : ViewModel() {
         }
     }
 
-    fun generatePdfCanvas(context: Context) {
+    fun generatePdfCanvas(context: Context, values: Array<ECGPointValue>) {
         ioScope.launch {
 //            val bitmap = v.getDrawingCache()
 
@@ -67,8 +67,8 @@ class MainViewModel()  : ViewModel() {
 //            val ecgGraphicUtil = ECGGraphicUtil()
 //            val bitmap = ecgGraphicUtil.onDraw(softCanvas)
 
-            val dataParse = ECGDataParse(context)
-            val bitmap = EcgSoftRenderer.instantiate(context, dataParse.values, 0) //.setMaxDataValue(2f)
+//            val dataParse = ECGDataParse(context)
+            val bitmap = EcgSoftRenderer.instantiate(context, values, 0) //.setMaxDataValue(2f)
                 .startRender()
 //            val bitmap = loadBitmapFromView(v)
             val currentTimeMillis = System.currentTimeMillis()
@@ -139,8 +139,10 @@ class MainViewModel()  : ViewModel() {
         ioScope.launch {
             val currentTimeMillis = System.currentTimeMillis()
 
-            var pageWidthInPixel = 3508
-            var pageHeightInPixel = 2480
+            v.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            var pageHeightInPixel = v.getMeasuredHeight()
+            var pageWidthInPixel = v.getMeasuredWidth()
+
 
 
 //            if (pageWidthInPixel == PdfGenerator.WRAP_CONTENT_WIDTH && pageHeightInPixel == PdfGenerator.WRAP_CONTENT_HEIGHT) {
@@ -152,8 +154,8 @@ class MainViewModel()  : ViewModel() {
 //            }
 
 
-            pageHeightInPixel= (pageHeightInPixel * 0.75) as Int
-            pageWidthInPixel = (pageWidthInPixel * 0.75) as Int
+            pageHeightInPixel= (pageHeightInPixel * 1.5).toInt()
+            pageWidthInPixel = (pageWidthInPixel * 1.5).toInt()
 
             v.measure(View.MeasureSpec.makeMeasureSpec(pageWidthInPixel, View.MeasureSpec.EXACTLY), View.MeasureSpec.UNSPECIFIED)
             pageHeightInPixel = Math.max(v.getMeasuredHeight(), PdfGenerator.a4HeightInPostScript)

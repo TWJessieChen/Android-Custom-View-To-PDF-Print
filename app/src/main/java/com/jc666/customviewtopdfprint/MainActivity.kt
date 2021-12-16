@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
 
 //            viewModel.generatePdf(BarChart(this@MainActivity))
-            viewModel.generatePdfCanvas(this@MainActivity)
+//            viewModel.generatePdfCanvas(this@MainActivity)
         }
 
         btn_print_pdf!!.setOnClickListener {
@@ -203,10 +203,11 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.generatePdf(CreateView().createView(AnkoContext.create(this@MainActivity) as AnkoContext<MainActivity>))
 
 //            viewModel.generatePdf_V2(GenerateECGReportView(this).createECGLayout())
-            viewModel.generatePdfCanvas(this@MainActivity)
+//            viewModel.generatePdfCanvas(this@MainActivity)
             val dataParse = ECGDataParse(this@MainActivity)
             val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.values, 0) //.setMaxDataValue(2f)
                 .startRender()
+            viewModel.generatePdfCanvas(this@MainActivity, dataParse.values)
             viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap!!), this@MainActivity)
         }
 

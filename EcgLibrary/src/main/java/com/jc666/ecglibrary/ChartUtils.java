@@ -32,6 +32,9 @@ public final class ChartUtils {
             '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',
             '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'};
 
+    public static float dip2px(DisplayMetrics displayMetrics, float dp) {
+       return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
+    }
 
     public static int dp2px(float density, float dp) {
         if (dp == 0) {

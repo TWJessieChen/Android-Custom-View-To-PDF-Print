@@ -87,18 +87,18 @@ class SoftAxesRenderer extends RealRenderer{
             if(i == 5) {
                 canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
                 canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(120*cellPixel), startY+(i*cellPixel), startX+(121*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(182*cellPixel), startY+(i*cellPixel), startX+(183*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
             } else if(i == 35) {
                 canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
                 canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(120*cellPixel), startY+(i*cellPixel), startX+(121*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(182*cellPixel), startY+(i*cellPixel), startX+(183*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
             } else if(i == 65) {
                 canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
                 canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(120*cellPixel), startY+(i*cellPixel), startX+(121*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-                canvas.drawRect(startX+(182*cellPixel), startY+(i*cellPixel), startX+(183*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
             } else if(i == 95) {
                 canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
             }
@@ -107,18 +107,18 @@ class SoftAxesRenderer extends RealRenderer{
             if(i == 3) {
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
                 drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVR");
-                drawRowLabel(canvas, startX+(120*cellPixel), startY+((i + 1)*cellPixel), "V1");
-                drawRowLabel(canvas, startX+(182*cellPixel), startY+((i + 1)*cellPixel), "V4");
+                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V1");
+                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V4");
             } else if(i == 33) {
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "II");
                 drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVL");
-                drawRowLabel(canvas, startX+(120*cellPixel), startY+((i + 1)*cellPixel), "V2");
-                drawRowLabel(canvas, startX+(182*cellPixel), startY+((i + 1)*cellPixel), "V5");
+                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V2");
+                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V5");
             } else if(i == 63) {
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "III");
                 drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVF");
-                drawRowLabel(canvas, startX+(120*cellPixel), startY+((i + 1)*cellPixel), "V3");
-                drawRowLabel(canvas, startX+(182*cellPixel), startY+((i + 1)*cellPixel), "V6");
+                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V3");
+                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V6");
             } else if(i == 93) {
                 //未來要開出來，可以選擇要顯示哪個lead label
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
@@ -131,6 +131,7 @@ class SoftAxesRenderer extends RealRenderer{
 
     private void drawRowLabel(Canvas canvas,float left,float bottom,String text){
         int padding = ChartUtils.dp2px(mDensity,5);
+//        int padding = dpToPx(5);
         Paint.FontMetricsInt fontMetrics = labelTextPaint.getFontMetricsInt();
         float startX = left + padding;
         float rectBottom = bottom - padding;
@@ -139,16 +140,9 @@ class SoftAxesRenderer extends RealRenderer{
         canvas.drawText(text,startX,baseline,labelTextPaint);
     }
 
-//    private void drawHorizontalPoint(Canvas canvas,float y,int startX,int endX){
-//        int cellPixel = mSoftStrategy.pixelPerCell();
-//        int hCellCounts = (endX-startX)/cellPixel;
-//        for (int i = 0;i<=hCellCounts;i++){
-//            if (i % (mSoftStrategy.cellCountPerGrid()) == 0 || i == hCellCounts){
-//                continue;
-//            }
-//            canvas.drawPoint(startX+i*cellPixel,y,pointPaint);
-//        }
-//    }
+    int dpToPx(int dps) {
+        return Math.round(mDensity * dps);
+    }
 
     private void drawVerticalLine(Canvas canvas,int startX,int endX,int startY,int endY){
         int cellPixel = mSoftStrategy.pixelPerCell();
@@ -177,7 +171,8 @@ class SoftAxesRenderer extends RealRenderer{
         } else {
             rowPaint.setColor(GREED_ROW_COLOR);
         }
-        rowPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,1f));
+        rowPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,1f));
+//        rowPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
 
         cellPaint = new Paint();
         cellPaint.setAntiAlias(true);
@@ -187,18 +182,21 @@ class SoftAxesRenderer extends RealRenderer{
             cellPaint.setColor(GREED_CELL_COLOR);
         }
         cellPaint.setAlpha(200);
-        cellPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
+        cellPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,1f));
+//        cellPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
 
         labelLeadPaint = new Paint();
         labelLeadPaint.setAntiAlias(true);
         labelLeadPaint.setColor(LABEL_LEAD_COLOR);
-        labelLeadPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,2f));
+        labelLeadPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,2f));
+//        labelLeadPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,2f));
 
         labelTextPaint = new Paint();
         labelTextPaint.setAntiAlias(true);
         labelTextPaint.setStyle(Paint.Style.FILL);
         labelTextPaint.setStrokeCap(Paint.Cap.ROUND);
-        labelTextPaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
+        labelTextPaint.setTextSize(ChartUtils.dip2px(mDisplayMetrics,20));
+//        labelTextPaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
         labelTextPaint.setColor(LABEL_TEXT_COLOR);
         labelTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
     }

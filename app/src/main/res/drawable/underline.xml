@@ -7,7 +7,7 @@
         </shape>
     </item>
     <!-- 主體背景顏色值 -->
-    <item android:bottom="1dp"> <!--設定只有底部有邊框-->
+    <item android:bottom="3dp"> <!--設定只有底部有邊框-->
         <shape>
             <solid android:color="#ffffff" />
         </shape>
