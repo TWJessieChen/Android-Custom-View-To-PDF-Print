@@ -55,7 +55,7 @@ class SoftDataRenderer extends RealRenderer{
             transformer.setDataContentRect(dataLeft,i*rowHeight,dataRight,(i+1)*rowHeight);
 
             //標記時間的 debug 使用
-            drawRowTimeDebug(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
+            //drawRowTimeDebug(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
 
             int start = i*mSoftStrategy.pointsPerRow();
             int end = Math.min((i+1)*mSoftStrategy.pointsPerRow(),mEcgData.length);

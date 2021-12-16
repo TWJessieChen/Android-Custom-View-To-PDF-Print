@@ -38,13 +38,16 @@ class SoftAxesRenderer extends RealRenderer{
 
     private Paint labelLeadPaint;//專門畫每個Lead起始位置的柱狀條畫筆
 
+    private int colorType;//紀錄畫筆顏色Type，0:紅色 1:綠色
+
     SoftAxesRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type) {
         super(context, values);
-        initPaint(type);
+        this.colorType = type;
     }
 
     @Override
     public void draw(Canvas canvas) {
+        initPaint(canvas, colorType);
         int startX = mSoftStrategy.horizontalPadding();
         int endX = mSoftStrategy.pictureWidth() - mSoftStrategy.horizontalPadding();
         int startY = mSoftStrategy.verticalPadding();
@@ -123,7 +126,7 @@ class SoftAxesRenderer extends RealRenderer{
                 //未來要開出來，可以選擇要顯示哪個lead label
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
             } else if(i == 118) {
-                drawRowLabel(canvas, startX+(214*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
+                drawRowLabel(canvas, startX+(235*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
             }
 
         }
@@ -162,8 +165,11 @@ class SoftAxesRenderer extends RealRenderer{
         }
     }
 
-    private void initPaint(int type){
-//        Log.d(TAG, "initPaint type: " + type);
+    private void initPaint(Canvas canvas, int type){
+        double relation = Math.sqrt(canvas.getWidth() * canvas.getHeight());
+        Log.d(TAG, "initPaint canvas relation: " + relation);
+        relation = relation / 250;
+        Log.d(TAG, "initPaint canvas relation: " + relation);
         rowPaint = new Paint();
         rowPaint.setAntiAlias(true);
         if(type == 0) {
@@ -195,7 +201,7 @@ class SoftAxesRenderer extends RealRenderer{
         labelTextPaint.setAntiAlias(true);
         labelTextPaint.setStyle(Paint.Style.FILL);
         labelTextPaint.setStrokeCap(Paint.Cap.ROUND);
-        labelTextPaint.setTextSize(ChartUtils.dip2px(mDisplayMetrics,20));
+        labelTextPaint.setTextSize((float) (4 * relation));
 //        labelTextPaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
         labelTextPaint.setColor(LABEL_TEXT_COLOR);
         labelTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
