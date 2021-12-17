@@ -38,15 +38,83 @@ class MainActivity : AppCompatActivity() {
         printManager = getSystemService(PRINT_SERVICE) as PrintManager
 
         btn_one_twelve_ecg_report = findViewById(R.id.btn_one_twelve_ecg_report)
-        btn_two_six_ecg_report = findViewById(R.id.btn_one_twelve_ecg_report)
+        btn_two_six_ecg_report = findViewById(R.id.btn_two_six_ecg_report)
         btn_four_three_ecg_report = findViewById(R.id.btn_four_three_ecg_report)
 
 
         btn_one_twelve_ecg_report!!.setOnClickListener {
+            val dataParse = ECGDataParse(this@MainActivity)
+            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.valuesTwelve, 0) //.setMaxDataValue(2f)
+                .startRender()
+            viewModel.saveGenerateECGMaskBmp(bitmap!!)
+
+            val patientInfo = PatientInfo(
+                firstName = "JC",
+                lastName = "666",
+                patientNumberTitleValue = "病歷號碼",
+                patientNumberValue = "GHGFVJ654D563FG7",
+                gender = 0,
+                patientAgeTitleValue = "年齡: ",
+                patientAgeValue = "35",
+                patientBirthdayTitleValue = "生日 ",
+                patientBirthdayValue = "1986.04.22",
+                ecgReportNotesValue = "Rhythm: sinusrhythm with tachycardia. QRST Evaluation: indeterminate ECG. Summary: abnormal ECG.",
+                patientHRValue = "120",
+                reportMagnificationValue = "增益:x1.0",
+                lowChannelValue = "低通:150Hz",
+                highChannelValue = "高通:0.07Hz",
+                acChannelValue = "交流電:80Hz",
+                hrDetectValue = "心律調節器偵測:ON",
+                pDurValue = 102,
+                pRIntValue = 148,
+                qRSDurValue = 82,
+                qTIntValue = 298,
+                qTcIntValue = 421,
+                pAxisValue = 46,
+                qRSAxisValue = 47,
+                tAxisValue = 47,
+                rV5SV1Value = 1.253
+            )
+
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,0), this@MainActivity)
 
         }
 
         btn_two_six_ecg_report!!.setOnClickListener {
+            val dataParse = ECGDataParse(this@MainActivity)
+            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.valuesSix, 0) //.setMaxDataValue(2f)
+                .startRender()
+            viewModel.saveGenerateECGMaskBmp(bitmap!!)
+
+            val patientInfo = PatientInfo(
+                firstName = "JC",
+                lastName = "666",
+                patientNumberTitleValue = "病歷號碼",
+                patientNumberValue = "GHGFVJ654D563FG7",
+                gender = 0,
+                patientAgeTitleValue = "年齡: ",
+                patientAgeValue = "35",
+                patientBirthdayTitleValue = "生日 ",
+                patientBirthdayValue = "1986.04.22",
+                ecgReportNotesValue = "Rhythm: sinusrhythm with tachycardia. QRST Evaluation: indeterminate ECG. Summary: abnormal ECG.",
+                patientHRValue = "120",
+                reportMagnificationValue = "增益:x1.0",
+                lowChannelValue = "低通:150Hz",
+                highChannelValue = "高通:0.07Hz",
+                acChannelValue = "交流電:80Hz",
+                hrDetectValue = "心律調節器偵測:ON",
+                pDurValue = 102,
+                pRIntValue = 148,
+                qRSDurValue = 82,
+                qTIntValue = 298,
+                qTcIntValue = 421,
+                pAxisValue = 46,
+                qRSAxisValue = 47,
+                tAxisValue = 47,
+                rV5SV1Value = 1.253
+            )
+
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,1), this@MainActivity)
 
         }
 
@@ -84,7 +152,8 @@ class MainActivity : AppCompatActivity() {
                 rV5SV1Value = 1.253
             )
 
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo), this@MainActivity)
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,2), this@MainActivity)
+
         }
 
         viewModel.generatePdfResult.observe(this) { it ->

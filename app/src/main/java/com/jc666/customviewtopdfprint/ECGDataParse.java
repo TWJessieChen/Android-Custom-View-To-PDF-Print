@@ -22,6 +22,10 @@ public class ECGDataParse {
 
     private ECGPointValue[] valuesTest = new ECGPointValue[20000];
 
+    private ECGPointValue[] valuesSixTest = new ECGPointValue[30000];
+
+    private ECGPointValue[] valuesTwelveTest = new ECGPointValue[60000];
+
     public ECGDataParse(Context context){
         String json = parseJson(context,"ecgData.json");
         Gson gson = new Gson();
@@ -46,12 +50,31 @@ public class ECGDataParse {
     }
 
     public ECGPointValue[] getValues() {
-
         for(int index=0; index < 10000; index++) {
             valuesTest[index] = values[index];
             valuesTest[index + 10000] = values[index];
         }
-
         return valuesTest;
+    }
+
+    public ECGPointValue[] getValuesSix() {
+        for(int index=0; index < 10000; index++) {
+            valuesSixTest[index] = values[index];
+            valuesSixTest[index + 10000] = values[index];
+            valuesSixTest[index + 20000] = values[index];
+        }
+        return valuesSixTest;
+    }
+
+    public ECGPointValue[] getValuesTwelve() {
+        for(int index=0; index < 10000; index++) {
+            valuesTwelveTest[index] = values[index];
+            valuesTwelveTest[index + 10000] = values[index];
+            valuesTwelveTest[index + 20000] = values[index];
+            valuesTwelveTest[index + 30000] = values[index];
+            valuesTwelveTest[index + 40000] = values[index];
+            valuesTwelveTest[index + 50000] = values[index];
+        }
+        return valuesTwelveTest;
     }
 }
