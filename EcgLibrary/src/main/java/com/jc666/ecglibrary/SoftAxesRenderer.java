@@ -18,13 +18,17 @@ import androidx.annotation.NonNull;
 class SoftAxesRenderer extends RealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
-    private static final int RED_ROW_COLOR = Color.parseColor("#C30D23");  //紅色
+    private static final int RED_ROW_COLOR = Color.parseColor("#00C30D23");  //紅色
 
-    private static final int RED_CELL_COLOR = Color.parseColor("#C30D23");  //紅色
+    private static final int RED_CELL_COLOR = Color.parseColor("#00C30D23");  //紅色
 
-    private static final int GREED_ROW_COLOR = Color.parseColor("#00C100");  //綠色
+    private static final int RED_POINT_COLOR = Color.parseColor("#00C30D23");  //紅色
 
-    private static final int GREED_CELL_COLOR = Color.parseColor("#00C100");  //綠色
+    private static final int GREED_ROW_COLOR = Color.parseColor("#0000C100");  //綠色
+
+    private static final int GREED_CELL_COLOR = Color.parseColor("#0000C100");  //綠色
+
+    private static final int GREED_POINT_COLOR = Color.parseColor("#0000C100");  //綠色
 
     private static final int LABEL_TEXT_COLOR = Color.parseColor("#FF000000"); //深藍色
 
@@ -33,6 +37,8 @@ class SoftAxesRenderer extends RealRenderer{
     private Paint rowPaint;//行與行之間的畫筆
 
     private Paint cellPaint;//網格畫筆
+
+    private Paint pointPaint;//網格畫點畫筆
 
     private Paint labelTextPaint;//專門寫每個Lead名稱畫筆
 
@@ -84,6 +90,8 @@ class SoftAxesRenderer extends RealRenderer{
                 } else {
                     canvas.drawLine(startX, startY+(i*cellPixel), endX, startY+(i*cellPixel), cellPaint);
                 }
+            } else {
+                drawHorizontalPoint(canvas,startY+i*cellPixel,startX,endX);
             }
 
             //畫各個Lead起始位置(劃出柱狀圖示)
@@ -126,7 +134,7 @@ class SoftAxesRenderer extends RealRenderer{
                 //未來要開出來，可以選擇要顯示哪個lead label
                 drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
             } else if(i == 118) {
-                drawRowLabel(canvas, startX+(235*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
+                drawRowLabel(canvas, startX+(215*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
             }
 
         }
@@ -141,10 +149,6 @@ class SoftAxesRenderer extends RealRenderer{
         float rectTop = rectBottom - ChartUtils.getTextHeight(labelTextPaint,text);
         float baseline = (rectBottom + rectTop - fontMetrics.bottom - fontMetrics.top) / 2f;
         canvas.drawText(text,startX,baseline,labelTextPaint);
-    }
-
-    int dpToPx(int dps) {
-        return Math.round(mDensity * dps);
     }
 
     private void drawVerticalLine(Canvas canvas,int startX,int endX,int startY,int endY){
@@ -165,44 +169,73 @@ class SoftAxesRenderer extends RealRenderer{
         }
     }
 
+    private void drawHorizontalPoint(Canvas canvas,float y,int startX,int endX){
+        int cellPixel = mSoftStrategy.pixelPerCell();
+        int hCellCounts = (endX-startX)/cellPixel;
+        for (int i = 0;i<=hCellCounts;i++){
+            if (i % (mSoftStrategy.cellCountPerGrid()) == 0 || i == hCellCounts){
+                continue;
+            }
+            canvas.drawPoint(startX+i*cellPixel,y,pointPaint);
+        }
+    }
+
     private void initPaint(Canvas canvas, int type){
+        /**
+         * relation 設定線條也要跟著不同的屏幕分辨率上做調整，這樣轉出來輸出的畫面才會一致!!!
+         * 參考文章 :
+         * https://codejzy.com/posts-859534.html
+         * https://stackoverflow.com/questions/11622773/android-line-width-pixel-size
+         * */
+
         double relation = Math.sqrt(canvas.getWidth() * canvas.getHeight());
-        Log.d(TAG, "initPaint canvas relation: " + relation);
+//        Log.d(TAG, "initPaint canvas relation: " + relation);
         relation = relation / 250;
-        Log.d(TAG, "initPaint canvas relation: " + relation);
+//        Log.d(TAG, "initPaint canvas relation: " + relation);
+
         rowPaint = new Paint();
-        rowPaint.setAntiAlias(true);
         if(type == 0) {
             rowPaint.setColor(RED_ROW_COLOR);
         } else {
             rowPaint.setColor(GREED_ROW_COLOR);
         }
-        rowPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,1f));
-//        rowPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
+        rowPaint.setAlpha(200);
+        rowPaint.setStrokeWidth((float) (0.1 * relation));
+        rowPaint.setAntiAlias(false);
+        rowPaint.setStyle(Paint.Style.STROKE);
 
         cellPaint = new Paint();
-        cellPaint.setAntiAlias(true);
         if(type == 0) {
             cellPaint.setColor(RED_CELL_COLOR);
         } else {
             cellPaint.setColor(GREED_CELL_COLOR);
         }
         cellPaint.setAlpha(200);
-        cellPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,1f));
-//        cellPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,0.5f));
+        cellPaint.setStrokeWidth((float) (0.1 * relation));
+        cellPaint.setAntiAlias(false);
+        cellPaint.setStyle(Paint.Style.STROKE);
+
+        pointPaint = new Paint();
+        if(type == 0) {
+            pointPaint.setColor(RED_POINT_COLOR);
+        } else {
+            pointPaint.setColor(GREED_POINT_COLOR);
+        }
+        pointPaint.setAlpha(200);
+        pointPaint.setStrokeWidth((float) (0.2 * relation));
+        pointPaint.setAntiAlias(false);
+        pointPaint.setStyle(Paint.Style.STROKE);
 
         labelLeadPaint = new Paint();
-        labelLeadPaint.setAntiAlias(true);
+        labelLeadPaint.setAntiAlias(false);
         labelLeadPaint.setColor(LABEL_LEAD_COLOR);
         labelLeadPaint.setStrokeWidth(ChartUtils.dip2px(mDisplayMetrics,2f));
-//        labelLeadPaint.setStrokeWidth(ChartUtils.dp2px(mDensity,2f));
 
         labelTextPaint = new Paint();
-        labelTextPaint.setAntiAlias(true);
+        labelTextPaint.setAntiAlias(false);
         labelTextPaint.setStyle(Paint.Style.FILL);
         labelTextPaint.setStrokeCap(Paint.Cap.ROUND);
         labelTextPaint.setTextSize((float) (4 * relation));
-//        labelTextPaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
         labelTextPaint.setColor(LABEL_TEXT_COLOR);
         labelTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
     }

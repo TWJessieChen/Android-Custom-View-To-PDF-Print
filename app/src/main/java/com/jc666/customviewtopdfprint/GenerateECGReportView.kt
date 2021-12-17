@@ -153,7 +153,7 @@ class GenerateECGReportView(context: Context) {
         //調整大小，可以決定格子大小，這尺寸專門for ecg 圖表使用
         //Log.d(TAG,"width: " + iv_ECG_data.width + " height: " + iv_ECG_data.height)
         iv_ECG_data.getLayoutParams().height = dip2px((14.160319845242177 * 25*3.6).toFloat()).toInt()
-        iv_ECG_data.getLayoutParams().width = dip2px((14.160319845242177 * 50*3.56).toFloat()).toInt()
+        iv_ECG_data.getLayoutParams().width = dip2px((14.160319845242177 * 50*3.55).toFloat()).toInt()
 //        Log.d(TAG,"width: " + (14.160319845242177 * 25).toInt() + " height: " + (14.160319845242177 * 50).toInt())
 
         //patient ecg info
@@ -565,7 +565,7 @@ class GenerateECGReportView(context: Context) {
         generateTimeContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         generateTimeContent.orientation = LinearLayout.HORIZONTAL
-        generateTimeContent.setPadding(dip2px((14.160319845242177 * 50*3.52).toFloat()).toInt() + 25, 550, 10, 10)
+        generateTimeContent.setPadding(dip2px((14.160319845242177 * 50*3.52).toFloat()), 550, 10, 10)
         val tv_generateTime = TextView(context)
         val tv_generateTime_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)

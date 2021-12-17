@@ -33,11 +33,11 @@ class SoftDataRenderer extends RealRenderer{
 
     SoftDataRenderer(@NonNull Context context, @NonNull ECGPointValue[] values) {
         super(context, values);
-        initPaint();
     }
 
     @Override
     public void draw(Canvas canvas) {
+        initPaint(canvas);
         this.transformer = mSoftStrategy.getTransformer();
         Log.d(TAG,"this.transformer: " + this.transformer);
 
@@ -74,16 +74,28 @@ class SoftDataRenderer extends RealRenderer{
         }
     }
 
-    private void initPaint(){
+    private void initPaint(Canvas canvas){
+        /**
+         * relation 設定線條也要跟著不同的屏幕分辨率上做調整，這樣轉出來輸出的畫面才會一致!!!
+         * 參考文章 :
+         * https://codejzy.com/posts-859534.html
+         * https://stackoverflow.com/questions/11622773/android-line-width-pixel-size
+         * */
+
+        double relation = Math.sqrt(canvas.getWidth() * canvas.getHeight());
+//        Log.d(TAG, "initPaint canvas relation: " + relation);
+        relation = relation / 250;
+//        Log.d(TAG, "initPaint canvas relation: " + relation);
+
         linePaint = new Paint();
-        linePaint.setAntiAlias(true);
+        linePaint.setAntiAlias(false);
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeCap(Paint.Cap.ROUND);
-        linePaint.setStrokeWidth(ChartUtils.dp2px(mDensity, 2));
+        linePaint.setStrokeWidth((float) (0.3 * relation));
         linePaint.setColor(LEAD_LINE_COLOR);
 
         timePaint = new Paint();
-        timePaint.setAntiAlias(true);
+        timePaint.setAntiAlias(false);
         timePaint.setStyle(Paint.Style.FILL);
         timePaint.setStrokeCap(Paint.Cap.ROUND);
         timePaint.setTextSize(ChartUtils.sp2px(mScaleDensity,20));
