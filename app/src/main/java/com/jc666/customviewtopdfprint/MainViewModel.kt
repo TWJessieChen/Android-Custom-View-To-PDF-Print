@@ -55,46 +55,10 @@ class MainViewModel()  : ViewModel() {
         }
     }
 
-    fun generatePdfCanvas(context: Context, values: Array<ECGPointValue>) {
+    fun saveGenerateECGMaskBmp(bmp: Bitmap) {
         ioScope.launch {
-//            val bitmap = v.getDrawingCache()
-
-//            val bitmap = Bitmap.createBitmap(595, 842, Bitmap.Config.ARGB_8888)
-//            val canvas_bmp = Canvas(bitmap)
-//            v.draw(canvas_bmp)
-
-//            val softCanvas = Canvas()
-//            val ecgGraphicUtil = ECGGraphicUtil()
-//            val bitmap = ecgGraphicUtil.onDraw(softCanvas)
-
-//            val dataParse = ECGDataParse(context)
-            val bitmap = EcgSoftRenderer.instantiate(context, values, 0) //.setMaxDataValue(2f)
-                .startRender()
-//            val bitmap = loadBitmapFromView(v)
             val currentTimeMillis = System.currentTimeMillis()
-            saveBitmap(bitmap, MainApplication.internalFilePath + File.separator + currentTimeMillis + ".png")
-
-//            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 595, 842, true)
-
-            // Create a PdfDocument with a page of the same size as the image
-//            val document = PdfDocument()
-//            val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
-//            val page = document.startPage(pageInfo)
-
-            // Draw the bitmap onto the page
-//            val canvas: Canvas = page.canvas
-//            canvas.drawBitmap(bitmap, 0f, 0f, null)
-//            document.finishPage(page)
-//
-//            // Write the PDF file to a file
-//            document.writeTo(FileOutputStream(MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"))
-//            document.close()
-
-//            viewModelScope.launch {
-//                generatePdfResult.value =
-//                    MainApplication.internalFilePath + File.separator + currentTimeMillis + ".pdf"
-//            }
-//            loadBitmapFromView(v)
+            saveBitmap(bmp, MainApplication.internalFilePath + File.separator + currentTimeMillis + ".png")
         }
     }
 
@@ -219,34 +183,7 @@ class MainViewModel()  : ViewModel() {
                         }
                     }
                 })
-
-
-//            loadBitmapFromView(v)
         }
-    }
-
-    suspend fun loadBitmapFromView(v: View): Bitmap? {
-//        val mmpi = 25.4f
-//        val dpi = 150
-//        val bitmap = Bitmap.createBitmap(
-//            (210 / mmpi * dpi).toInt(),
-//            (297 / mmpi * dpi).toInt(), Bitmap.Config.ARGB_8888
-//        )
-
-        val TARGET_DENSITY = 300
-        val PHYSICAL_WIDTH_IN_INCH = 5f
-        val PHYSICAL_HEIGHT_IN_INCH = 7f
-        val bitmap = Bitmap.createBitmap(
-            (PHYSICAL_WIDTH_IN_INCH * TARGET_DENSITY).toInt(),
-            (PHYSICAL_HEIGHT_IN_INCH * TARGET_DENSITY).toInt(),
-            Bitmap.Config.ARGB_8888
-        )
-        bitmap.density = TARGET_DENSITY
-
-        val c = Canvas(bitmap)
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom())
-        v.draw(c)
-        return bitmap
     }
 
     private fun saveBitmap(bitmap: Bitmap?, path: String) {

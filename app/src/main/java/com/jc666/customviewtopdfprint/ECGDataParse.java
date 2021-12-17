@@ -12,8 +12,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @author Seeker
- * @date 2018/10/15/015  18:02
+ * @author JC666
+ * @date 2021/12/17
+ * @describe TODO
  */
 public class ECGDataParse {
 

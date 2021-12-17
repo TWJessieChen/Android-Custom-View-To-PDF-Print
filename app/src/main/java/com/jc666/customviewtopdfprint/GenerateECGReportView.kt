@@ -18,29 +18,42 @@ import androidx.constraintlayout.widget.ConstraintLayout
 class GenerateECGReportView(context: Context) {
     private val TAG = GenerateECGReportView::class.java.simpleName
 
-    var context: Context
+    private var context: Context
 
-    private var firstNameValue = "JC"
-    private var lastNameValue = "666"
-    private var patientNumberTitleValue = "病歷號碼"
-    private var patientNumberValue = "GHGFVJ654D563FG7"
-    private var patientAgeTitleValue = "年齡: "
-    private var patientAgeValue = "35"
-    private var patientBirthdayTitleValue = "生日 "
-    private var patientBirthdayValue = "1986.04.22"
-    private var ecgReportNotesValue = "Rhythm: sinusrhythm with tachycardia. QRST Evaluation: indeterminate ECG. Summary: abnormal ECG."
+//    private var gender = 2
+//    private var firstNameValue = "JC"
+//    private var lastNameValue = "666"
+//    private var patientNumberTitleValue = "病歷號碼"
+//    private var patientNumberValue = "GHGFVJ654D563FG7"
+//    private var patientAgeTitleValue = "年齡: "
+//    private var patientAgeValue = "35"
+//    private var patientBirthdayTitleValue = "生日 "
+//    private var patientBirthdayValue = "1986.04.22"
+//    private var ecgReportNotesValue = "Rhythm: sinusrhythm with tachycardia. QRST Evaluation: indeterminate ECG. Summary: abnormal ECG."
     private var patientHRTitleValue = "HR "
+//    private var patientHRValue = "120"
     private var patientHRUnitValue = " bpm"
-
+//    private var reportMagnificationValue = "增益:x1.0"
+//    private var lowChannelValue = "低通:150Hz"
+//    private var highChannelValue = "高通:0.05Hz"
+//    private var acChannelValue = "交流電:60Hz"
+//    private var hrDetectValue = "心律調節器偵測:ON"
+//    private var pDurValue = 102
+//    private var pRIntValue = 148
+//    private var qRSDurValue = 82
+//    private var qTIntValue = 298
+//    private var qTcIntValue = 421
+//    private var pAxisValue = 46
+//    private var qRSAxisValue = 47
+//    private var tAxisValue = 47
+//    private var rV5SV1Value = 1.253
 
     init {
         this.context = context
     }
 
-    fun createECGLayout(bmp: Bitmap) : View {
+    fun createECGLayout(bmp: Bitmap, patientInfo: PatientInfo) : View {
         val parent = LinearLayout(context)
-//        parent.layoutParams = LinearLayout.LayoutParams(2408, 3508)
-//        parent.layoutParams = LinearLayout.LayoutParams(842,595)
         parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
 
 //        val params: ViewGroup.LayoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -65,15 +78,15 @@ class GenerateECGReportView(context: Context) {
         val tv_last_name_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         tv_first_name.setLayoutParams(tv_first_name_params)
-        tv_first_name.setText(firstNameValue)
+        tv_first_name.setText(patientInfo.firstName)
         tv_first_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,48F)
         tv_last_name.setLayoutParams(tv_last_name_params)
-        tv_last_name.setText(lastNameValue)
+        tv_last_name.setText(patientInfo.lastName)
         tv_last_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,48F)
         tv_last_name.setPadding(25, 0, 0, 0)
         tv_ecg_report_notes.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT))
-        tv_ecg_report_notes.setText(ecgReportNotesValue)
+        tv_ecg_report_notes.setText(patientInfo.ecgReportNotesValue)
         tv_ecg_report_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP,30F)
         tv_ecg_report_notes.setPadding(dip2px(600F), 10, 0, 0)
         tv_ecg_report_notes.maxLines = 1
@@ -95,10 +108,10 @@ class GenerateECGReportView(context: Context) {
         val tv_patient_number_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         tv_patient_title.setLayoutParams(tv_patient_title_params)
-        tv_patient_title.setText(patientNumberTitleValue)
+        tv_patient_title.setText(patientInfo.patientNumberTitleValue)
         tv_patient_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,30F)
         tv_patient_number.setLayoutParams(tv_patient_number_params)
-        tv_patient_number.setText(patientNumberValue)
+        tv_patient_number.setText(patientInfo.patientNumberValue)
         tv_patient_number.setTextSize(TypedValue.COMPLEX_UNIT_SP,48F)
         tv_patient_number.setPadding(15, 0, 0, 0)
         tv_patient_number.setTypeface(null, Typeface.BOLD)
@@ -125,11 +138,11 @@ class GenerateECGReportView(context: Context) {
         val tv_patient_age_birthday_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         tv_patient_age_value.setLayoutParams(tv_patient_age_birthday_params)
-        tv_patient_age_value.setText(patientAgeTitleValue + patientAgeValue)
+        tv_patient_age_value.setText(patientInfo.patientAgeTitleValue + patientInfo.patientAgeValue)
         tv_patient_age_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,28F)
         tv_patient_age_value.setPadding(5, 0, 0, 0)
         tv_patient_birthday_value.setLayoutParams(tv_patient_age_birthday_params)
-        tv_patient_birthday_value.setText(patientBirthdayTitleValue + patientBirthdayValue)
+        tv_patient_birthday_value.setText(patientInfo.patientBirthdayTitleValue + patientInfo.patientBirthdayValue)
         tv_patient_birthday_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,28F)
         tv_patient_birthday_value.setPadding(15, 0, 0, 0)
         patientGenderAgeBirthdayContent.removeAllViews()
@@ -179,7 +192,7 @@ class GenerateECGReportView(context: Context) {
         val tv_patient_hr_value_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         tv_patient_hr_value.setLayoutParams(tv_patient_hr_value_params)
-        tv_patient_hr_value.setText(patientHRTitleValue + " 120 " + patientHRUnitValue)
+        tv_patient_hr_value.setText(patientHRTitleValue + "  " + patientInfo.patientHRValue + "  " + patientHRUnitValue)
         tv_patient_hr_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_hr_value.setPadding(20, 0, 0, 0)
         patientHRContent.addView(iv_hr_icon)
@@ -206,7 +219,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_p_dur_title.setText("P dur ")
         tv_patient_p_dur_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_p_dur_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_p_dur_value.setText("102")
+        tv_patient_p_dur_value.setText(patientInfo.pDurValue.toString())
         tv_patient_p_dur_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_p_dur_value.setPadding(15, 0, 0, 0)
         tv_patient_p_dur_unit.setLayoutParams(tv_patient_info_params)
@@ -237,7 +250,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_pr_int_title.setText("PR int ")
         tv_patient_pr_int_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_pr_int_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_pr_int_value.setText("102")
+        tv_patient_pr_int_value.setText(patientInfo.pRIntValue.toString())
         tv_patient_pr_int_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_pr_int_value.setPadding(15, 0, 0, 0)
         tv_patient_pr_int_unit.setLayoutParams(tv_patient_info_params)
@@ -268,7 +281,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qrs_dur_title.setText("QRS dur ")
         tv_patient_qrs_dur_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qrs_dur_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_qrs_dur_value.setText("82")
+        tv_patient_qrs_dur_value.setText(patientInfo.qRSDurValue.toString())
         tv_patient_qrs_dur_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qrs_dur_value.setPadding(15, 0, 0, 0)
         tv_patient_qrs_dur_unit.setLayoutParams(tv_patient_info_params)
@@ -299,7 +312,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qt_int_title.setText("QT int ")
         tv_patient_qt_int_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qt_int_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_qt_int_value.setText("482")
+        tv_patient_qt_int_value.setText(patientInfo.qTIntValue.toString())
         tv_patient_qt_int_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qt_int_value.setPadding(15, 0, 0, 0)
         tv_patient_qt_int_unit.setLayoutParams(tv_patient_info_params)
@@ -330,7 +343,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qtc_int_title.setText("QTc int ")
         tv_patient_qtc_int_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qtc_int_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_qtc_int_value.setText("482")
+        tv_patient_qtc_int_value.setText(patientInfo.qTcIntValue.toString())
         tv_patient_qtc_int_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qtc_int_value.setPadding(15, 0, 0, 0)
         tv_patient_qtc_int_unit.setLayoutParams(tv_patient_info_params)
@@ -361,7 +374,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_p_axis_title.setText("P axis ")
         tv_patient_p_axis_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_p_axis_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_p_axis_value.setText("82")
+        tv_patient_p_axis_value.setText(patientInfo.pAxisValue.toString())
         tv_patient_p_axis_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_p_axis_value.setPadding(15, 0, 0, 0)
         tv_patient_p_axis_unit.setLayoutParams(tv_patient_info_params)
@@ -392,7 +405,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_qrs_axis_title.setText("QRS axis ")
         tv_patient_qrs_axis_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qrs_axis_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_qrs_axis_value.setText("82")
+        tv_patient_qrs_axis_value.setText(patientInfo.qRSAxisValue.toString())
         tv_patient_qrs_axis_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_qrs_axis_value.setPadding(15, 0, 0, 0)
         tv_patient_qrs_axis_unit.setLayoutParams(tv_patient_info_params)
@@ -423,7 +436,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_t_axis_title.setText("T axis ")
         tv_patient_t_axis_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_t_axis_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_t_axis_value.setText("82")
+        tv_patient_t_axis_value.setText(patientInfo.tAxisValue.toString())
         tv_patient_t_axis_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_t_axis_value.setPadding(15, 0, 0, 0)
         tv_patient_t_axis_unit.setLayoutParams(tv_patient_info_params)
@@ -454,7 +467,7 @@ class GenerateECGReportView(context: Context) {
         tv_patient_rv_sv_title.setText("RV5+SV1 ")
         tv_patient_rv_sv_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_rv_sv_value.setLayoutParams(tv_patient_info_params)
-        tv_patient_rv_sv_value.setText("1.235")
+        tv_patient_rv_sv_value.setText(patientInfo.rV5SV1Value.toString())
         tv_patient_rv_sv_value.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
         tv_patient_rv_sv_value.setPadding(15, 0, 0, 0)
         tv_patient_rv_sv_unit.setLayoutParams(tv_patient_info_params)
@@ -478,7 +491,7 @@ class GenerateECGReportView(context: Context) {
         reportMagnificationContent.gravity = Gravity.CENTER_VERTICAL
         val tv_report_magnification = TextView(context)
         tv_report_magnification.setLayoutParams(tv_patient_info_params)
-        tv_report_magnification.setText("增益: x1.0")
+        tv_report_magnification.setText(patientInfo.reportMagnificationValue)
         tv_report_magnification.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         reportMagnificationContent.setBackgroundResource(R.drawable.aroundshap)
         reportMagnificationContent.addView(tv_report_magnification)
@@ -497,13 +510,13 @@ class GenerateECGReportView(context: Context) {
         val tv_high_channel = TextView(context)
         val tv_ac = TextView(context)
         tv_low_channel.setLayoutParams(tv_patient_info_params)
-        tv_low_channel.setText("低通:150Hz")
+        tv_low_channel.setText(patientInfo.lowChannelValue)
         tv_low_channel.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         tv_high_channel.setLayoutParams(tv_patient_info_params)
-        tv_high_channel.setText("高通:0.05Hz")
+        tv_high_channel.setText(patientInfo.highChannelValue)
         tv_high_channel.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         tv_ac.setLayoutParams(tv_patient_info_params)
-        tv_ac.setText("交流電:60Hz")
+        tv_ac.setText(patientInfo.acChannelValue)
         tv_ac.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         channelACContent.setBackgroundResource(R.drawable.aroundshap)
         channelACContent.addView(tv_low_channel)
@@ -522,12 +535,11 @@ class GenerateECGReportView(context: Context) {
         hrDetectContent.gravity = Gravity.CENTER_VERTICAL
         val tv_hr_detect = TextView(context)
         tv_hr_detect.setLayoutParams(tv_patient_info_params)
-        tv_hr_detect.setText("心律調節器偵測:ON")
+        tv_hr_detect.setText(patientInfo.hrDetectValue)
         tv_hr_detect.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         hrDetectContent.setBackgroundResource(R.drawable.aroundshap)
         hrDetectContent.addView(tv_hr_detect)
         hrDetectLayout.addView(hrDetectContent)
-
 
         patientECGInfoContent.removeAllViews()
         patientECGInfoContent.addView(patientHRContent)
@@ -565,16 +577,15 @@ class GenerateECGReportView(context: Context) {
         generateTimeContent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         generateTimeContent.orientation = LinearLayout.HORIZONTAL
-        generateTimeContent.setPadding(dip2px((14.160319845242177 * 50*3.52).toFloat()), 550, 10, 10)
+        generateTimeContent.setPadding(dip2px((14.160319845242177 * 50*3.52).toFloat() + 35F), 550, 10, 10)
         val tv_generateTime = TextView(context)
         val tv_generateTime_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         tv_generateTime.setLayoutParams(tv_generateTime_params)
         tv_generateTime.setText("2021.12.03 18:19:00")
-        tv_generateTime.setTextSize(TypedValue.COMPLEX_UNIT_SP,42F)
+        tv_generateTime.setTextSize(TypedValue.COMPLEX_UNIT_SP,36F)
         generateTimeContent.removeAllViews()
         generateTimeContent.addView(tv_generateTime)
-
 
         parent.removeAllViews()
         parent.addView(nameContent)
@@ -583,107 +594,12 @@ class GenerateECGReportView(context: Context) {
         parent.addView(patientECGDataInfoContent)
         parent.addView(generateTimeContent)
 
-        //Log.d(TAG,"width: " + iv_ECG_data.width + " height: " + iv_ECG_data.height)
-
         return parent
     }
-
-    fun createXmlElement(title:String,description:String) : View{
-        val parent = LinearLayout(context)
-        parent.layoutParams = LinearLayout.LayoutParams(842, 595)
-
-        parent.orientation = LinearLayout.VERTICAL
-
-
-
-        //children of parent linearlayout
-        val iv = ImageView(context)
-        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
-        lp.setMargins(0, 11, 7, 0)
-        iv.setLayoutParams(lp)
-        iv.setImageResource(R.mipmap.female)
-        iv.getLayoutParams().height = 40
-        iv.getLayoutParams().width = 46
-
-
-        parent.addView(iv); // lo agregamos al layout
-
-        val relativeP = RelativeLayout(context)
-        relativeP.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT)
-
-        val linearCH = LinearLayout(context)
-        linearCH.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-        // TextView1
-        val tv1 = TextView(context)
-        val lptv1 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
-        lptv1.setMargins(0, 7, 0, 0)
-
-        tv1.setLayoutParams(lptv1)
-        tv1.setText(title) // title
-        tv1.setTextSize(TypedValue.COMPLEX_UNIT_SP,25F)
-        tv1.setTypeface(null, Typeface.BOLD)
-
-        // TextView2
-        val tv2 = TextView(context)
-        val lptv2 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
-        lptv2.setMargins(0, 11, 7, 0)
-
-        tv2.setLayoutParams(lptv1)
-        tv2.setText(description) // description
-        tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25F)
-        tv2.setTypeface(null, Typeface.BOLD)
-
-        linearCH.removeAllViews()
-        linearCH.addView(tv1)
-        linearCH.addView(tv2)
-
-        relativeP.removeAllViews()
-        relativeP.addView(linearCH)
-
-        // last ImageView
-        val iv2 = ImageView(context)
-        val lpiv2 = RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
-        lpiv2.setMargins(0, 11, 7, 0)
-        lpiv2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
-        iv2.setLayoutParams(lpiv2)
-        iv2.setImageResource(R.mipmap.female)
-        iv2.getLayoutParams().height = 40
-        iv2.getLayoutParams().width = 46
-
-
-        parent.removeAllViews()
-        parent.addView(iv)
-        parent.addView(relativeP)
-        parent.addView(iv2)
-
-        return parent
-    }
-
 
     private fun dip2px(dipValue: Float): Int {
         val density = Resources.getSystem().displayMetrics.density
         return (dipValue * density + 0.5f).toInt()
     }
-
-
-//    private fun dp2px(dp: Float): Int {
-//        val density = resources.displayMetrics.density
-//        return (dp * density + 0.5).toInt()
-//    }
-//
-//    private fun sp2px(sp: Float): Int {
-//        val density = resources.displayMetrics.scaledDensity
-//        return (sp * density + 0.5).toInt()
-//    }
 
 }

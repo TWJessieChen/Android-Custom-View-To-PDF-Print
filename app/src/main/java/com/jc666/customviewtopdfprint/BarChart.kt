@@ -9,72 +9,16 @@ import android.graphics.Bitmap
 
 
 
-
+/**
+ * @author JC666
+ * @date 2021/12/15
+ * @describe
+ * 目前完全不使用此方式畫Layout出來!!!
+ * 但可以做為之後參考範例
+ */
 
 //class BarChart : View {
 class BarChart {
-
-//    constructor(context: Context?) : super(context)
-//    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
-//
-//    private val textBound = Rect()
-//    private val inputText = "JC666"
-//    private val textPaint = Paint().apply {
-//        color = Color.BLACK
-//        textSize = 40.toPx().toFloat()
-////        textAlign = Paint.Align.CENTER
-//    }
-//    private val lineTextPaint = Paint().apply {
-//        color = Color.BLACK
-//        textSize = 12.toPx().toFloat()
-//        textAlign = Paint.Align.RIGHT
-//    }
-//    private val boundPaint = Paint().apply {
-//        color = Color.YELLOW
-//        style = Paint.Style.FILL
-//    }
-//    private val centerPaint = Paint().apply {
-//        color = Color.RED
-//    }
-//    private val linePaint = Paint().apply {
-//        color = Color.MAGENTA
-//    }
-//    private val fontMetrics = textPaint.fontMetrics
-//
-//    override fun onDraw(canvas: Canvas) {
-//        val centerX = width / 2
-//        val centerY = height / 2
-//        textPaint.getTextBounds(inputText, 0, inputText.length, textBound)
-//
-//        canvas.save()
-//        canvas.translate(centerX.toFloat(), centerY.toFloat())
-//        canvas.drawRect(textBound, boundPaint)
-//        drawLine(canvas, "bottom", 0f, fontMetrics.bottom, Color.DKGRAY)
-//        drawLine(canvas, "ascent", -(30.toPx().toFloat()), fontMetrics.ascent, Color.DKGRAY)
-//        drawLine(canvas, "top", -(60.toPx().toFloat()), fontMetrics.top, Color.MAGENTA)
-//        drawLine(canvas, "descent", -(60.toPx().toFloat()), fontMetrics.descent, Color.MAGENTA)
-//        drawLine(canvas, "leading", -(120.toPx().toFloat()), fontMetrics.bottom - fontMetrics.leading, Color.LTGRAY)
-//        canvas.drawText(inputText, 0f, 0f, textPaint)
-//        canvas.drawCircle(0f, 0f, 3.toPx().toFloat(), centerPaint)
-//        canvas.restore()
-//    }
-//
-//    private fun drawLine(canvas: Canvas, text: String, x: Float, y: Float, color: Int) {
-//        linePaint.color = color
-//        lineTextPaint.color = color
-//        val lineLeft = -(200.toPx().toFloat())
-//        val lineRight = (200.toPx().toFloat())
-//        canvas.drawText(text, x, y, lineTextPaint)
-//        canvas.drawLine(lineLeft, y, lineRight, y, linePaint)
-//    }
-
-//    constructor(context: Context?) : super(context)
-//    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-//    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
-
 
     init {
         Bitmap.createBitmap(842, 595, Bitmap.Config.ARGB_8888).also { softwareBitmap = it }
