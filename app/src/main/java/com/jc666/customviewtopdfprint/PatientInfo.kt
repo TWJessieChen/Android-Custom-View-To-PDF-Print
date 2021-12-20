@@ -4,7 +4,7 @@ data class PatientInfo(val firstName: String,
                        val lastName: String,
                        val patientNumberTitleValue: String,
                        val patientNumberValue: String,
-                       val gender: Int,
+                       val gender: Int, //1:male, 2:female, 3:other
                        val patientAgeTitleValue: String,
                        val patientAgeValue: String,
                        val patientBirthdayTitleValue: String,
