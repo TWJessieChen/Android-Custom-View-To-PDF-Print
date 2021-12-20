@@ -36,11 +36,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         printManager = getSystemService(PRINT_SERVICE) as PrintManager
-
         btn_one_twelve_ecg_report = findViewById(R.id.btn_one_twelve_ecg_report)
         btn_two_six_ecg_report = findViewById(R.id.btn_two_six_ecg_report)
         btn_four_three_ecg_report = findViewById(R.id.btn_four_three_ecg_report)
-
 
         btn_one_twelve_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
@@ -76,8 +74,7 @@ class MainActivity : AppCompatActivity() {
                 rV5SV1Value = 1.253
             )
 
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,0), this@MainActivity)
-
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo), this@MainActivity)
         }
 
         btn_two_six_ecg_report!!.setOnClickListener {
@@ -114,8 +111,7 @@ class MainActivity : AppCompatActivity() {
                 rV5SV1Value = 1.253
             )
 
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,1), this@MainActivity)
-
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo), this@MainActivity)
         }
 
         btn_four_three_ecg_report!!.setOnClickListener {
@@ -152,8 +148,7 @@ class MainActivity : AppCompatActivity() {
                 rV5SV1Value = 1.253
             )
 
-            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo,2), this@MainActivity)
-
+            viewModel.generatePdfFromGkemon(GenerateECGReportView(this).createECGLayout(bitmap, patientInfo), this@MainActivity)
         }
 
         viewModel.generatePdfResult.observe(this) { it ->

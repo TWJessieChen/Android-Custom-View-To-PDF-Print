@@ -48,10 +48,17 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
 
     private fun initSoft() {
         softwareCanvas = Canvas()
+
+        //因為要讓在不同尺寸的Lead上呈現一樣的大小，所以底圖高度設定一樣大小
         softwareBitmap = Bitmap.createBitmap(
             mSoftStrategy.pictureWidth(),
-            mSoftStrategy.pictureHeight(), Bitmap.Config.ARGB_8888
+            3600, Bitmap.Config.ARGB_8888
         )
+        //原先是動態設定width & height 大小
+//        softwareBitmap = Bitmap.createBitmap(
+//            mSoftStrategy.pictureWidth(),
+//            mSoftStrategy.pictureHeight(), Bitmap.Config.ARGB_8888
+//        )
         softwareCanvas!!.setBitmap(softwareBitmap)
         softwareCanvas!!.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
     }

@@ -117,54 +117,10 @@ class SoftAxesRenderer extends RealRenderer{
             } else if(gridType == 1) {
                 drawTwoXSixGrid(canvas, i, startX, startY, cellPixel);
             } else if(gridType == 0) {
-
+                drawOneXTwelveGrid(canvas, i, startX, startY, cellPixel);
             }
-
-
-//            //畫各個Lead起始位置(劃出柱狀圖示)
-//            if(i == 5) {
-//                canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//            } else if(i == 35) {
-//                canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//            } else if(i == 65) {
-//                canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(62*cellPixel), startY+(i*cellPixel), startX+(63*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(125*cellPixel), startY+(i*cellPixel), startX+(126*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//                canvas.drawRect(startX+(187*cellPixel), startY+(i*cellPixel), startX+(188*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//            } else if(i == 95) {
-//                canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
-//            }
-//
-//            //畫各個Lead label number
-//            if(i == 3) {
-//                drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
-//                drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVR");
-//                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V1");
-//                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V4");
-//            } else if(i == 33) {
-//                drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "II");
-//                drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVL");
-//                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V2");
-//                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V5");
-//            } else if(i == 63) {
-//                drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "III");
-//                drawRowLabel(canvas, startX+(62*cellPixel), startY+((i + 1)*cellPixel), "aVF");
-//                drawRowLabel(canvas, startX+(125*cellPixel), startY+((i + 1)*cellPixel), "V3");
-//                drawRowLabel(canvas, startX+(187*cellPixel), startY+((i + 1)*cellPixel), "V6");
-//            } else if(i == 93) {
-//                //未來要開出來，可以選擇要顯示哪個lead label
-//                drawRowLabel(canvas, startX, startY+((i + 1)*cellPixel), "I");
-//            } else if(i == 118) {
-//                drawRowLabel(canvas, startX+(215*cellPixel), startY+((i + 1)*cellPixel), "25mm/1S   10mm/1mv");
-//            }
-
         }
+
     }
 
     private void drawRowLabel(Canvas canvas,float left,float bottom,String text){
@@ -209,50 +165,59 @@ class SoftAxesRenderer extends RealRenderer{
 
     private void drawOneXTwelveGrid(Canvas canvas, int index,int startX,int startY,int cellPixel){
         //畫各個Lead起始位置(劃出柱狀圖示)
-        if(index == 5) {
+        if(index == 0) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-        } else if(index == 35) {
+        } else if(index == 15) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-        } else if(index == 65) {
+        } else if(index == 30) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-        } else if(index == 95) {
+        } else if(index == 45) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-        } else if(index == 125) {
+        } else if(index == 60) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-        } else if(index == 160) {
+        } else if(index == 75) {
             canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
-            canvas.drawRect(startX+(125*cellPixel), startY+(index*cellPixel), startX+(126*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 90) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 105) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 120) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 135) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 150) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
+        } else if(index == 165) {
+            canvas.drawRect(startX, startY+(index*cellPixel), startX+(1*cellPixel), startY+((index + 10)*cellPixel), labelLeadPaint);
         }
 
         //畫各個Lead label number
-        if(index == 3) {
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "I");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V1");
-        } else if(index == 33) {
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "II");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V2");
-        } else if(index == 63) {
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "III");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V3");
-        } else if(index == 93) {
-            //未來要開出來，可以選擇要顯示哪個lead label
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVR");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V4");
-        } else if(index == 123) {
-            //未來要開出來，可以選擇要顯示哪個lead label
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVL");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V5");
-        } else if(index == 153) {
-            //未來要開出來，可以選擇要顯示哪個lead label
-            drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVF");
-            drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V6");
-        } else if(index == 185) {
-            drawRowLabel(canvas, startX+(215*cellPixel), startY+((index + 1)*cellPixel), "25mm/1S   10mm/1mv");
+        if(index == 0) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "I");
+        } else if(index == 15) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "II");
+        } else if(index == 30) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "III");
+        } else if(index == 45) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "aVR");
+        } else if(index == 60) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "aVL");
+        } else if(index == 75) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "aVF");
+        } else if(index == 90) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V1");
+        } else if(index == 105) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V2");
+        } else if(index == 120) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V3");
+        } else if(index == 135) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V4");
+        } else if(index == 150) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V5");
+        } else if(index == 165) {
+            drawRowLabel(canvas, startX+(2*cellPixel), startY+((index + 1)*cellPixel), "V6");
+        }else if(index == 178) {
+            drawRowLabel(canvas, startX+(210*cellPixel), startY+((index + 2)*cellPixel), "25mm/1S   10mm/1mv");
         }
     }
 
@@ -289,19 +254,16 @@ class SoftAxesRenderer extends RealRenderer{
             drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "III");
             drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V3");
         } else if(index == 93) {
-            //未來要開出來，可以選擇要顯示哪個lead label
             drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVR");
             drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V4");
         } else if(index == 123) {
-            //未來要開出來，可以選擇要顯示哪個lead label
             drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVL");
             drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V5");
         } else if(index == 153) {
-            //未來要開出來，可以選擇要顯示哪個lead label
             drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "aVF");
             drawRowLabel(canvas, startX+(125*cellPixel), startY+((index + 1)*cellPixel), "V6");
         } else if(index == 178) {
-            drawRowLabel(canvas, startX+(210*cellPixel), startY+((index + 1)*cellPixel), "25mm/1S   10mm/1mv");
+            drawRowLabel(canvas, startX+(210*cellPixel), startY+((index + 2)*cellPixel), "25mm/1S   10mm/1mv");
         }
     }
 
@@ -346,7 +308,7 @@ class SoftAxesRenderer extends RealRenderer{
             //未來要開出來，可以選擇要顯示哪個lead label
             drawRowLabel(canvas, startX, startY+((index + 1)*cellPixel), "I");
         } else if(index == 118) {
-            drawRowLabel(canvas, startX+(215*cellPixel), startY+((index + 1)*cellPixel), "25mm/1S   10mm/1mv");
+            drawRowLabel(canvas, startX+(210*cellPixel), startY+((index + 2)*cellPixel), "25mm/1S   10mm/1mv");
         }
     }
 
@@ -408,6 +370,7 @@ class SoftAxesRenderer extends RealRenderer{
         labelTextPaint.setTextSize((float) (4 * relation));
         labelTextPaint.setColor(LABEL_TEXT_COLOR);
         labelTextPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
     }
 
 }

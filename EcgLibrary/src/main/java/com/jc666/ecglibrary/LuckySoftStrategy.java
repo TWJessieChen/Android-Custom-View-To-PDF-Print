@@ -1,5 +1,7 @@
 package com.jc666.ecglibrary;
 
+import android.util.Log;
+
 /**
  * @author JC666
  * @date 2021/12/15
@@ -29,12 +31,19 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     @Override
     public int gridCountPerRow() {
-        if (maxDataValueForMv > 2f){
-            return 10;
-        }else if (maxDataValueForMv > 1.5f){
-            return 8;
-        }else {
-            return 6;
+        Log.d(TAG,"gridCountPerRow maxDataValueForMv: " + maxDataValueForMv);
+        if(pointCount > 30000) {
+            return 3;
+        } else {
+            if (maxDataValueForMv > 2f){
+                return 10;
+            }else if (maxDataValueForMv > 1.5f){
+                return 8;
+            }else if (maxDataValueForMv == 1.5f){
+                return 6;
+            } else {
+                return 3;
+            }
         }
     }
 
@@ -45,7 +54,7 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     @Override
     public int pointsPerRow() {
-        return pointsPerSecond() * secondsPerRow();// 250/s,10s数据
+        return pointsPerSecond() * secondsPerRow();// 500/s,10s数据
     }
 
     @Override
@@ -55,7 +64,7 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     @Override
     public int pointsPerSecond() {
-        return 500;
+        return 500; //每秒心律資料多寡個數，目前設定每秒心律有500筆資料
 //        return 250;
     }
 

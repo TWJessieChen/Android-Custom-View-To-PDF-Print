@@ -17,7 +17,6 @@ class GenerateECGReportView(context: Context) {
     private val TAG = GenerateECGReportView::class.java.simpleName
 
     private var context: Context
-
     private var patientHRTitleValue = "HR "
     private var patientHRUnitValue = " bpm"
     private var llPatientNameNumberAgePadding = 0
@@ -46,46 +45,13 @@ class GenerateECGReportView(context: Context) {
     private var llReportMagnificationLayoutHeight = 0
     private var tvReportMagnificationChannelAC = 0F
 
-//    private var gender = 2
-//    private var firstNameValue = "JC"
-//    private var lastNameValue = "666"
-//    private var patientNumberTitleValue = "病歷號碼"
-//    private var patientNumberValue = "GHGFVJ654D563FG7"
-//    private var patientAgeTitleValue = "年齡: "
-//    private var patientAgeValue = "35"
-//    private var patientBirthdayTitleValue = "生日 "
-//    private var patientBirthdayValue = "1986.04.22"
-//    private var ecgReportNotesValue = "Rhythm: sinusrhythm with tachycardia. QRST Evaluation: indeterminate ECG. Summary: abnormal ECG."
-//    private var patientHRValue = "120"
-//    private var reportMagnificationValue = "增益:x1.0"
-//    private var lowChannelValue = "低通:150Hz"
-//    private var highChannelValue = "高通:0.05Hz"
-//    private var acChannelValue = "交流電:60Hz"
-//    private var hrDetectValue = "心律調節器偵測:ON"
-//    private var pDurValue = 102
-//    private var pRIntValue = 148
-//    private var qRSDurValue = 82
-//    private var qTIntValue = 298
-//    private var qTcIntValue = 421
-//    private var pAxisValue = 46
-//    private var qRSAxisValue = 47
-//    private var tAxisValue = 47
-//    private var rV5SV1Value = 1.253
-
     init {
         this.context = context
     }
 
-    fun createECGLayout(bmp: Bitmap, patientInfo: PatientInfo, grid: Int) : View {
+    fun createECGLayout(bmp: Bitmap, patientInfo: PatientInfo) : View {
         val parent = LinearLayout(context)
         parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-
-//        val params: ViewGroup.LayoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//            LinearLayout.LayoutParams.WRAP_CONTENT)
-//        params.width = 842
-//        params.height = 595
-//        parent.layoutParams = params
-//        parent.layoutParams = LinearLayout.LayoutParams(dip2px(842f),dip2px(595f))
         parent.orientation = LinearLayout.VERTICAL
 
         val density = Resources.getSystem().displayMetrics.density
@@ -94,95 +60,37 @@ class GenerateECGReportView(context: Context) {
         Log.d(TAG, "density: " + density)
         Log.d(TAG, "scaledDensity: " + scaledDensity)
 
-        when(grid) {
-            0 -> {
-                ivECGHeight = dip2px((14.160319845242177 * 36*16.3).toFloat())
-                ivECGWidth = dip2px((14.160319845242177 * 50*16.5).toFloat())
-                tvTimeWidth = dip2px((14.160319845242177 * 50*16.5).toFloat() + 35F)
-                llPatientNameNumberAgePadding = dip2px(100F)
-                llPatientECGInfoContentWidth = dip2px(1500F)
-                tvNameContentSize = sp2px(82F)
-                tvLastNamePadding = dip2px(400F)
-                tvECGReportNotes = sp2px(42F)
-                tvECGReportNotesPadding = dip2px(1400F)
-                tvPatientTitle = sp2px(54F)
-                tvPatientNumber = sp2px(72F)
-                tvPatientNumberPadding = dip2px(100F)
-                ivGender = dip2px(100F)
-                tvPatientAge = sp2px(52F)
-                tvPatientBirthdayValuePadding = dip2px(100F)
-                tvPatientAgeValuePadding = dip2px(100F)
-                llPatientNameNumberAgePaddingHeight = dip2px(3F)
-                ivHRIconWidthWidth = dip2px(100F)
-                tvPatientECGInfoContent = sp2px(58F)
-                tvPatientECGInfoContentPadding = dip2px(10F)
-                tvPatientHRValuePadding = dip2px(40F)
-                llPatientECGInfoContentPaddingWidth = dip2px(10F)
-                llPatientECGInfoContentPaddingHeight = dip2px(28F)
-                llReportMagnificationLayoutHeight = dip2px(350F)
-                tvReportMagnificationChannelAC = sp2px(52F)
-            }
-            1 -> {
-                if(density < 2) {
-                    ivECGHeight = dip2px((14.160319845242177 * 36*16).toFloat())
-                    ivECGWidth = dip2px((14.160319845242177 * 50*16).toFloat())
-                    tvTimeWidth = dip2px((14.160319845242177 * 50*16).toFloat() + 35F)
-                } else {
-                    ivECGHeight = dip2px((14.160319845242177 * 36*16.3).toFloat())
-                    ivECGWidth = dip2px((14.160319845242177 * 50*16.5).toFloat())
-                    tvTimeWidth = dip2px((14.160319845242177 * 50*16.5).toFloat() + 35F)
-                }
-                llPatientNameNumberAgePadding = dip2px(100F)
-                llPatientECGInfoContentWidth = dip2px(1500F)
-                tvNameContentSize = sp2px(82F)
-                tvLastNamePadding = dip2px(400F)
-                tvECGReportNotes = sp2px(42F)
-                tvECGReportNotesPadding = dip2px(1400F)
-                tvPatientTitle = sp2px(54F)
-                tvPatientNumber = sp2px(72F)
-                tvPatientNumberPadding = dip2px(100F)
-                ivGender = dip2px(100F)
-                tvPatientAge = sp2px(52F)
-                tvPatientBirthdayValuePadding = dip2px(100F)
-                tvPatientAgeValuePadding = dip2px(100F)
-                llPatientNameNumberAgePaddingHeight = dip2px(3F)
-                ivHRIconWidthWidth = dip2px(100F)
-                tvPatientECGInfoContent = sp2px(58F)
-                tvPatientECGInfoContentPadding = dip2px(10F)
-                tvPatientHRValuePadding = dip2px(40F)
-                llPatientECGInfoContentPaddingWidth = dip2px(10F)
-                llPatientECGInfoContentPaddingHeight = dip2px(28F)
-                llReportMagnificationLayoutHeight = dip2px(350F)
-                tvReportMagnificationChannelAC = sp2px(52F)
-            }
-            2 -> {
-                ivECGHeight = dip2px((14.160319845242177 * 25*3.6).toFloat())
-                ivECGWidth = dip2px((14.160319845242177 * 50*3.52).toFloat())
-                tvTimeWidth = dip2px((14.160319845242177 * 50*3.52).toFloat() + 35F)
-                llPatientNameNumberAgePadding = dip2px(50F)
-                llPatientECGInfoContentWidth = dip2px(360F)
-                tvNameContentSize = sp2px(24F)
-                tvLastNamePadding = dip2px(200F)
-                tvECGReportNotes = sp2px(14F)
-                tvECGReportNotesPadding = dip2px(600F)
-                tvPatientTitle = sp2px(18F)
-                tvPatientNumber = sp2px(24F)
-                tvPatientNumberPadding = dip2px(50F)
-                ivGender = dip2px(45F)
-                tvPatientAge = sp2px(20F)
-                tvPatientBirthdayValuePadding = dip2px(50F)
-                tvPatientAgeValuePadding = dip2px(50F)
-                llPatientNameNumberAgePaddingHeight = dip2px(3F)
-                ivHRIconWidthWidth = dip2px(45F)
-                tvPatientECGInfoContent = sp2px(16F)
-                tvPatientECGInfoContentPadding = dip2px(5F)
-                tvPatientHRValuePadding = dip2px(20F)
-                llPatientECGInfoContentPaddingWidth = dip2px(5F)
-                llPatientECGInfoContentPaddingHeight = dip2px(7F)
-                llReportMagnificationLayoutHeight = dip2px(100F)
-                tvReportMagnificationChannelAC = sp2px(14F)
-            }
+        if(density < 2) {
+            ivECGHeight = dip2px((14.160319845242177 * 36*16).toFloat())
+            ivECGWidth = dip2px((14.160319845242177 * 50*16).toFloat())
+            tvTimeWidth = dip2px((14.160319845242177 * 50*16).toFloat() + 35F)
+        } else {
+            ivECGHeight = dip2px((14.160319845242177 * 36*16.3).toFloat())
+            ivECGWidth = dip2px((14.160319845242177 * 50*16.5).toFloat())
+            tvTimeWidth = dip2px((14.160319845242177 * 50*16.5).toFloat() + 35F)
         }
+        llPatientNameNumberAgePadding = dip2px(100F)
+        llPatientECGInfoContentWidth = dip2px(1500F)
+        tvNameContentSize = sp2px(82F)
+        tvLastNamePadding = dip2px(400F)
+        tvECGReportNotes = sp2px(42F)
+        tvECGReportNotesPadding = dip2px(1400F)
+        tvPatientTitle = sp2px(54F)
+        tvPatientNumber = sp2px(72F)
+        tvPatientNumberPadding = dip2px(100F)
+        ivGender = dip2px(100F)
+        tvPatientAge = sp2px(52F)
+        tvPatientBirthdayValuePadding = dip2px(100F)
+        tvPatientAgeValuePadding = dip2px(100F)
+        llPatientNameNumberAgePaddingHeight = dip2px(3F)
+        ivHRIconWidthWidth = dip2px(100F)
+        tvPatientECGInfoContent = sp2px(58F)
+        tvPatientECGInfoContentPadding = dip2px(10F)
+        tvPatientHRValuePadding = dip2px(40F)
+        llPatientECGInfoContentPaddingWidth = dip2px(10F)
+        llPatientECGInfoContentPaddingHeight = dip2px(28F)
+        llReportMagnificationLayoutHeight = dip2px(350F)
+        tvReportMagnificationChannelAC = sp2px(52F)
 
         //first & last name & ECG notes
         val nameContent = LinearLayout(context)
@@ -250,7 +158,7 @@ class GenerateECGReportView(context: Context) {
         val iv_gender_params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         iv_gender.setLayoutParams(iv_gender_params)
-        when(grid) {
+        when(patientInfo.gender) {
             1 -> {
                 iv_gender.setImageResource(R.mipmap.male)
             }

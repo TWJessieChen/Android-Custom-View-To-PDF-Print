@@ -1,4 +1,4 @@
-package com.jc666.customviewtopdfprint
+package com.jc666.customviewtopdfprint.testcode
 
 import android.content.res.Resources
 import android.graphics.*
@@ -6,9 +6,19 @@ import kotlin.math.roundToInt
 import android.graphics.BitmapFactory
 
 import android.graphics.Bitmap
+import com.jc666.customviewtopdfprint.MainApplication
+import com.jc666.customviewtopdfprint.R
 
+/**
+ * @author JC666
+ * @date 2021/12/15
+ * @describe
+ * 目前完全不使用此方式畫Layout出來!!!
+ * 但可以做為之後參考範例
+ */
 
-class ECGGraphicUtil {
+//class BarChart : View {
+class BarChart {
 
     init {
         Bitmap.createBitmap(842, 595, Bitmap.Config.ARGB_8888).also { softwareBitmap = it }
@@ -24,17 +34,24 @@ class ECGGraphicUtil {
 
     private var softwareBitmap: Bitmap? = null
 
-    private val rowPaint = Paint().apply {
+    private val barPaint = Paint().apply {
         color = Color.BLUE
-    }
-
-    private val cellPaint = Paint().apply {
-        color = Color.RED
     }
 
     private val linePaint = Paint().apply {
         strokeWidth = 8.toPx().toFloat()
         color = Color.GRAY
+    }
+
+    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = 14.toPx().toFloat()
+        color = Color.GRAY
+        textAlign = Paint.Align.LEFT
+    }
+
+    private val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        isFilterBitmap = true
+        isDither = true
     }
 
     private val valueTextPaint = Paint().apply {
@@ -43,57 +60,76 @@ class ECGGraphicUtil {
         textAlign = Paint.Align.RIGHT
     }
 
-    private val startDistanceWidth = 0.toPx()
-    private val startDistanceHeight = 0.toPx()
-    private val endDistanceWidth = 250.toPx()
-    private val endDistanceHeight = 120.toPx()
-    private val cellPixel = 10
-    private val vCellCounts = 120
-    private val cellCountPerGrid = 5
-    private val gridCountPerRow = 6
-
+    private val startDistanceWidth = 10.toPx()
+    private val startDistanceHeight = 15.toPx()
     private val barWidth = 30.toPx()
     private val barDistance = 30.toPx()
     private val maxValue = 200
 
+    private var firstNameValue = "JC"
+    private var lastNameValue = "666"
+    private var patientNumberTitleValue = "病歷號碼"
+    private var patientNumberValue = "GHGFVJ654D563FG7"
+    private var patientAgeTitleValue = "年齡:"
+    private var patientAgeValue = "35"
+    private var patientBirthdayTitleValue = "生日"
+    private var patientBirthdayValue = "1986.04.22"
+
     fun onDraw(canvas: Canvas) : Bitmap{
         canvas.setBitmap(softwareBitmap!!)
 
-        drawHorizontalLine(canvas)
-
+        drawPatientFirstAndLastNameValue(canvas)
+        drawPatientIDNumberValue(canvas)
+        drawPatientGenderAndAgeValue(canvas)
+//        drawBar(canvas)
+//        drawAxis(canvas)
+//        drawValue(canvas)
+//        drawLabels(canvas)
         return softwareBitmap!!
     }
 
-    private fun drawHorizontalLine(canvas: Canvas) {
-
-        for (i in 0 .. vCellCounts){
-            if(i == 0) {
-                canvas.drawLine(startDistanceWidth.toFloat(),
-                    endDistanceHeight.toFloat(),
-                    endDistanceWidth.toFloat(),
-                    endDistanceHeight.toFloat(), rowPaint)
-            } else if(i == vCellCounts) {
-                canvas.drawLine(startDistanceWidth.toFloat(),
-                    endDistanceHeight.toFloat(),
-                    endDistanceWidth.toFloat(),
-                    endDistanceHeight.toFloat(), rowPaint)
-            } else if(i%cellCountPerGrid == 0) {
-                canvas.drawLine(startDistanceWidth.toFloat(),
-                    (startDistanceHeight+i*cellPixel).toFloat(),
-                    endDistanceWidth.toFloat(),
-                    (startDistanceHeight+i*cellPixel).toFloat(), cellPaint)
-            }
-        }
+    private fun drawPatientFirstAndLastNameValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + startDistanceHeight
+        // 只畫 firstNameValue
+        canvas.drawText(firstNameValue, x, y, textPaint)
+        // 只畫 lastNameValue
+        canvas.drawText(lastNameValue, x + (barDistance*2), y, textPaint)
     }
 
-    private fun drawVerticalLine(canvas: Canvas) {
-
-
-
-
-
+    private fun drawPatientIDNumberValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + (startDistanceHeight*2)
+        // 只畫 patientNumberTitleValue
+        canvas.drawText(patientNumberTitleValue, x, y, textPaint)
+        // 只畫 patientNumberValue
+        canvas.drawText(patientNumberValue, x + (barDistance*2), y, textPaint)
     }
 
+    private fun drawPatientGenderAndAgeValue(canvas: Canvas) {
+        val x = getTextValueWidth() + startDistanceWidth
+        val fontMetrics = textPaint.fontMetrics
+        // 要先移動 (top) 這段距離才不會遮住字
+        val y = - fontMetrics.top + (startDistanceHeight*3)
+        // 只畫 patientGenderValue
+        val bitmap = BitmapFactory.decodeResource(
+            MainApplication.appContext!!.resources,
+            R.mipmap.female
+        )
+        canvas.drawBitmap(bitmap, x, y, iconPaint)
+        // 只畫 patientAgeTitleValue
+        canvas.drawText(patientAgeTitleValue, x + 10.toPx(), y + 6.toPx(), textPaint)
+        // 只畫 patientAgeValue
+        canvas.drawText(patientAgeValue, x + 30.toPx(), y + 6.toPx(), textPaint)
+        // 只畫 patientBirthdayTitleValue
+        canvas.drawText(patientBirthdayTitleValue, x + (barDistance*2), y + 6.toPx(), textPaint)
+        // 只畫 patientBirthdayValue
+        canvas.drawText(patientBirthdayValue, x + (barDistance*2) + 20.toPx(), y + 6.toPx(), textPaint)
+    }
 
     private fun getTextValueWidth(): Float {
         val rect = Rect()
@@ -126,7 +162,7 @@ class ECGGraphicUtil {
             val right = left + barWidth
             val bottom = softwareBitmap!!.height - getLabelHeight()
             val top = bottom * (1 - barData.value / maxValue)
-//            canvas.drawRect(left, top, right, bottom, barPaint)
+            canvas.drawRect(left, top, right, bottom, barPaint)
         }
     }
 
@@ -168,17 +204,5 @@ class ECGGraphicUtil {
     //Dp 轉 pixel 的 extension function
     fun Int.toPx(): Int {
         return (Resources.getSystem().displayMetrics.density * this).roundToInt()
-    }
-
-    fun dp2px(density: Float, dp: Float): Int {
-        return if (dp == 0f) {
-            0
-        } else (dp * density + 0.5f).toInt()
-    }
-
-    fun sp2px(scaledDensity: Float, sp: Float): Int {
-        return if (sp == 0f) {
-            0
-        } else (sp * scaledDensity + 0.5f).toInt()
     }
 }
