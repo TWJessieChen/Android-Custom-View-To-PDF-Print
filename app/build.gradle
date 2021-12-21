@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'checkstyle'
 }
+
+check.dependsOn 'checkstyle'
 
 android {
     compileSdkVersion 30
@@ -28,6 +31,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    task checkstyle(type: Checkstyle) {
+        configFile file("${project.rootDir}/quality/square_picasso_checkstyle.xml")
+        source 'src'
+        include '**/*.java'
+        exclude '**/gen/**'
+
+        classpath = files()
     }
 }
 
