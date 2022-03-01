@@ -13,8 +13,6 @@ import com.gkemon.XMLtoPDF.PdfGenerator
 import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
-import com.jc666.ecglibrary.ECGPointValue
-import com.jc666.ecglibrary.EcgSoftRenderer
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

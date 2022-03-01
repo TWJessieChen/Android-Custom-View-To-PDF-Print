@@ -11,8 +11,19 @@ import android.graphics.PorterDuff
  * @date 2021/12/15
  * @describe TODO
  */
-class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPointValue>, type: Int, softStrategy: SoftStrategy?, dataRenderer: RealRenderer?, axesArenderer: RealRenderer?)  {
-    private val TAG = EcgSoftRenderer::class.java.simpleName
+class ECGReportViewSoftRenderer private constructor(context: Context,
+                                                    values: Array<ECGPointValue>,
+                                                    colorType: Int,
+                                                    leadName: String,
+                                                    gain: Int,
+                                                    softStrategy: SoftStrategy?,
+                                                    dataRenderer: RealRenderer?,
+                                                    axesArenderer: RealRenderer?)  {
+    private val TAG = ECGReportViewSoftRenderer::class.java.simpleName
+
+    //紀錄畫筆顏色Type，0:白色(黑色波形) 1:黑色(綠色波形)
+    private val BACKGROUND_BLACK_COLOR = Color.parseColor("#ff231815") //黑色
+    private val BACKGROUND_WHITE_COLOR = Color.parseColor("#ffffffff") //白色
 
     private val mSoftStrategy: SoftStrategy
 
@@ -24,26 +35,31 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
 
     private var softwareCanvas: Canvas? = null
 
+    private var backgroundType: Int = 0
+
     companion object {
         @JvmOverloads
         fun instantiate(
             context: Context,
             values: Array<ECGPointValue>,
-            type:Int,
+            colorType:Int,
+            leadName: String,
+            gain: Int,
             softStrategy: SoftStrategy? = null,
             dataRenderer: RealRenderer? = null,
-            axesArenderer: RealRenderer? = null
-        ): EcgSoftRenderer {
-            return EcgSoftRenderer(context, values, type, softStrategy, dataRenderer, axesArenderer)
+            axesRenderer: RealRenderer? = null
+        ): ECGReportViewSoftRenderer {
+            return ECGReportViewSoftRenderer(context, values, colorType, leadName, gain, softStrategy, dataRenderer, axesRenderer)
         }
     }
 
     init {
         mSoftStrategy = softStrategy ?: LuckySoftStrategy(values.size)
-        mDataRenerer = dataRenderer ?: SoftDataRenderer(context, values)
-        mAxesRenderer = axesArenderer ?: SoftAxesRenderer(context, values, type)
+        mDataRenerer = dataRenderer ?: SoftViewDataRenderer(context, values, colorType, gain)
+        mAxesRenderer = axesArenderer ?: SoftViewAxesRenderer(context, values, colorType, leadName, gain)
         mDataRenerer.setSoftStrategy(mSoftStrategy)
         mAxesRenderer.setSoftStrategy(mSoftStrategy)
+        backgroundType = colorType
     }
 
     private fun initSoft() {
@@ -52,7 +68,7 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
         //因為要讓在不同尺寸的Lead上呈現一樣的大小，所以底圖高度設定一樣大小
         softwareBitmap = Bitmap.createBitmap(
             mSoftStrategy.pictureWidth(),
-            3600, Bitmap.Config.ARGB_8888
+            mSoftStrategy.pictureHeight(), Bitmap.Config.ARGB_8888
         )
         //原先是動態設定width & height 大小
 //        softwareBitmap = Bitmap.createBitmap(
@@ -68,7 +84,11 @@ class EcgSoftRenderer private constructor(context: Context, values: Array<ECGPoi
      */
     fun startRender(): Bitmap? {
         initSoft()
-        softwareCanvas!!.drawColor(Color.WHITE)
+        if(backgroundType == 0) {
+            softwareCanvas!!.drawColor(BACKGROUND_WHITE_COLOR)
+        } else {
+            softwareCanvas!!.drawColor(BACKGROUND_BLACK_COLOR)
+        }
         mAxesRenderer.draw(softwareCanvas)
         mDataRenerer.draw(softwareCanvas);
         return softwareBitmap

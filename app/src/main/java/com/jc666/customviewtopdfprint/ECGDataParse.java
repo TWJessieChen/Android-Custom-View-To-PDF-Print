@@ -20,6 +20,8 @@ public class ECGDataParse {
 
     private ECGPointValue[] values;
 
+    private ECGPointValue[] valuesOneLeadTest = new ECGPointValue[5000];
+
     private ECGPointValue[] valuesTest = new ECGPointValue[20000];
 
     private ECGPointValue[] valuesSixTest = new ECGPointValue[30000];
@@ -47,6 +49,13 @@ public class ECGDataParse {
             e.printStackTrace();
         }
         return stringBuilder.toString();
+    }
+
+    public ECGPointValue[] getValuesOneLeadTest() {
+        for(int index=0; index < 5000; index++) {
+            valuesOneLeadTest[index] = values[index];
+        }
+        return valuesOneLeadTest;
     }
 
     public ECGPointValue[] getValues() {

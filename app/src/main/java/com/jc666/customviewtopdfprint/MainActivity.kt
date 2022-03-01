@@ -8,7 +8,8 @@ import android.print.PrintDocumentAdapter
 import android.print.PrintJob
 import android.print.PrintManager
 import android.widget.*
-import com.jc666.ecglibrary.EcgSoftRenderer
+import com.jc666.ecglibrary.ECGReportSoftRenderer
+import com.jc666.ecglibrary.ECGReportViewSoftRenderer
 import org.jetbrains.anko.*
 import java.io.File
 import java.io.FileInputStream
@@ -19,6 +20,10 @@ import java.nio.channels.FileChannel
 
 class MainActivity : AppCompatActivity() {
 
+    private var btn_one_lead_ecg_report: Button? = null
+
+    private var btn_two_lead_ecg_report: Button? = null
+
     private var btn_one_twelve_ecg_report: Button? = null
 
     private var btn_two_six_ecg_report: Button? = null
@@ -26,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private var btn_four_three_ecg_report: Button? = null
 
     private var printManager: PrintManager? = null
+
+    private var imageView: ImageView? = null
 
     private val viewModel by lazy {
         MainViewModel()
@@ -39,10 +46,41 @@ class MainActivity : AppCompatActivity() {
         btn_one_twelve_ecg_report = findViewById(R.id.btn_one_twelve_ecg_report)
         btn_two_six_ecg_report = findViewById(R.id.btn_two_six_ecg_report)
         btn_four_three_ecg_report = findViewById(R.id.btn_four_three_ecg_report)
+        btn_one_lead_ecg_report = findViewById(R.id.btn_one_lead_ecg_report)
+        btn_two_lead_ecg_report = findViewById(R.id.btn_two_lead_ecg_report)
+        imageView = findViewById(R.id.image)
+
+        btn_two_lead_ecg_report!!.setOnClickListener {
+            val dataParse = ECGDataParse(this@MainActivity)
+            val bitmap = ECGReportViewSoftRenderer.instantiate(this@MainActivity,
+                dataParse.valuesOneLeadTest,
+                0,
+                "III",
+                2) //.setMaxDataValue(2f)
+                .startRender()
+            //viewModel.saveGenerateECGMaskBmp(bitmap!!)
+
+            imageView!!.setImageBitmap(bitmap)
+
+        }
+
+        btn_one_lead_ecg_report!!.setOnClickListener {
+            val dataParse = ECGDataParse(this@MainActivity)
+            val bitmap = ECGReportViewSoftRenderer.instantiate(this@MainActivity,
+                dataParse.valuesOneLeadTest,
+                1,
+                "aVR",
+                3) //.setMaxDataValue(2f)
+                .startRender()
+            //viewModel.saveGenerateECGMaskBmp(bitmap!!)
+
+            imageView!!.setImageBitmap(bitmap)
+
+        }
 
         btn_one_twelve_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.valuesTwelve, 0) //.setMaxDataValue(2f)
+            val bitmap = ECGReportSoftRenderer.instantiate(this@MainActivity, dataParse.valuesTwelve, 0) //.setMaxDataValue(2f)
                 .startRender()
             viewModel.saveGenerateECGMaskBmp(bitmap!!)
 
@@ -79,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_two_six_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.valuesSix, 0) //.setMaxDataValue(2f)
+            val bitmap = ECGReportSoftRenderer.instantiate(this@MainActivity, dataParse.valuesSix, 0) //.setMaxDataValue(2f)
                 .startRender()
             viewModel.saveGenerateECGMaskBmp(bitmap!!)
 
@@ -116,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_four_three_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = EcgSoftRenderer.instantiate(this@MainActivity, dataParse.values, 0) //.setMaxDataValue(2f)
+            val bitmap = ECGReportSoftRenderer.instantiate(this@MainActivity, dataParse.values, 0) //.setMaxDataValue(2f)
                 .startRender()
             viewModel.saveGenerateECGMaskBmp(bitmap!!)
 

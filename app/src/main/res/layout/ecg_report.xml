@@ -12,12 +12,12 @@
         android:id="@+id/tv_first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:textSize="10sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="JC"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="JC" />
 
     <TextView
         android:id="@+id/tv_last_name"
