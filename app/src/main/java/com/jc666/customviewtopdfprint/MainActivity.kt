@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 dataParse.valuesOneLeadTest,
                 0,
                 "III",
-                2) //.setMaxDataValue(2f)
+                1) //.setMaxDataValue(2f)
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
 //            image_head!!.setImageBitmap(result.second)
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 dataParse.valuesOneLeadTest,
                 1,
                 "aVR",
-                3) //.setMaxDataValue(2f)
+                0) //.setMaxDataValue(2f)
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
 

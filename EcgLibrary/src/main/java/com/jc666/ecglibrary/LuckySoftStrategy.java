@@ -16,7 +16,7 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     public LuckySoftStrategy(int pointCount){
         this.pointCount = pointCount;
-        this.maxDataValueForMv = 1.5f;
+        this.maxDataValueForMv = 1.0f;
     }
 
     @Override
@@ -35,8 +35,12 @@ public class LuckySoftStrategy implements SoftStrategy {
     @Override
     public int gridCountPerRow() {
         Log.d(TAG,"gridCountPerRow maxDataValueForMv: " + maxDataValueForMv);
+        Log.d(TAG,"gridCountPerRow pointCount: " + pointCount);
         if(pointCount > 30000) {
             return 3;
+        } if(pointCount == 5000) {
+            //特殊使用方式，統一回傳格子數 6
+            return 6;
         } else {
             if (maxDataValueForMv > 2f){
                 return 10;

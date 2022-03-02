@@ -44,6 +44,8 @@ class ECGReportViewRenderer private constructor(context: Context,
 
     private var leadName: String = ""
 
+    private var gain: Int = 1
+
     companion object {
         @JvmOverloads
         fun instantiate(
@@ -68,6 +70,33 @@ class ECGReportViewRenderer private constructor(context: Context,
         this.mECGBackgroundRenderer.setSoftStrategy(mSoftStrategy)
         this.backgroundType = colorType
         this.leadName = leadName
+        this.gain = gain
+
+        if (mSoftStrategy is LuckySoftStrategy) {
+                    Log.d(TAG,"mSoftStrategy maxDataValueForMv: " + mSoftStrategy.maxDataValueForMv())
+        }
+        when (gain) {
+            0 -> {
+                if (mSoftStrategy is LuckySoftStrategy) {
+                    mSoftStrategy.setMaxDataValueForMv(2f)
+                }
+            }
+            1 -> {
+                if (mSoftStrategy is LuckySoftStrategy) {
+                    mSoftStrategy.setMaxDataValueForMv(1f)
+                }
+            }
+            2 -> {
+                if (mSoftStrategy is LuckySoftStrategy) {
+                    mSoftStrategy.setMaxDataValueForMv(0.5f)
+                }
+            }
+            3 -> {
+                if (mSoftStrategy is LuckySoftStrategy) {
+                    mSoftStrategy.setMaxDataValueForMv(0.25f)
+                }
+            }
+        }
     }
 
     private fun initSoft() {
