@@ -7,13 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import java.util.List;
 
 /**
  * @author JC666
  * @date 2022/03/01
  * @describe TODO
  */
-class ECGBackgroundRenderer extends RealRenderer{
+class ECGBackgroundRenderer extends BriteMEDRealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
     private static final int GRAY_ROW_COLOR = Color.parseColor("#ff949497");  //灰色
@@ -52,7 +53,7 @@ class ECGBackgroundRenderer extends RealRenderer{
 
     private String gainValue = "Error";
 
-    ECGBackgroundRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type, String leadName, int gain) {
+    ECGBackgroundRenderer(@NonNull Context context, @NonNull List<ECGReportDataFormat> values,@NonNull int type, String leadName, int gain) {
         super(context, values);
         this.colorType = type;
         this.leadName = leadName;

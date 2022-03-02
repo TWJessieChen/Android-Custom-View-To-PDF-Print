@@ -10,16 +10,26 @@ import android.util.Log
 /**
  * @author JC666
  * @date 2021/12/15
- * @describe 主要是繪製ECG圖，分成背景圖與資料圖，兩個不同的圖層
+ * @describe 主要是繪製ECG圖api class func，分成背景圖與資料圖，兩個不同的圖層
+ *
+ * List<ECGReportDataFormat> : 傳入的object，包含ECG data list(12 lead 原始資料), isPacemaker 值, leadOff(12 lead 原始資料)
+ * colorType : 電子報告顏色模式(Type，0:背景白色(黑色波形) 1:背景黑色(綠色波形))
+ * leadName : 需要繪製哪個Lead的名稱(ex: I,II,III,aVR,aVL,aVF,V1,V2,V3,V4,V5,V6)
+ * leadIndex : 需要繪製哪個Lead的Index(ex: 0 ~ 11(ECGReportDataFormat(ecg: List<Int>資料)) 對應著 -> I,II,III,aVR,aVL,aVF,V1,V2,V3,V4,V5,V6)
+ * gain : 需要繪製Lead gain 值, 0.5 = 2mv = 0(2f), 1 = 1mv = 1(1f), 2 = 0.5mv = 2(0.5f), 4 = 0.25mv = 3(0.25f)
+ *
+ *
  */
+
 class ECGReportViewRenderer private constructor(context: Context,
-                                                values: Array<ECGPointValue>,
+                                                valuesObject: List<ECGReportDataFormat>,
                                                 colorType: Int,
                                                 leadName: String,
+                                                leadIndex: Int,
                                                 gain: Int,
                                                 softStrategy: SoftStrategy?,
-                                                ecgDataRenderer: RealRenderer?,
-                                                ecgBackgroundRenderer: RealRenderer?)  {
+                                                ecgDataRenderer: BriteMEDRealRenderer?,
+                                                ecgBackgroundRenderer: BriteMEDRealRenderer?)  {
     private val TAG = ECGReportViewRenderer::class.java.simpleName
 
     //紀錄畫筆顏色Type，0:白色(黑色波形) 1:黑色(綠色波形)
@@ -28,9 +38,9 @@ class ECGReportViewRenderer private constructor(context: Context,
 
     private val mSoftStrategy: SoftStrategy
 
-    private val mECGDataRenderer: RealRenderer
+    private val mECGDataRenderer: BriteMEDRealRenderer
 
-    private val mECGBackgroundRenderer: RealRenderer
+    private val mECGBackgroundRenderer: BriteMEDRealRenderer
 
     private var ecgDataBitmap: Bitmap? = null
 
@@ -44,34 +54,37 @@ class ECGReportViewRenderer private constructor(context: Context,
 
     private var leadName: String = ""
 
+    private var leadIndex: Int = 0
+
     private var gain: Int = 1
 
     companion object {
         @JvmOverloads
         fun instantiate(
             context: Context,
-            values: Array<ECGPointValue>,
+            valuesObject: List<ECGReportDataFormat>,
             colorType:Int,
             leadName: String,
+            leadIndex: Int,
             gain: Int,
             softStrategy: SoftStrategy? = null,
-            ecgDataRenderer: RealRenderer? = null,
-            ecgBackgroundRenderer: RealRenderer? = null
+            ecgDataRenderer: BriteMEDRealRenderer? = null,
+            ecgBackgroundRenderer: BriteMEDRealRenderer? = null
         ): ECGReportViewRenderer {
-            return ECGReportViewRenderer(context, values, colorType, leadName, gain, softStrategy, ecgDataRenderer, ecgBackgroundRenderer)
+            return ECGReportViewRenderer(context, valuesObject, colorType, leadName, leadIndex, gain, softStrategy, ecgDataRenderer, ecgBackgroundRenderer)
         }
     }
 
     init {
-        this.mSoftStrategy = softStrategy ?: LuckySoftStrategy(values.size)
-        this.mECGDataRenderer = ecgDataRenderer ?: ECGDataRenderer(context, values, colorType, gain)
-        this.mECGBackgroundRenderer = ecgBackgroundRenderer  ?: ECGBackgroundRenderer(context, values, colorType, leadName, gain)
+        this.mSoftStrategy = softStrategy ?: LuckySoftStrategy(valuesObject.size)
+        this.mECGDataRenderer = ecgDataRenderer ?: ECGDataRenderer(context, valuesObject, leadIndex, colorType, gain)
+        this.mECGBackgroundRenderer = ecgBackgroundRenderer  ?: ECGBackgroundRenderer(context, valuesObject, colorType, leadName, gain)
         this.mECGDataRenderer.setSoftStrategy(mSoftStrategy)
         this.mECGBackgroundRenderer.setSoftStrategy(mSoftStrategy)
         this.backgroundType = colorType
         this.leadName = leadName
         this.gain = gain
-
+        this.leadIndex = leadIndex
         if (mSoftStrategy is LuckySoftStrategy) {
                     Log.d(TAG,"mSoftStrategy maxDataValueForMv: " + mSoftStrategy.maxDataValueForMv())
         }

@@ -6,13 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import java.util.List;
 
 /**
  * @author JC666
  * @date 2021/12/15
  * @describe TODO
  */
-class ECGDataRenderer extends RealRenderer{
+class ECGDataRenderer extends BriteMEDRealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
     private static final int BLACK_LEAD_LINE_COLOR = Color.parseColor("#ff000000"); //黑色
@@ -31,16 +32,21 @@ class ECGDataRenderer extends RealRenderer{
 
     private int rowHeight;
 
+    private int leadIndex;
+
     private Paint linePaint;
 
     private Paint timePaint;
 
     private Paint peakPaint;
 
-    ECGDataRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type, int gain) {
+    private static final float oneMV= 13981f;
+
+    ECGDataRenderer(@NonNull Context context, @NonNull List<ECGReportDataFormat> values, int leadIndex, @NonNull int type, int gain) {
         super(context, values);
         this.colorType = type;
         this.gainValue = gain;
+        this.leadIndex = leadIndex;
     }
 
     @Override
@@ -66,13 +72,13 @@ class ECGDataRenderer extends RealRenderer{
             //drawRowTimeDebug(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
 
             int start = i*mSoftStrategy.pointsPerRow();
-            int end = Math.min((i+1)*mSoftStrategy.pointsPerRow(),mEcgData.length);
+            int end = Math.min((i+1)*mSoftStrategy.pointsPerRow(),mEcgData.size());
 
             for (int j = start;j < end-1;j++){
                 float currentX = transformer.computeRawX((j-start));
-                float currentY = transformer.computeRawY(mEcgData[j].getCoorY());
+                float currentY = transformer.computeRawY(mEcgData.get(j).getEcg().get(leadIndex)  / oneMV);
                 float nextX = transformer.computeRawX((j+1-start));
-                float nextY = transformer.computeRawY(mEcgData[j+1].getCoorY());
+                float nextY = transformer.computeRawY(mEcgData.get(j+1).getEcg().get(leadIndex)  / oneMV);
 
                 if (!transformer.needDraw(currentY,nextY)){
                     continue;
@@ -80,7 +86,7 @@ class ECGDataRenderer extends RealRenderer{
                 canvas.drawLine(currentX,currentY,nextX,nextY,linePaint);
 
 
-                if(mEcgData[j].isRPeak()) {
+                if(mEcgData.get(j).isPacemaker() == 1) {
                     canvas.drawLine(currentX,currentY,nextX,nextY,peakPaint);
                 }
             }

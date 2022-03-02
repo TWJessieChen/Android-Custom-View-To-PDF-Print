@@ -57,11 +57,13 @@ class MainActivity : AppCompatActivity() {
         iv_background_two_six_lead_v1 = findViewById(R.id.iv_background_two_six_lead_v1)
 
         btn_two_lead_ecg_report!!.setOnClickListener {
-            val dataParse = ECGDataParse(this@MainActivity)
+            var dataParseResult = ECGDataBriteMEDParse(this@MainActivity)
+
             val result = ECGReportViewRenderer.instantiate(this@MainActivity,
-                dataParse.valuesOneLeadTest,
+                dataParseResult.valuesOneLeadTest,
                 0,
-                "III",
+                "II",
+                1,
                 1) //.setMaxDataValue(2f)
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
@@ -75,11 +77,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_one_lead_ecg_report!!.setOnClickListener {
-            val dataParse = ECGDataParse(this@MainActivity)
+            var dataParseResult = ECGDataBriteMEDParse(this@MainActivity)
             val result = ECGReportViewRenderer.instantiate(this@MainActivity,
-                dataParse.valuesOneLeadTest,
+                dataParseResult.valuesOneLeadTest,
                 1,
-                "aVR",
+                "V6",
+                7,
                 0) //.setMaxDataValue(2f)
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
