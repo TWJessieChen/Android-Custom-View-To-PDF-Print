@@ -80,10 +80,10 @@ class ECGBackgroundRenderer extends RealRenderer{
         int startY = mSoftStrategy.verticalPadding();
         int endY = mSoftStrategy.pictureHeight() - mSoftStrategy.verticalPadding();
 
-        Log.d(TAG, "SoftAxesRenderer draw startX: " + startX);
-        Log.d(TAG, "SoftAxesRenderer draw endX: " + endX);
-        Log.d(TAG, "SoftAxesRenderer draw startY: " + startY);
-        Log.d(TAG, "SoftAxesRenderer draw endY: " + endY);
+        Log.d(TAG, "ECGBackgroundRenderer draw startX: " + startX);
+        Log.d(TAG, "ECGBackgroundRenderer draw endX: " + endX);
+        Log.d(TAG, "ECGBackgroundRenderer draw startY: " + startY);
+        Log.d(TAG, "ECGBackgroundRenderer draw endY: " + endY);
 
         drawHorizontalLine(canvas,startX,endX,startY,endY);
         drawVerticalLine(canvas,startX,endX,startY,endY);
@@ -120,7 +120,14 @@ class ECGBackgroundRenderer extends RealRenderer{
 
             //畫lead 柱
             if(i == 10) {
-                canvas.drawRect(startX, startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(1*cellPixel), startY+(i*cellPixel), startX+(2*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(3*cellPixel), startY+(i*cellPixel), startX+(4*cellPixel), startY+((i + 10)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(1*cellPixel), startY+(i*cellPixel), startX+(4*cellPixel), startY+((i + 1)*cellPixel), labelLeadPaint);
+            }
+            //畫lead 柱
+            if(i == 19) {
+                canvas.drawRect(startX+(0*cellPixel), startY+(i*cellPixel), startX+(1*cellPixel), startY+((i + 1)*cellPixel), labelLeadPaint);
+                canvas.drawRect(startX+(4*cellPixel), startY+(i*cellPixel), startX+(5*cellPixel), startY+((i + 1)*cellPixel), labelLeadPaint);
             }
 
             //畫lead 文字
@@ -164,7 +171,7 @@ class ECGBackgroundRenderer extends RealRenderer{
         int hCellCounts = (endX-startX)/cellPixel;
         Log.d(TAG, "drawVerticalLine cellPixel: " + cellPixel);
         Log.d(TAG, "drawVerticalLine hCellCounts: " + hCellCounts);
-        Log.d(TAG, "drawHorizontalLine mSoftStrategy.cellCountPerGrid(): " + mSoftStrategy.cellCountPerGrid());
+        Log.d(TAG, "drawVerticalLine mSoftStrategy.cellCountPerGrid(): " + mSoftStrategy.cellCountPerGrid());
 
         for (int i = 0; i <= hCellCounts; i++){
             if (i == 0){

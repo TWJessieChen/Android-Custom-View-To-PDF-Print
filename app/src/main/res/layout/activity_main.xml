@@ -53,29 +53,33 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_two_six_ecg_report" />
 
     <FrameLayout
-        android:id="@+id/fl_image"
+        android:id="@+id/fl_two_six_lead_v1_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_four_three_ecg_report"
-        android:background="@mipmap/lead_head">
+        app:layout_constraintStart_toStartOf="parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/image_head"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:src="@mipmap/lead_head"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+        <HorizontalScrollView
+            android:id="@+id/hs_background_two_six_lead_v1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+        <ImageView
+            android:id="@+id/iv_background_two_six_lead_v1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/lead_head"/>
+
+        </HorizontalScrollView>
 
         <HorizontalScrollView
             android:id="@+id/hs_two_six_lead_v1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp">
 
             <ImageView
                 android:id="@+id/image"
@@ -87,7 +91,6 @@
         </HorizontalScrollView>
 
     </FrameLayout>
-    >
 
 
 

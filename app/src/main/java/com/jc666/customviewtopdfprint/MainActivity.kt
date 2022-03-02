@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private var imageView: ImageView? = null
 
-    private var fl_image: FrameLayout? = null
+    private var iv_background_two_six_lead_v1: ImageView? = null
 
     private val viewModel by lazy {
         MainViewModel()
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         btn_one_lead_ecg_report = findViewById(R.id.btn_one_lead_ecg_report)
         btn_two_lead_ecg_report = findViewById(R.id.btn_two_lead_ecg_report)
         imageView = findViewById(R.id.image)
-        fl_image = findViewById(R.id.fl_image)
+        iv_background_two_six_lead_v1 = findViewById(R.id.iv_background_two_six_lead_v1)
 
         btn_two_lead_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
@@ -68,8 +68,9 @@ class MainActivity : AppCompatActivity() {
 //            image_head!!.setImageBitmap(result.second)
             imageView!!.setImageBitmap(result.third)
 //            imageView!!.visibility = View.INVISIBLE
-            val background = BitmapDrawable(result.second)
-            fl_image!!.setBackgroundDrawable(background)
+//            val background = BitmapDrawable(result.second)
+//            fl_image!!.setBackgroundDrawable(background)
+            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
             Log.d(TAG, "Lead name: " + result.first)
         }
 
@@ -86,8 +87,9 @@ class MainActivity : AppCompatActivity() {
 //            image_head!!.setImageBitmap(result.second)
             imageView!!.setImageBitmap(result.third)
 //            imageView!!.visibility = View.INVISIBLE
-            val background = BitmapDrawable(result.second)
-            fl_image!!.setBackgroundDrawable(background)
+//            val background = BitmapDrawable(result.second)
+//            fl_image!!.setBackgroundDrawable(background)
+            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
             Log.d(TAG, "Lead name: " + result.first)
         }
 
