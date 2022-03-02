@@ -1,15 +1,17 @@
 package com.jc666.customviewtopdfprint
 
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintDocumentAdapter
 import android.print.PrintJob
 import android.print.PrintManager
+import android.util.Log
 import android.widget.*
 import com.jc666.ecglibrary.ECGReportSoftRenderer
-import com.jc666.ecglibrary.ECGReportViewSoftRenderer
+import com.jc666.ecglibrary.ECGReportViewRenderer
 import org.jetbrains.anko.*
 import java.io.File
 import java.io.FileInputStream
@@ -19,6 +21,7 @@ import java.nio.channels.FileChannel
 
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = MainActivity::class.java.simpleName
 
     private var btn_one_lead_ecg_report: Button? = null
 
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private var printManager: PrintManager? = null
 
     private var imageView: ImageView? = null
+
+    private var fl_image: FrameLayout? = null
 
     private val viewModel by lazy {
         MainViewModel()
@@ -49,24 +54,28 @@ class MainActivity : AppCompatActivity() {
         btn_one_lead_ecg_report = findViewById(R.id.btn_one_lead_ecg_report)
         btn_two_lead_ecg_report = findViewById(R.id.btn_two_lead_ecg_report)
         imageView = findViewById(R.id.image)
+        fl_image = findViewById(R.id.fl_image)
 
         btn_two_lead_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = ECGReportViewSoftRenderer.instantiate(this@MainActivity,
+            val result = ECGReportViewRenderer.instantiate(this@MainActivity,
                 dataParse.valuesOneLeadTest,
                 0,
                 "III",
                 2) //.setMaxDataValue(2f)
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
-
-            imageView!!.setImageBitmap(bitmap)
-
+//            image_head!!.setImageBitmap(result.second)
+            imageView!!.setImageBitmap(result.third)
+//            imageView!!.visibility = View.INVISIBLE
+            val background = BitmapDrawable(result.second)
+            fl_image!!.setBackgroundDrawable(background)
+            Log.d(TAG, "Lead name: " + result.first)
         }
 
         btn_one_lead_ecg_report!!.setOnClickListener {
             val dataParse = ECGDataParse(this@MainActivity)
-            val bitmap = ECGReportViewSoftRenderer.instantiate(this@MainActivity,
+            val result = ECGReportViewRenderer.instantiate(this@MainActivity,
                 dataParse.valuesOneLeadTest,
                 1,
                 "aVR",
@@ -74,8 +83,12 @@ class MainActivity : AppCompatActivity() {
                 .startRender()
             //viewModel.saveGenerateECGMaskBmp(bitmap!!)
 
-            imageView!!.setImageBitmap(bitmap)
-
+//            image_head!!.setImageBitmap(result.second)
+            imageView!!.setImageBitmap(result.third)
+//            imageView!!.visibility = View.INVISIBLE
+            val background = BitmapDrawable(result.second)
+            fl_image!!.setBackgroundDrawable(background)
+            Log.d(TAG, "Lead name: " + result.first)
         }
 
         btn_one_twelve_ecg_report!!.setOnClickListener {

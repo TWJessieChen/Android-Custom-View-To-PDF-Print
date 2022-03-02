@@ -21,6 +21,9 @@ public class LuckySoftStrategy implements SoftStrategy {
 
     @Override
     public int pictureWidth() {
+        Log.d(TAG,"pointsPerRow(): " + pointsPerRow());
+        Log.d(TAG,"pixelPerPoint(): " + pixelPerPoint());
+        Log.d(TAG,"horizontalPadding(): " + horizontalPadding());
         return Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2);//左右边距
     }
 

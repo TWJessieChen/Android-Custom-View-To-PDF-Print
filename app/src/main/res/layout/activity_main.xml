@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints">
 
     <Button
         android:id="@+id/btn_two_lead_ecg_report"
@@ -50,19 +52,44 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_two_six_ecg_report" />
 
-    <HorizontalScrollView
-        android:id="@+id/hs_two_six_lead_v1"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/fl_image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_four_three_ecg_report">
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
-    </HorizontalScrollView >
+        app:layout_constraintTop_toBottomOf="@+id/btn_four_three_ecg_report"
+        android:background="@mipmap/lead_head">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/image_head"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@mipmap/lead_head"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
+        <HorizontalScrollView
+            android:id="@+id/hs_two_six_lead_v1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/patient_report_ecg_data_land"/>
+
+        </HorizontalScrollView>
+
+    </FrameLayout>
+    >
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
  * @date 2021/12/15
  * @describe TODO
  */
-class SoftViewDataRenderer extends RealRenderer{
+class ECGDataRenderer extends RealRenderer{
     private String TAG = this.getClass().getSimpleName();
 
     private static final int BLACK_LEAD_LINE_COLOR = Color.parseColor("#ff000000"); //黑色
@@ -37,7 +37,7 @@ class SoftViewDataRenderer extends RealRenderer{
 
     private Paint peakPaint;
 
-    SoftViewDataRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type, int gain) {
+    ECGDataRenderer(@NonNull Context context, @NonNull ECGPointValue[] values,@NonNull int type, int gain) {
         super(context, values);
         this.colorType = type;
         this.gainValue = gain;
