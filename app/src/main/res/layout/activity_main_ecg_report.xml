@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/one_twelve_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.StaticEcgBackgroundView
+                    android:id="@+id/background_one_twelve_wave_view_i"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="I"
+                    app:draw_mode="loop"
+                    app:grid_visible="true"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"/>
+
+                <HorizontalScrollView
+                    android:id="@+id/hs_two_six_lead_v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                        android:id="@+id/one_twelve_wave_view_i"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        app:draw_mode="loop"
+                        app:grid_label_name="I"
+                        app:grid_visible="true"
+                        app:wave_background="#ff202123"
+                        app:wave_line_color="#ff00c100"
+                        app:wave_line_second="10"
+                        />
+
+                </HorizontalScrollView>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                    android:id="@+id/one_twelve_wave_view_ii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="I I"
+                    app:draw_mode="loop"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"
+                    app:grid_visible="true"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp">
+
+                <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                    android:id="@+id/one_twelve_wave_view_iii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="I I I"
+                    app:draw_mode="loop"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"
+                    app:grid_visible="true"
+                    tools:ignore="MissingConstraints"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp">
+
+                <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                    android:id="@+id/one_twelve_wave_view_avr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="a V R"
+                    app:draw_mode="loop"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"
+                    app:grid_visible="true"
+                    tools:ignore="MissingConstraints"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp">
+
+                <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                    android:id="@+id/one_twelve_wave_view_avl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="a V L"
+                    app:draw_mode="loop"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"
+                    app:grid_visible="true"
+                    tools:ignore="MissingConstraints"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp">
+
+                <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                    android:id="@+id/one_twelve_wave_view_avf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    app:wave_line_second="10"
+                    app:grid_label_name="a V F"
+                    app:draw_mode="loop"
+                    app:wave_background="#ff202123"
+                    app:wave_line_color="#ff00c100"
+                    app:grid_visible="true"
+                    tools:ignore="MissingConstraints"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 1"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 2"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 3"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 4"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 5"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/wave_ecg_view_shadow">
+
+            <com.jc666.customviewtopdfprint.StaticWaveEcgView
+                android:id="@+id/one_twelve_wave_view_v6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:wave_line_second="10"
+                app:grid_label_name="a V 6"
+                app:draw_mode="loop"
+                app:wave_background="#ff202123"
+                app:wave_line_color="#ff00c100"
+                app:grid_visible="true"
+                tools:ignore="MissingConstraints"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/two_six_group"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="invisible">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+<!--            -->
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_i"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:grid_visible="true"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_ii"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="I I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_iii"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="I I I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_avr"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V R"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_avl"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V L"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_avf"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V F"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 1"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 2"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 3"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 4"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v5"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 5"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.jc666.customviewtopdfprint.WaveEcgView-->
+<!--                android:id="@+id/two_six_wave_view_v6"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="1dp"-->
+<!--                app:grid_label_name="a V 6"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/four_three_r_group"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="invisible">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_i"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:grid_visible="true"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_ii"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="I I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_iii"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="I I I"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_avr"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="@dimen/dp_1"-->
+<!--                android:layout_marginEnd="@dimen/dp_1"-->
+<!--                android:layout_marginStart="@dimen/dp_1"-->
+<!--                android:layout_marginTop="@dimen/dp_1"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:grid_label_name="a V R"-->
+<!--                app:grid_visible="true"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                tools:ignore="MissingConstraints"-->
+<!--                />-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_avl"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V L"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_avf"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V F"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 1"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 2"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 3"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 4"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v5"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 5"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/wave_ecg_view_shadow">-->
+
+<!--            <com.britemed.btecganaar.view.WaveEcgView-->
+<!--                android:id="@+id/four_three_r_wave_view_v6"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_margin="@dimen/dp_1"-->
+<!--                app:grid_label_name="a V 6"-->
+<!--                app:draw_mode="loop"-->
+<!--                app:wave_background="#ff202123"-->
+<!--                app:wave_line_color="#ff00c100"-->
+<!--                app:grid_visible="true"-->
+<!--                tools:ignore="MissingConstraints"/>-->
+
+<!--        </RelativeLayout>-->
+
+<!--    </LinearLayout>-->
+
+</RelativeLayout>

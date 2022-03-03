@@ -11,13 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomViewToPDFPrint">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainECGReportActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
         <service android:name="PrintJobMonitorService"/>

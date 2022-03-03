@@ -15,8 +15,6 @@ public abstract class BriteMEDRealRenderer {
 
     public SoftStrategy mSoftStrategy;
 
-    //public ECGPointValue[] mEcgData;
-
     public List<ECGReportDataFormat> mEcgData;
 
     public Context mContext;

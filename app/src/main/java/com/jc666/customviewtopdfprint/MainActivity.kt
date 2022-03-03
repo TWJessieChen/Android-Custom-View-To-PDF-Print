@@ -1,7 +1,6 @@
 package com.jc666.customviewtopdfprint
 
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
@@ -39,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     private var iv_background_two_six_lead_v1: ImageView? = null
 
+    var one_twelve_Static_wave_view_i: StaticWaveEcgView? = null
+
     private val viewModel by lazy {
         MainViewModel()
     }
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         btn_one_lead_ecg_report = findViewById(R.id.btn_one_lead_ecg_report)
         btn_two_lead_ecg_report = findViewById(R.id.btn_two_lead_ecg_report)
         imageView = findViewById(R.id.image)
-        iv_background_two_six_lead_v1 = findViewById(R.id.iv_background_two_six_lead_v1)
+//        iv_background_two_six_lead_v1 = findViewById(R.id.iv_background_two_six_lead_v1)
 
         btn_two_lead_ecg_report!!.setOnClickListener {
             var dataParseResult = ECGDataBriteMEDParse(this@MainActivity)
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 //            imageView!!.visibility = View.INVISIBLE
 //            val background = BitmapDrawable(result.second)
 //            fl_image!!.setBackgroundDrawable(background)
-            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
+//            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
             Log.d(TAG, "Lead name: " + result.first)
         }
 
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 //            imageView!!.visibility = View.INVISIBLE
 //            val background = BitmapDrawable(result.second)
 //            fl_image!!.setBackgroundDrawable(background)
-            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
+//            iv_background_two_six_lead_v1!!.setImageBitmap(result.second)
             Log.d(TAG, "Lead name: " + result.first)
         }
 
