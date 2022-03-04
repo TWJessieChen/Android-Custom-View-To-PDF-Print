@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CustomViewToPDFPrint">
         <activity
-            android:name=".MainECGReportActivity"
+            android:name=".MainEcgActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -20,7 +20,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".EcgActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
         <activity android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity android:name=".MainECGReportActivity"
             android:screenOrientation="landscape"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

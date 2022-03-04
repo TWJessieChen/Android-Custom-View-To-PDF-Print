@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_i"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_ii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.customviewtopdfprint.ecgview.ScrollECGView
+                    android:id="@+id/ecg_data_ecgView_iiiiiiiiiiii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+<!--        <com.luqian.androidx.widget.ecgview.ScrollECGView-->
+<!--            android:id="@+id/ecg_data_ecgView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
+    
+<!--    <com.luqian.androidx.widget.ecgview.ECGAllDataView-->
+<!--        android:id = "@+id/allData_ecgView"-->
+<!--        android:layout_width = "match_parent"-->
+<!--        android:layout_height = "40dp"-->
+<!--        android:layout_alignParentBottom = "true"-->
+<!--        android:visibility="gone"/>-->
+
+</RelativeLayout>
