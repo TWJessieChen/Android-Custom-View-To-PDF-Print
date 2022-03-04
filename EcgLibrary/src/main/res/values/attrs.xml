@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StaticEcgView">
+        <!--電子報告背景設定模式-->
+        <attr name="background_draw_mode" format="enum">
+            <enum name="WHITE" value="0" />
+            <enum name="BLACK" value="1" />
+        </attr>
+        <attr name="gain" format="enum">
+          <enum name="GAIN_I" value="0" />
+          <enum name="GAIN_II" value="1" />
+          <enum name="GAIN_III" value="2" />
+          <enum name="GAIN_IIII" value="3" />
+        </attr>
+        <attr name="lead_name" format="string" />
+    </declare-styleable>
+</resources>
