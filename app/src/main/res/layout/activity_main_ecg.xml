@@ -10,14 +10,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.jc666.ecglibrary.view.StaticEcgView
-            android:id="@+id/ecg_data_ecgView_iiiiiii"
+<!--        <com.jc666.ecglibrary.view.StaticEcgView-->
+<!--            android:id="@+id/ecg_data_ecgView_iiiiiii"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            app:background_draw_mode="WHITE"-->
+<!--            app:gain="GAIN_II"-->
+<!--            app:lead_name="I"/>-->
+
+        <com.jc666.customviewtopdfprint.ecgview.EcgView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            app:background_draw_mode="WHITE"
-            app:gain="GAIN_II"
-            app:lead_name="I"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,9 +42,14 @@
                     android:id="@+id/ecg_data_ecgView_i"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_sp="TEN_SP"
                     app:background_draw_mode="WHITE"
                     app:gain="GAIN_II"
-                    app:lead_name="I"/>
+                    app:lead_name="aVR"/>
 
             </FrameLayout>
 
@@ -56,9 +66,14 @@
                     android:id="@+id/ecg_data_ecgView_ii"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_sp="TEN_SP"
                     app:background_draw_mode="BLACK"
-                    app:gain="GAIN_II"
-                    app:lead_name="I"/>
+                    app:gain="GAIN_I"
+                    app:lead_name="III"/>
 
             </FrameLayout>
 
@@ -82,9 +97,15 @@
                     android:id="@+id/ecg_data_ecgView_iii"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_text_sp="TEN_SP"
                     app:background_draw_mode="BLACK"
-                    app:gain="GAIN_II"
-                    app:lead_name="I"/>
+                    app:gain="GAIN_IV"
+                    app:lead_name="V6"/>
 
 
             </FrameLayout>
@@ -102,9 +123,15 @@
                     android:id="@+id/ecg_data_ecgView_iiii"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_text_sp="TEN_SP"
                     app:background_draw_mode="WHITE"
-                    app:gain="GAIN_II"
-                    app:lead_name="I"/>
+                    app:gain="GAIN_III"
+                    app:lead_name="III"/>
 
             </FrameLayout>
 
@@ -120,9 +147,15 @@
                     android:id="@+id/ecg_data_ecgView_iiiii"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_text_sp="TEN_SP"
                     app:background_draw_mode="WHITE"
                     app:gain="GAIN_II"
-                    app:lead_name="I"/>
+                    app:lead_name="II"/>
 
 
             </FrameLayout>
@@ -140,8 +173,15 @@
                     android:id="@+id/ecg_data_ecgView_iiiiii"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_text_sp="TEN_SP"
+                    app:background_small_grid_enable="Disable"
                     app:background_draw_mode="BLACK"
-                    app:gain="GAIN_II"
+                    app:gain="GAIN_I"
                     app:lead_name="I"/>
 
             </FrameLayout>
@@ -152,35 +192,53 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp">
-
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:background="@drawable/ecg_report_ecg_data_rectangle_write"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="2dp">
 
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
+                <com.jc666.ecglibrary.view.StaticEcgView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_small_grid_enable="Disable"
+                    app:background_draw_mode="WHITE"
+                    app:gain="GAIN_III"
+                    app:lead_name="aVF"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp">
+
+                <com.jc666.ecglibrary.view.StaticEcgView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    app:background_text_padding="Enable"
+                    app:background_small_grid_enable="Disable"
+                    app:background_draw_mode="BLACK"
+                    app:gain="GAIN_IV"
+                    app:lead_name="aVF"/>
 
             </FrameLayout>
 
@@ -231,72 +289,77 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp">
+                android:background="@drawable/ecg_report_ecg_data_rectangle_write">
 
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
+              <com.jc666.ecglibrary.view.StaticEcgView
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginStart="1dp"
+                  android:layout_marginTop="1dp"
+                  android:layout_marginEnd="1dp"
+                  android:layout_marginBottom="1dp"
+                  app:background_draw_mode="BLACK"
+                  app:background_small_grid_enable="Disable"
+                  app:background_text_sp="SIX_SP"
+                  app:gain="GAIN_IV"
+                  app:lead_name="aVF"/>
 
             </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp">
+<!--            <FrameLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/ecg_report_ecg_data_rectangle_write"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:layout_marginEnd="2dp">-->
 
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+<!--                <com.jc666.customviewtopdfprint.ecgview.EcgView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"/>-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal">-->
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp">
+<!--            <FrameLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/ecg_report_ecg_data_rectangle_write"-->
+<!--                android:layout_marginStart="2dp"-->
+<!--                android:layout_marginTop="2dp">-->
 
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+<!--                <com.jc666.customviewtopdfprint.ecgview.EcgView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"/>-->
 
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ecg_report_ecg_data_rectangle_write"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp">
+<!--            <FrameLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@drawable/ecg_report_ecg_data_rectangle_write"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:layout_marginEnd="2dp">-->
 
-                <com.jc666.customviewtopdfprint.ecgview.EcgView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+<!--                <com.jc666.customviewtopdfprint.ecgview.EcgView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"/>-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
 
         </LinearLayout>
 

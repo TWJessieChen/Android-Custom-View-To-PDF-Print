@@ -20,9 +20,13 @@ class StaticEcgView : View {
     private val BACKGROUND_BLACK_COLOR = Color.parseColor("#ff231815") //黑色
     private val BACKGROUND_WHITE_COLOR = Color.parseColor("#ffffffff") //白色
 
-    private var mSoftStrategy: SoftStrategy? = null
-
     private var mStaticECGBackgroundRenderer: StaticECGBackgroundRenderer? = null
+
+    private var BACKGROUND_TEXT_PADDING_STATUS = 0 //預設不需要字串位移
+
+    private var BACKGROUND_TEXT_SP = 2 //預設8sp字體大小
+
+    private var BACKGROUND_SMALL_GRID_STATUS = 1 //預設開啟小網格
 
     private var BACKGROUND_DRAW_MODE = 0
 
@@ -48,23 +52,29 @@ class StaticEcgView : View {
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val height = MeasureSpec.getSize(heightMeasureSpec)
         setMeasuredDimension(width, height)
-        this.mSoftStrategy = StaticECGSoftStrategy(5000, width, height)
         this.mStaticECGBackgroundRenderer = StaticECGBackgroundRenderer(context,
-            mSoftStrategy as StaticECGSoftStrategy,
-            0,
+            width,
+            height,
+            BACKGROUND_DRAW_MODE,
             LEAD_NMAE,
-            GAIN)
+            GAIN,
+            BACKGROUND_SMALL_GRID_STATUS,
+            BACKGROUND_TEXT_SP,
+            BACKGROUND_TEXT_PADDING_STATUS)
     }
-
-//    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-//        mWidth = w.toFloat()
-//        mHeight = h.toFloat()
-//        super.onSizeChanged(w, h, oldw, oldh)
-//    }
 
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.StaticEcgView)
+            if (a.hasValue(R.styleable.StaticEcgView_background_text_padding)) {
+                BACKGROUND_TEXT_PADDING_STATUS = a.getInt(R.styleable.StaticEcgView_background_text_padding, 0)
+            }
+            if (a.hasValue(R.styleable.StaticEcgView_background_text_sp)) {
+                BACKGROUND_TEXT_SP = a.getInt(R.styleable.StaticEcgView_background_text_sp, 2)
+            }
+            if (a.hasValue(R.styleable.StaticEcgView_background_small_grid_enable)) {
+                BACKGROUND_SMALL_GRID_STATUS = a.getInt(R.styleable.StaticEcgView_background_small_grid_enable, 0)
+            }
             if (a.hasValue(R.styleable.StaticEcgView_background_draw_mode)) {
                 BACKGROUND_DRAW_MODE = a.getInt(R.styleable.StaticEcgView_background_draw_mode, 0)
             }
@@ -87,7 +97,7 @@ class StaticEcgView : View {
         super.onDraw(canvas)
 
         ecgBackgroundBitmap = Bitmap.createBitmap(
-            (mSoftStrategy as StaticECGSoftStrategy).pictureWidth(),
+            measuredWidth,
             measuredHeight, Bitmap.Config.ARGB_8888
         )
 
@@ -104,7 +114,7 @@ class StaticEcgView : View {
 
         mRenderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mRenderPaint!!.setStyle(Paint.Style.FILL)
-        mStaticECGBackgroundRenderer!!.draw(ecgBackgroundCanvas)
+        mStaticECGBackgroundRenderer!!.draw(ecgBackgroundCanvas!!)
 
         canvas.drawBitmap(ecgBackgroundBitmap!!, 0f, 0f, mRenderPaint)
     }

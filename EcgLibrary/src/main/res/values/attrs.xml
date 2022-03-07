@@ -2,6 +2,21 @@
 <resources>
     <declare-styleable name="StaticEcgView">
         <!--電子報告背景設定模式-->
+        <attr name="background_text_padding" format="enum">
+          <enum name="Enable" value="1" />
+          <enum name="Disable" value="0" />
+        </attr>
+        <attr name="background_text_sp" format="enum">
+          <enum name="FOUR_SP" value="0" />
+          <enum name="SIX_SP" value="1" />
+          <enum name="EIGHT_SP" value="2" />
+          <enum name="TEN_SP" value="3" />
+          <enum name="TWELVE_SP" value="4" />
+        </attr>
+        <attr name="background_small_grid_enable" format="enum">
+          <enum name="Enable" value="1" />
+          <enum name="Disable" value="0" />
+        </attr>
         <attr name="background_draw_mode" format="enum">
             <enum name="WHITE" value="0" />
             <enum name="BLACK" value="1" />
@@ -10,7 +25,7 @@
           <enum name="GAIN_I" value="0" />
           <enum name="GAIN_II" value="1" />
           <enum name="GAIN_III" value="2" />
-          <enum name="GAIN_IIII" value="3" />
+          <enum name="GAIN_IV" value="3" />
         </attr>
         <attr name="lead_name" format="string" />
     </declare-styleable>

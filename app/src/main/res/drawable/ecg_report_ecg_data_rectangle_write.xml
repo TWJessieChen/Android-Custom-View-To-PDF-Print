@@ -16,7 +16,7 @@
 <!--                //設定描邊-->
 
 <!--            <solid android:color="#ff000000" />-->
-            <solid android:color="#ff202123" />
+<!--            <solid android:color="#ff202123" />-->
             <!--    //指定形狀的填充色-->
 
             <!--    <padding-->

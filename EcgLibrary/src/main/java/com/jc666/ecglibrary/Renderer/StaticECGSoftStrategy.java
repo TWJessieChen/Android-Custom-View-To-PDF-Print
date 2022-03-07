@@ -1,15 +1,15 @@
 package com.jc666.ecglibrary.Renderer;
 
 import android.util.Log;
-import com.jc666.ecglibrary.SoftStrategy;
 import com.jc666.ecglibrary.Transformer;
+import com.jc666.ecglibrary.view.StaticSoftStrategy;
 
 /**
  * @author JC666
  * @date 2021/12/15
  * @describe TODO
  */
-public class StaticECGSoftStrategy implements SoftStrategy {
+public class StaticECGSoftStrategy implements StaticSoftStrategy {
     private String TAG = this.getClass().getSimpleName();
 
     private int pointCount;
@@ -30,11 +30,21 @@ public class StaticECGSoftStrategy implements SoftStrategy {
 
     private float maxDataValueForMv;//默认每行所表示的上下最大毫伏数 (maxDataValueForMv,-maxDataValueForMv)
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public StaticECGSoftStrategy(int pointCount, int width, int height){
         this.pointCount = pointCount;
         this.maxDataValueForMv = 1.0f;
         this.width = width;
         this.height = height;
+        Log.d(TAG,"width: " + width);
+        Log.d(TAG,"height: " + height);
     }
 
     @Override
@@ -42,35 +52,30 @@ public class StaticECGSoftStrategy implements SoftStrategy {
         Log.d(TAG,"pointsPerRow(): " + pointsPerRow());
         Log.d(TAG,"pixelPerPoint(): " + pixelPerPoint());
         Log.d(TAG,"horizontalPadding(): " + horizontalPadding());
+        Log.d(TAG,"pictureWidth(): " + Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2));
         return Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2);//左右边距
     }
 
     @Override
     public int pictureHeight() {
-        return pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2;//，一小格是1像素,5个小格组成一个大格，总共6个大格每行
+        Log.e(TAG,"pixelPerCell(): " + pixelPerCell());
+        Log.e(TAG,"cellCountPerGrid(): " + cellCountPerGrid());
+        Log.e(TAG,"gridCountPerRow(): " + gridCountPerRow());
+        Log.e(TAG,"totalRows(): " + totalRows());
+        Log.e(TAG,"verticalPadding(): " + verticalPadding());
+        Log.e(TAG,"pictureWidth(): " + ((int) pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2));
+        return (int) pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2;//，一小格是1像素,5个小格组成一个大格，总共6个大格每行
     }
 
     @Override
     public int gridCountPerRow() {
         Log.d(TAG,"gridCountPerRow maxDataValueForMv: " + maxDataValueForMv);
         Log.d(TAG,"gridCountPerRow pointCount: " + pointCount);
+        Log.d(TAG,"gridCountPerRow (height / GRID_WIDTH): " + (height / GRID_WIDTH));
+        if((height / GRID_WIDTH) < 4) {
+            return 4;
+        }
         return (height / GRID_WIDTH);
-        //return (height/SMALL_GRID_WIDTH);
-
-        //if(pointCount == 5000) {
-        //    //特殊使用方式，統一回傳格子數 6
-        //    return 5;
-        //} else {
-        //    if (maxDataValueForMv > 2f){
-        //        return 10;
-        //    }else if (maxDataValueForMv > 1.5f){
-        //        return 8;
-        //    }else if (maxDataValueForMv == 1.5f){
-        //        return 6;
-        //    } else {
-        //        return 3;
-        //    }
-        //}
     }
 
     @Override
@@ -88,29 +93,42 @@ public class StaticECGSoftStrategy implements SoftStrategy {
         return 10;
     }
 
+    /**
+     * 數值會影響寬度可以多長
+     */
     @Override
     public int pointsPerSecond() {
+        if((height / GRID_WIDTH) < 4) {
+            return 600;
+        }
         return 500; //每秒心律資料多寡個數，目前設定每秒心律有500筆資料
     }
 
     @Override
-    public int pixelPerCell() {
-        return 20;//一个小格占5像素
+    public float pixelPerCell() {
+        if((height / GRID_WIDTH) < 4) {
+            return 4F;
+        }
+        return (height / GRID_WIDTH);    //一个小格占5像素，控制格子大小
     }
 
     @Override
     public float pixelPerPoint() {
+        //if((height / GRID_WIDTH) < 4) {
+        //    return 1.5f;
+        //}
         return 1f;//0.5像素/每点
     }
 
     @Override
     public int totalRows() {
+        Log.d(TAG, "TotalRows: " + (pointCount%pointsPerRow() == 0?pointCount/pointsPerRow():pointCount/pointsPerRow()+1));
         return pointCount%pointsPerRow() == 0?pointCount/pointsPerRow():pointCount/pointsPerRow()+1;//总共12行，2分钟数据
     }
 
     @Override
     public int horizontalPadding() {
-        return 20;//水平方向，左右边距20个像素
+        return 0;//水平方向，左右边距20个像素
     }
 
     @Override
