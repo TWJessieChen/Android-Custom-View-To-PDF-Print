@@ -36,6 +36,7 @@ open class OnScaleWithGestureDetectorTouchListener(ctx: Context) : View.OnTouchL
         }
 
         override fun onScaleEnd(detector: ScaleGestureDetector?) {
+            Log.d(TAG,"onScaleEnd")
             onScaleEnd()
         }
 

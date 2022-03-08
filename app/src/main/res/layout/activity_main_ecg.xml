@@ -48,8 +48,26 @@
                     android:layout_marginBottom="1dp"
                     app:background_text_sp="TEN_SP"
                     app:background_draw_mode="WHITE"
+                    app:background_small_grid_enable="Disable"
                     app:gain="GAIN_II"
                     app:lead_name="aVR"/>
+
+              <HorizontalScrollView
+                  android:id="@+id/hs_static_ecg_data_ecgView_i"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:fillViewport="true"
+                  android:layout_marginStart="25dp"
+                  android:layout_marginTop="1dp"
+                  android:layout_marginEnd="1dp"
+                  android:layout_marginBottom="1dp">
+
+                <com.jc666.ecglibrary.view.StaticECGDataView
+                    android:id="@+id/static_ecg_data_ecgView_i"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+              </HorizontalScrollView>
 
             </FrameLayout>
 
@@ -74,6 +92,23 @@
                     app:background_draw_mode="BLACK"
                     app:gain="GAIN_I"
                     app:lead_name="III"/>
+
+              <HorizontalScrollView
+                  android:id="@+id/hs_static_ecg_data_ecgView_ii"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:fillViewport="true"
+                  android:layout_marginStart="25dp"
+                  android:layout_marginTop="1dp"
+                  android:layout_marginEnd="1dp"
+                  android:layout_marginBottom="1dp">
+
+                <com.jc666.ecglibrary.view.StaticECGDataView
+                    android:id="@+id/static_ecg_data_ecgView_ii"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+              </HorizontalScrollView>
 
             </FrameLayout>
 

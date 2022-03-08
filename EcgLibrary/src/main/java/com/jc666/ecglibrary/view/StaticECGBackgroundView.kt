@@ -141,9 +141,22 @@ class StaticECGBackgroundView : View {
      * background : 設定 WHITE:0, BLACK:1
      * _gain : 設定 GAIN_I:0, GAIN_II:1, GAIN_III:2, GAIN_IV:3
      */
-    fun setBackgroundParams(background: Int, _gain: Int) {
+    fun setBackgroundParams(background: Int, _gain: Float) {
         this.BACKGROUND_DRAW_MODE = background
-        this.GAIN = _gain
+        when (_gain) {
+            0.5F -> {
+                this.GAIN = 0
+            }
+            1F -> {
+                this.GAIN = 1
+            }
+            2F -> {
+                this.GAIN = 2
+            }
+            4F -> {
+                this.GAIN = 3
+            }
+        }
         invalidate()
     }
 }

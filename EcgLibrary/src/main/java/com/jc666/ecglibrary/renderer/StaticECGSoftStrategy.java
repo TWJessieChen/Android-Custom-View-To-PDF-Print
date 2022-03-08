@@ -1,4 +1,4 @@
-package com.jc666.ecglibrary.Renderer;
+package com.jc666.ecglibrary.renderer;
 
 import android.util.Log;
 import com.jc666.ecglibrary.Transformer;
@@ -43,27 +43,27 @@ public class StaticECGSoftStrategy implements StaticSoftStrategy {
         this.maxDataValueForMv = 1.0f;
         this.width = width;
         this.height = height;
-        Log.d(TAG,"width: " + width);
-        Log.d(TAG,"height: " + height);
+        //Log.d(TAG,"width: " + width);
+        //Log.d(TAG,"height: " + height);
     }
 
     @Override
     public int pictureWidth() {
-        Log.d(TAG,"pointsPerRow(): " + pointsPerRow());
-        Log.d(TAG,"pixelPerPoint(): " + pixelPerPoint());
-        Log.d(TAG,"horizontalPadding(): " + horizontalPadding());
-        Log.d(TAG,"pictureWidth(): " + Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2));
+        //Log.d(TAG,"pointsPerRow(): " + pointsPerRow());
+        //Log.d(TAG,"pixelPerPoint(): " + pixelPerPoint());
+        //Log.d(TAG,"horizontalPadding(): " + horizontalPadding());
+        //Log.d(TAG,"pictureWidth(): " + Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2));
         return Math.round(pointsPerRow() * pixelPerPoint() + horizontalPadding() * 2);//左右边距
     }
 
     @Override
     public int pictureHeight() {
-        Log.e(TAG,"pixelPerCell(): " + pixelPerCell());
-        Log.e(TAG,"cellCountPerGrid(): " + cellCountPerGrid());
-        Log.e(TAG,"gridCountPerRow(): " + gridCountPerRow());
-        Log.e(TAG,"totalRows(): " + totalRows());
-        Log.e(TAG,"verticalPadding(): " + verticalPadding());
-        Log.e(TAG,"pictureWidth(): " + ((int) pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2));
+        //Log.e(TAG,"pixelPerCell(): " + pixelPerCell());
+        //Log.e(TAG,"cellCountPerGrid(): " + cellCountPerGrid());
+        //Log.e(TAG,"gridCountPerRow(): " + gridCountPerRow());
+        //Log.e(TAG,"totalRows(): " + totalRows());
+        //Log.e(TAG,"verticalPadding(): " + verticalPadding());
+        //Log.e(TAG,"pictureWidth(): " + ((int) pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2));
         return (int) pixelPerCell() * cellCountPerGrid() * gridCountPerRow() * totalRows() + verticalPadding() * 2;//，一小格是1像素,5个小格组成一个大格，总共6个大格每行
     }
 

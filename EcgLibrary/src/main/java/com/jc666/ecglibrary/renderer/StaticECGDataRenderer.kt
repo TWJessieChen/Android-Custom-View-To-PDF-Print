@@ -1,42 +1,43 @@
-package com.jc666.ecglibrary.Renderer
+package com.jc666.ecglibrary.renderer
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
+import android.util.DisplayMetrics
 import android.util.Log
-import com.jc666.ecglibrary.SoftStrategy.getTransformer
-import com.jc666.ecglibrary.SoftStrategy.horizontalPadding
-import com.jc666.ecglibrary.SoftStrategy.pictureWidth
-import com.jc666.ecglibrary.SoftStrategy.pictureHeight
-import com.jc666.ecglibrary.SoftStrategy.verticalPadding
-import com.jc666.ecglibrary.SoftStrategy.totalRows
-import com.jc666.ecglibrary.SoftStrategy.maxDataValueForMv
-import com.jc666.ecglibrary.SoftStrategy.pointsPerRow
-import com.jc666.ecglibrary.ECGReportDataFormat.ecg
-import com.jc666.ecglibrary.ECGReportDataFormat.isPacemaker
-import com.jc666.ecglibrary.ECGReportDataFormat
-import com.jc666.ecglibrary.BriteMEDRealRenderer
-import com.jc666.ecglibrary.ChartUtils
-import com.jc666.ecglibrary.Renderer.StaticECGDataRenderer
-import com.jc666.ecglibrary.Transformer
+import com.jc666.ecglibrary.*
+import com.jc666.ecglibrary.view.ECGTransformer
 
 /**
  * @author JC666
- * @date 2021/12/15
+ * @date 2022/03/08
  * @describe TODO
  */
-internal class StaticECGDataRenderer(
-    context: Context,
-    values: List<ECGReportDataFormat?>,
-    leadIndex: Int,
-    type: Int,
-    gain: Int
-) : BriteMEDRealRenderer(context, values) {
+internal class StaticECGDataRenderer(context: Context,
+                                     height: Int,
+                                     values: List<ECGReportDataFormat>,
+                                     leadIndex: Int,
+                                     drawType: Int,
+                                     gainValue: Float) {
     private val TAG = this.javaClass.simpleName
+
     private var colorType = 0 //紀錄畫筆顏色Type，0:黑色 1:綠色
-    private var gainValue = 0 //紀錄畫筆顏色Type，0:黑色 1:綠色
-    private var transformer: Transformer? = null
+
+    private var mECGTransformer: ECGTransformer? = null
+
+    private var mHeight:Int = 0
+
+    //默认每行所表示的上下最大毫伏数 (maxDataValueForMv,-maxDataValueForMv)
+    private var maxDataValueForMv = 1.0f
+
+    protected var mDensity = 0f
+
+    protected var mScaleDensity = 0f
+
+    protected var mDisplayMetrics: DisplayMetrics? = null
+
     private var dataLeft = 0
     private var dataRight = 0
     private var rowHeight = 0
@@ -44,27 +45,28 @@ internal class StaticECGDataRenderer(
     private var linePaint: Paint? = null
     private var timePaint: Paint? = null
     private var peakPaint: Paint? = null
-    override fun draw(canvas: Canvas) {
+
+    private var mEcgDataList: List<ECGReportDataFormat>? = null
+
+    fun draw(canvas: Canvas) {
         initPaint(canvas, colorType)
-        transformer = mSoftStrategy.getTransformer()
-        Log.d(TAG, "this.transformer: " + transformer)
-        dataLeft = mSoftStrategy.horizontalPadding()
+        mECGTransformer = ECGTransformer()
+
         Log.d(TAG, "this.dataLeft: " + dataLeft)
-        dataRight = mSoftStrategy.pictureWidth() - mSoftStrategy.horizontalPadding()
+        dataRight = Math.round(mEcgDataList!!.size * 1f)
         Log.d(TAG, "this.dataRight: " + dataRight)
-        rowHeight =
-            (mSoftStrategy.pictureHeight() - mSoftStrategy.verticalPadding() * 2) / mSoftStrategy.totalRows()
+        rowHeight = mHeight
         Log.d(TAG, "this.rowHeight: " + rowHeight)
-        transformer!!.setVisibleCoorport(
+        mECGTransformer!!.setVisibleCoorport(
             0f,
-            mSoftStrategy.maxDataValueForMv(),
-            mSoftStrategy.pointsPerRow().toFloat(),
-            -mSoftStrategy.maxDataValueForMv()
+            maxDataValueForMv,
+            mEcgDataList!!.size.toFloat(),
+            -maxDataValueForMv
         )
         var i = 0
-        val rows = mSoftStrategy.totalRows()
+        val rows = 1
         while (i < rows) {
-            transformer!!.setDataContentRect(
+            mECGTransformer!!.setDataContentRect(
                 dataLeft,
                 i * rowHeight,
                 dataRight,
@@ -73,18 +75,18 @@ internal class StaticECGDataRenderer(
 
             //標記時間的 debug 使用
             //drawRowTimeDebug(canvas,dataLeft,(i+1)*rowHeight,i*mSoftStrategy.secondsPerRow()+"s");
-            val start = i * mSoftStrategy.pointsPerRow()
-            val end = Math.min((i + 1) * mSoftStrategy.pointsPerRow(), mEcgData.size)
+            val start = i * mEcgDataList!!.size
+            val end = Math.min((i + 1) * mEcgDataList!!.size, mEcgDataList!!.size)
             for (j in start until end - 1) {
-                val currentX = transformer!!.computeRawX(j - start)
-                val currentY = transformer!!.computeRawY(mEcgData[j].ecg[leadIndex] / oneMV)
-                val nextX = transformer!!.computeRawX(j + 1 - start)
-                val nextY = transformer!!.computeRawY(mEcgData[j + 1].ecg[leadIndex] / oneMV)
-                if (!transformer!!.needDraw(currentY, nextY)) {
+                val currentX = mECGTransformer!!.computeRawX(j - start)
+                val currentY = mECGTransformer!!.computeRawY(mEcgDataList!![j].ecg[leadIndex] / oneMV)
+                val nextX = mECGTransformer!!.computeRawX(j + 1 - start)
+                val nextY = mECGTransformer!!.computeRawY(mEcgDataList!![j + 1].ecg[leadIndex] / oneMV)
+                if (!mECGTransformer!!.needDraw(currentY, nextY)) {
                     continue
                 }
                 canvas.drawLine(currentX, currentY, nextX, nextY, linePaint!!)
-                if (mEcgData[j].isPacemaker == 1) {
+                if (mEcgDataList!![j].isPacemaker == 1) {
                     canvas.drawLine(currentX, currentY, nextX, nextY, peakPaint!!)
                 }
             }
@@ -150,8 +152,13 @@ internal class StaticECGDataRenderer(
     }
 
     init {
-        colorType = type
-        gainValue = gain
+        colorType = drawType
+        maxDataValueForMv = gainValue
         this.leadIndex = leadIndex
+        this.mEcgDataList = values
+        this.mDisplayMetrics = context.getResources().getDisplayMetrics()
+        this.mDensity = mDisplayMetrics!!.density
+        this.mScaleDensity = mDisplayMetrics!!.scaledDensity
+        this.mHeight = height
     }
 }
