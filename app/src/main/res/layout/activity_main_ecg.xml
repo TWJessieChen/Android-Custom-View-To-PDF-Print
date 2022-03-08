@@ -65,7 +65,8 @@
                 <com.jc666.ecglibrary.view.StaticECGDataView
                     android:id="@+id/static_ecg_data_ecgView_i"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:clickable="true"/>
 
               </HorizontalScrollView>
 
@@ -106,7 +107,8 @@
                 <com.jc666.ecglibrary.view.StaticECGDataView
                     android:id="@+id/static_ecg_data_ecgView_ii"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:clickable="true"/>
 
               </HorizontalScrollView>
 
@@ -329,6 +331,7 @@
                 android:background="@drawable/ecg_report_ecg_data_rectangle_write">
 
               <com.jc666.ecglibrary.view.StaticECGBackgroundView
+                  android:id="@+id/ecg_data_ecgView_iv"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:layout_marginStart="1dp"
@@ -340,6 +343,24 @@
                   app:background_text_sp="SIX_SP"
                   app:gain="GAIN_IV"
                   app:lead_name="aVF"/>
+
+              <HorizontalScrollView
+                  android:id="@+id/hs_static_ecg_data_ecgView_iv"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:fillViewport="true"
+                  android:layout_marginStart="25dp"
+                  android:layout_marginTop="1dp"
+                  android:layout_marginEnd="1dp"
+                  android:layout_marginBottom="1dp">
+
+                <com.jc666.ecglibrary.view.StaticECGDataView
+                    android:id="@+id/static_ecg_data_ecgView_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"/>
+
+              </HorizontalScrollView>
 
             </FrameLayout>
 
