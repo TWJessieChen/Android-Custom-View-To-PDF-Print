@@ -1,4 +1,4 @@
-package com.jc666.ecglibrary.Renderer
+package com.jc666.ecglibrary.renderer
 
 import android.content.Context
 import android.graphics.Canvas

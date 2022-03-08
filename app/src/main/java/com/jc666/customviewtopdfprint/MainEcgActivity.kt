@@ -2,11 +2,12 @@ package com.jc666.customviewtopdfprint
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jc666.customviewtopdfprint.ecgview.EcgView
+import com.jc666.ecglibrary.constants.ConstContent
+import com.jc666.ecglibrary.view.StaticECGBackgroundView
 
 class MainEcgActivity : AppCompatActivity() {
 
-//    private var ecg_data_ecgView_i: EcgView? = null
+    private var ecg_data_ecgView_i: StaticECGBackgroundView? = null
 //    private var ecg_data_ecgView_ii: EcgView? = null
 //    private var ecg_data_ecgView_iii: EcgView? = null
 //    private var ecg_data_ecgView_iiii: EcgView? = null
@@ -23,7 +24,7 @@ class MainEcgActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_ecg)
-//        ecg_data_ecgView_i = findViewById(R.id.ecg_data_ecgView_i)
+        ecg_data_ecgView_i = findViewById(R.id.ecg_data_ecgView_i)
 //        ecg_data_ecgView_ii = findViewById(R.id.ecg_data_ecgView_ii)
 //        ecg_data_ecgView_iii = findViewById(R.id.ecg_data_ecgView_iii)
 //        ecg_data_ecgView_iiii = findViewById(R.id.ecg_data_ecgView_iiii)
@@ -49,6 +50,8 @@ class MainEcgActivity : AppCompatActivity() {
 //        ecg_data_ecgView_iiiiiiiiii?.setLeadData(floats)
 //        ecg_data_ecgView_iiiiiiiiiii?.setLeadData(floats)
 //        ecg_data_ecgView_iiiiiiiiiiii?.setLeadData(floats)
+
+        ecg_data_ecgView_i!!.setBackgroundParams(ConstContent.BACKGROUND_DRAW_MODE_BLACK,ConstContent.GAIN_I_MODE)
 
     }
 

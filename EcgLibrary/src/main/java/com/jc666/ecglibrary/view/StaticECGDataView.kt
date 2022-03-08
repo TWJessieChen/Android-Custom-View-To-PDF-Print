@@ -5,16 +5,11 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import com.jc666.ecglibrary.LuckySoftStrategy
 import com.jc666.ecglibrary.R
-import com.jc666.ecglibrary.SoftStrategy
 import com.jc666.ecglibrary.Renderer.StaticECGBackgroundRenderer
-import com.jc666.ecglibrary.Renderer.StaticECGSoftStrategy
 
-class StaticEcgView : View {
-    private val TAG = StaticEcgView::class.java.simpleName
-
-    private val NAMESPACE = "http://schemas.android.com/apk/res-auto"
+class StaticECGBackgroundView : View {
+    private val TAG = StaticECGBackgroundView::class.java.simpleName
 
     //紀錄畫筆顏色Type，0:白色(黑色波形) 1:黑色(綠色波形)
     private val BACKGROUND_BLACK_COLOR = Color.parseColor("#ff231815") //黑色
