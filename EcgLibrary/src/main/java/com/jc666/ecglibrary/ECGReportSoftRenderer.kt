@@ -39,7 +39,7 @@ class ECGReportSoftRenderer private constructor(context: Context, values: Array<
     }
 
     init {
-        mSoftStrategy = softStrategy ?: LuckySoftStrategy(values.size)
+        mSoftStrategy = softStrategy ?: ReportLuckySoftStrategy(values.size)
         mDataRenerer = dataRenderer ?: SoftDataRenderer(context, values)
         mAxesRenderer = axesArenderer ?: SoftAxesRenderer(context, values, type)
         mDataRenerer.setSoftStrategy(mSoftStrategy)

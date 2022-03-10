@@ -77,8 +77,8 @@ class MainEcgActivity : AppCompatActivity() {
                                                 ConstContent.GAIN_II_MODE,
                                                 0)
 
-        ecg_data_ecgView_ii!!.setBackgroundParams(ConstContent.BACKGROUND_DRAW_MODE_WHITE,ConstContent.GAIN_III_MODE)
-        static_ecg_data_ecgView_ii!!.setLeadData(ConstContent.BACKGROUND_DRAW_MODE_WHITE,
+        ecg_data_ecgView_ii!!.setBackgroundParams(ConstContent.BACKGROUND_DRAW_MODE_BLACK,ConstContent.GAIN_III_MODE)
+        static_ecg_data_ecgView_ii!!.setLeadData(ConstContent.BACKGROUND_DRAW_MODE_BLACK,
             dataParseResult.valuesOneLeadTest,
             ConstContent.GAIN_III_MODE,
             1)

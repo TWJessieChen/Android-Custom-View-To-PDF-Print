@@ -90,7 +90,7 @@
                     android:layout_marginEnd="1dp"
                     android:layout_marginBottom="1dp"
                     app:background_text_sp="TEN_SP"
-                    app:background_draw_mode="BLACK"
+                    app:background_draw_mode="WHITE"
                     app:gain="GAIN_I"
                     app:lead_name="III"/>
 
